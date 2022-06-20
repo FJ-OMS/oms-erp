@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.skyer.order.infra.mapper.AfterSaleReceiverInfoMapper">
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap id="BaseResultMap" type="org.skyer.order.domain.entity.AfterSaleReceiverInfo">
+        <result column="id" property="id" jdbcType="DECIMAL"/>
+        <result column="inner_refund_no" property="innerRefundNo" jdbcType="VARCHAR"/>
+        <result column="inner_order_no" property="innerOrderNo" jdbcType="VARCHAR"/>
+        <result column="outer_order_no" property="outerOrderNo" jdbcType="VARCHAR"/>
+        <result column="outer_refund_no" property="outerRefundNo" jdbcType="VARCHAR"/>
+        <result column="return_name" property="returnName" jdbcType="VARCHAR"/>
+        <result column="mobile" property="mobile" jdbcType="VARCHAR"/>
+        <result column="province_code" property="provinceCode" jdbcType="VARCHAR"/>
+        <result column="province" property="province" jdbcType="VARCHAR"/>
+        <result column="city_code" property="cityCode" jdbcType="VARCHAR"/>
+        <result column="city" property="city" jdbcType="VARCHAR"/>
+        <result column="district_code" property="districtCode" jdbcType="VARCHAR"/>
+        <result column="district" property="district" jdbcType="VARCHAR"/>
+        <result column="town" property="town" jdbcType="VARCHAR"/>
+        <result column="address" property="address" jdbcType="VARCHAR"/>
+        <result column="creation_date" property="creationDate" jdbcType="DATE"/>
+        <result column="last_update_date" property="lastUpdateDate" jdbcType="DATE"/>
+        <result column="created_by" property="createdBy" jdbcType="DECIMAL"/>
+        <result column="last_updated_by" property="lastUpdatedBy" jdbcType="DECIMAL"/>
+        <result column="object_version_number" property="objectVersionNumber" jdbcType="DECIMAL"/>
+        <result column="receive_name" property="receiveName" jdbcType="VARCHAR"/>
+        <result column="receive_mobile" property="receiveMobile" jdbcType="VARCHAR"/>
+        <result column="receive_province_code" property="receiveProvinceCode" jdbcType="VARCHAR"/>
+        <result column="receive_province" property="receiveProvince" jdbcType="VARCHAR"/>
+        <result column="receive_city_code" property="receiveCityCode" jdbcType="VARCHAR"/>
+        <result column="receive_city" property="receiveCity" jdbcType="VARCHAR"/>
+        <result column="receive_district_code" property="receiveDistrictCode" jdbcType="VARCHAR"/>
+        <result column="receive_district" property="receiveDistrict" jdbcType="VARCHAR"/>
+        <result column="receive_town" property="receiveTown" jdbcType="VARCHAR"/>
+        <result column="receive_address" property="receiveAddress" jdbcType="VARCHAR"/>
+    </resultMap>
+</mapper>

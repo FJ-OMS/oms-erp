@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.skyer.goods.infra.mapper.SkuGroupSkuMapper">
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap id="BaseResultMap" type="org.skyer.goods.domain.entity.SkuGroupSku">
+        <result column="id" property="id" jdbcType="DECIMAL"/>
+        <result column="delete_flag" property="deleteFlag" jdbcType="DECIMAL"/>
+        <result column="creation_date" property="creationDate" jdbcType="DATE"/>
+        <result column="last_update_date" property="lastUpdateDate" jdbcType="DATE"/>
+        <result column="created_by" property="createdBy" jdbcType="DECIMAL"/>
+        <result column="last_updated_by" property="lastUpdatedBy" jdbcType="DECIMAL"/>
+        <result column="object_version_number" property="objectVersionNumber" jdbcType="DECIMAL"/>
+        <result column="tenant_id" property="tenantId" jdbcType="DECIMAL"/>
+        <result column="spu_id" property="spuId" jdbcType="DECIMAL"/>
+        <result column="sku_id" property="skuId" jdbcType="DECIMAL"/>
+        <result column="sku_group_id" property="skuGroupId" jdbcType="DECIMAL"/>
+    </resultMap>
+
+    <select id="totalSkuNum" resultType="java.math.BigDecimal">
+        select count(*) from sgoo_sku_group_sku groupSku where 1=1 and groupSku.delete_flag = 0
+        <if test="groupId != null">
+            and  sku_group_id = #{groupId}
+        </if>
+    </select>
+</mapper>

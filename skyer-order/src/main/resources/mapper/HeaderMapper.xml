@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.skyer.order.infra.mapper.HeaderMapper">
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap id="BaseResultMap" type="org.skyer.order.domain.entity.Header">
+        <result column="id" property="id" jdbcType="DECIMAL"/>
+        <result column="outer_order_no" property="outerOrderNo" jdbcType="VARCHAR"/>
+        <result column="inner_order_no" property="innerOrderNo" jdbcType="VARCHAR"/>
+        <result column="trade_type" property="tradeType" jdbcType="VARCHAR"/>
+        <result column="channel" property="channel" jdbcType="VARCHAR"/>
+        <result column="action_type" property="actionType" jdbcType="VARCHAR"/>
+        <result column="business_type" property="businessType" jdbcType="VARCHAR"/>
+        <result column="pay_type" property="payType" jdbcType="VARCHAR"/>
+        <result column="store_id" property="storeId" jdbcType="DECIMAL"/>
+        <result column="store_code" property="storeCode" jdbcType="VARCHAR"/>
+        <result column="store_name" property="storeName" jdbcType="VARCHAR"/>
+        <result column="pay_status" property="payStatus" jdbcType="DECIMAL"/>
+        <result column="cancel_status" property="cancelStatus" jdbcType="DECIMAL"/>
+        <result column="order_status" property="orderStatus" jdbcType="DECIMAL"/>
+        <result column="refund_status" property="refundStatus" jdbcType="DECIMAL"/>
+        <result column="return_status" property="returnStatus" jdbcType="DECIMAL"/>
+        <result column="order_remarks" property="orderRemarks" jdbcType="VARCHAR"/>
+        <result column="buyer_remarks" property="buyerRemarks" jdbcType="VARCHAR"/>
+        <result column="service_remarks" property="serviceRemarks" jdbcType="VARCHAR"/>
+        <result column="endorse_opinion" property="endorseOpinion" jdbcType="VARCHAR"/>
+        <result column="cancel_reason" property="cancelReason" jdbcType="VARCHAR"/>
+        <result column="exception_reason" property="exceptionReason" jdbcType="VARCHAR"/>
+        <result column="buyer_flag" property="buyerFlag" jdbcType="VARCHAR"/>
+        <result column="buyer_nick" property="buyerNick" jdbcType="VARCHAR"/>
+        <result column="sku_quatity" property="skuQuatity" jdbcType="DECIMAL"/>
+        <result column="goods_quatity" property="goodsQuatity" jdbcType="DECIMAL"/>
+        <result column="order_time" property="orderTime" jdbcType="DATE"/>
+        <result column="pay_time" property="payTime" jdbcType="DATE"/>
+        <result column="modified_time" property="modifiedTime" jdbcType="DATE"/>
+        <result column="received_time" property="receivedTime" jdbcType="DATE"/>
+        <result column="end_time" property="endTime" jdbcType="DATE"/>
+        <result column="pull_time" property="pullTime" jdbcType="DATE"/>
+        <result column="transfer_time" property="transferTime" jdbcType="DATE"/>
+        <result column="reset_time" property="resetTime" jdbcType="DATE"/>
+        <result column="bpmn_process_id" property="bpmnProcessId" jdbcType="DECIMAL"/>
+        <result column="bpmn_instance_id" property="bpmnInstanceId" jdbcType="DECIMAL"/>
+        <result column="bpmn_version_num" property="bpmnVersionNum" jdbcType="DECIMAL"/>
+        <result column="exception_flag" property="exceptionFlag" jdbcType="DECIMAL"/>
+        <result column="delete_flag" property="deleteFlag" jdbcType="DECIMAL"/>
+        <result column="creation_date" property="creationDate" jdbcType="DATE"/>
+        <result column="last_update_date" property="lastUpdateDate" jdbcType="DATE"/>
+        <result column="created_by" property="createdBy" jdbcType="DECIMAL"/>
+        <result column="last_updated_by" property="lastUpdatedBy" jdbcType="DECIMAL"/>
+        <result column="object_version_number" property="objectVersionNumber" jdbcType="DECIMAL"/>
+    </resultMap>
+    <select id="getListPage" resultType="org.skyer.order.api.vo.OrderPageVo">
+
+    </select>
+    <select id="getOrderList" resultType="org.skyer.order.api.dto.AccountCheckingOrderDTO">
+        SELECT
+            t1.inner_order_no orderNo,t1.outer_order_no platformOrderNo,t1.creation_date createDate,
+            t3.amount orderMoney,order_status orderStatus,'0' orderType, t1.store_id, t1.store_name,
+            t1.id orderId
+        FROM sord_header t1
+        LEFT JOIN sord_price t3 ON t3.inner_order_no = t1.inner_order_no AND t3.type = 3
+        <where>
+            <if test="dto.orderNoList != null and dto.orderNoList.size > 0">
+                AND t1.outer_order_no IN
+                <foreach collection="dto.orderNoList" item="id" open="(" separator="," close=")">
+                    #{id}
+                </foreach>
+            </if>
+            <if test="dto.beginDate != null and dto.beginDate == null">
+                AND t1.creation_date &gt;= #{dto.beginDate}
+            </if>
+            <if test="dto.endDate != null and dto.endDate == null">
+                AND  t1.creation_date &lt;= #{dto.endDate}
+            </if>
+            <if test="dto.beginDate != null and dto.endDate != null">
+                AND  t1.creation_date BETWEEN #{dto.beginDate} AND #{dto.endDate}
+            </if>
+        </where>
+    </select>
+    <select id="getAfterSaleList" resultType="org.skyer.order.api.dto.AccountCheckingOrderDTO">
+        SELECT
+            t2.outer_refund_no platformRefundNo,t1.inner_order_no orderNo,t2.inner_refund_no refundNo,
+            t2.creation_date createDate,t2.refund_amount orderMoney,t2.status orderStatus,t1.id orderId,
+            t2.id refundId,t2.type orderType,t1.outer_order_no platformOrderNo
+        FROM sord_header t1
+        RIGHT JOIN sord_after_sale_header t2 ON t2.origin_order_id = t1.id
+        <where>
+            <if test="dto.orderNoList != null and dto.orderNoList.size > 0">
+                AND t2.outer_refund_no IN
+                <foreach collection="dto.orderNoList" item="id" open="(" separator="," close=")">
+                    #{id}
+                </foreach>
+            </if>
+            <if test="dto.beginDate != null and dto.beginDate == null">
+                AND t2.creation_date &gt;= #{dto.beginDate}
+            </if>
+            <if test="dto.endDate != null and dto.endDate == null">
+                AND  t2.creation_date &lt;= #{dto.endDate}
+            </if>
+            <if test="dto.beginDate != null and dto.endDate != null">
+                AND  t2.creation_date BETWEEN #{dto.beginDate} AND #{dto.endDate}
+            </if>
+        </where>
+
+    </select>
+
+    <select id="queryPartHeaderToSaleReport" resultType="org.skyer.order.api.vo.OrderSaleReportVO">
+        SELECT
+            <if test="dto.type == 1">
+                header.channel type,
+            </if>
+            <if test="dto.type == 2 and dto.dateType == 1">
+                DATE_FORMAT(header.order_time,'%Y年%m月') type,
+            </if>
+            <if test="dto.type == 2 and dto.dateType == 2">
+                DATE_FORMAT(header.creation_date,'%Y年%m月') type,
+            </if>
+            <if test="dto.type == 3">
+                receiver.province type,
+            </if>
+            count( header.id ) orderCount,
+            sum( header.goods_quatity ) itemCount,
+            sum(price1.amount) orderAmount,
+            sum(price2.amount) itemCost
+        FROM
+            sord_header header LEFT JOIN sord_receiver_info receiver ON header.inner_order_no = receiver.inner_order_no
+            Left join sord_price price1 on header.inner_order_no = price1.inner_order_no and price1.type = 3
+            Left join sord_price price2 on header.inner_order_no = price2.inner_order_no and price2.type = 2
+        WHERE 1=1
+        <if test="dto.startDate != null and dto.dateType == 1">
+            AND header.order_time &gt;= #{dto.startDate}
+            AND header.order_time &lt;= #{dto.endDate}
+        </if>
+        <if test="dto.startDate != null and dto.dateType == 2">
+            AND header.creation_date &gt;= #{dto.startDate}
+            AND header.creation_date &lt;= #{dto.endDate}
+        </if>
+        <if test="dto.channel != null">
+            AND header.channel = #{dto.channel}
+        </if>
+        <if test="dto.type == 1">
+            group by header.channel
+        </if>
+        <if test="dto.type == 2 and dto.dateType == 1">
+            group by  DATE_FORMAT(header.order_time,'%Y年%m月')
+        </if>
+        <if test="dto.type == 2 and dto.dateType == 2">
+            group by  DATE_FORMAT(header.pay_time,'%Y年%m月')
+        </if>
+        <if test="dto.type == 3">
+            group by receiver.province
+        </if>
+        order by header.order_time desc
+    </select>
+
+    <select id="queryPartChannelSaleReport" resultType="org.skyer.order.app.vo.ChannelSaleOrderVO">
+        SELECT
+        header.store_code storeCode,
+        count( header.id ) orderCount,
+        sum( price.amount ) orderAmount
+        FROM
+        sord_header header
+        LEFT JOIN sord_price price ON header.inner_order_no = price.inner_order_no
+        AND price.type = 3
+        WHERE
+        1 = 1
+        <if test="startTime != null">
+            AND header.order_time &gt; #{startTime}
+        </if>
+        <if test="endTime != null">
+            AND header.order_time &lt; #{endTime}
+        </if>
+        <if test="storeCodeList != null and storeCodeList.size() > 0">
+            AND header.store_code  in
+            <foreach collection="storeCodeList" item="storeCode" open="(" separator="," close=")">
+                #{storeCode}
+            </foreach>
+        </if>
+
+    </select>
+
+    <select id="queryOrderSaleDateReport" resultType="org.skyer.order.api.vo.OrderSaleDateVO">
+        SELECT
+            DATE_FORMAT( header.order_time, '%Y-%m-%d' ) orderDate,
+            count( header.id ) orderCount,
+            sum( header.goods_quatity ) orderItemCount,
+            sum( price1.amount ) orderAmount,
+            sum( CASE WHEN header.delivery_status = "30512" THEN 1 ELSE 0 END ) AS sendOrderCount,
+            sum( CASE WHEN header.delivery_status = "30512" THEN header.goods_quatity ELSE 0 END ) AS sendOrderItemCount,
+            sum( CASE WHEN header.delivery_status = "30512" THEN price1.amount ELSE 0 END ) AS sendOrderAmount
+        FROM
+            sord_header header
+                LEFT JOIN sord_price price1 ON header.inner_order_no = price1.inner_order_no
+                AND price1.type = 3
+        WHERE
+            1 = 1
+            <if test="dto.startDate != null">
+                AND header.order_time &gt; #{dto.startDate}
+            </if>
+            <if test="dto.endDate != null">
+                AND header.order_time &lt; #{dto.endDate}
+            </if>
+            <if test="dto.channel != null">
+            AND header.channel = #{dto.channel}
+            </if>
+        GROUP BY
+            DATE_FORMAT(header.order_time, '%Y-%m-%d' )
+        order By 	header.order_time desc
+
+    </select>
+</mapper>

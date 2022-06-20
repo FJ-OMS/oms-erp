@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.skyer.stock.infra.mapper.WarehouseResultMapper">
+    <!-- 可根据自己的需求，是否要使用 -->
+    <resultMap id="BaseResultMap" type="org.skyer.stock.domain.entity.WarehouseResult">
+        <result column="id" property="id" jdbcType="DECIMAL"/>
+        <result column="creation_date" property="creationDate" jdbcType="DATE"/>
+        <result column="last_update_date" property="lastUpdateDate" jdbcType="DATE"/>
+        <result column="created_by" property="createdBy" jdbcType="DECIMAL"/>
+        <result column="last_updated_by" property="lastUpdatedBy" jdbcType="DECIMAL"/>
+        <result column="tenant_id" property="tenantId" jdbcType="DECIMAL"/>
+        <result column="object_version_number" property="objectVersionNumber" jdbcType="DECIMAL"/>
+        <result column="code" property="code" jdbcType="VARCHAR"/>
+        <result column="warehouse_warrant_id" property="warehouseWarrantId" jdbcType="DECIMAL"/>
+        <result column="warehouse_warrant_code" property="warehouseWarrantCode" jdbcType="VARCHAR"/>
+        <result column="platform_order_code" property="platformOrderCode" jdbcType="VARCHAR"/>
+        <result column="order_code" property="orderCode" jdbcType="VARCHAR"/>
+        <result column="input_type" property="inputType" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="VARCHAR"/>
+        <result column="support_logic_warehouse_id" property="supportLogicWarehouseId" jdbcType="DECIMAL"/>
+        <result column="support_logic_warehouse_name" property="supportLogicWarehouseName" jdbcType="VARCHAR"/>
+        <result column="support_logic_warehouse_code" property="supportLogicWarehouseCode" jdbcType="VARCHAR"/>
+        <result column="receiving_logic_warehouse_id" property="receivingLogicWarehouseId" jdbcType="DECIMAL"/>
+        <result column="receiving_logic_warehouse_name" property="receivingLogicWarehouseName" jdbcType="VARCHAR"/>
+        <result column="receiving_logic_warehouse_code" property="receivingLogicWarehouseCode" jdbcType="VARCHAR"/>
+        <result column="store_id" property="storeId" jdbcType="DECIMAL"/>
+        <result column="store_name" property="storeName" jdbcType="VARCHAR"/>
+        <result column="channel_type_code" property="channelTypeCode" jdbcType="VARCHAR"/>
+        <result column="returns_name" property="returnsName" jdbcType="VARCHAR"/>
+        <result column="returns_address" property="returnsAddress" jdbcType="VARCHAR"/>
+        <result column="returns_tel" property="returnsTel" jdbcType="VARCHAR"/>
+        <result column="returns_mobile" property="returnsMobile" jdbcType="VARCHAR"/>
+        <result column="country" property="country" jdbcType="VARCHAR"/>
+        <result column="province" property="province" jdbcType="VARCHAR"/>
+        <result column="city" property="city" jdbcType="VARCHAR"/>
+        <result column="district" property="district" jdbcType="VARCHAR"/>
+        <result column="logistics_company_id" property="logisticsCompanyId" jdbcType="DECIMAL"/>
+        <result column="logistics_company_name" property="logisticsCompanyName" jdbcType="VARCHAR"/>
+        <result column="logistics_no" property="logisticsNo" jdbcType="VARCHAR"/>
+    </resultMap>
+    <select id="selectList" resultType="org.skyer.stock.domain.vo.WarehouseResultVO">
+        SELECT  t1.id,
+                t1.code,
+                t1.warehouse_warrant_code,
+                t1.input_type,
+                t1.status,
+                t1.receiving_logic_warehouse_name,
+                t1.receiving_logic_warehouse_code,
+                t1.store_name,
+                t1.channel_type_code,
+                t1.creation_date,
+                t2.already_qty
+        FROM sstock_warehouse_result t1
+        LEFT JOIN (SELECT warehouse_result_id, SUM( already_qty ) already_qty FROM sstock_warehouse_result_detail GROUP BY warehouse_result_id) t2
+        ON t1.id = t2.warehouse_result_id
+        <where>
+            <if test="queryCode != null and queryCode != ''">
+                AND (t1.`code` = #{queryCode}
+                OR t1.warehouse_warrant_code = #{queryCode}
+                OR t1.platform_order_code = #{queryCode}
+                OR t1.order_code = #{queryCode}
+                )
+            </if>
+            <if test="channelTypeCode != null and channelTypeCode != ''">
+                AND t1.channel_type_code = #{channelTypeCode}
+            </if>
+            <if test="storeIdList != null and storeIdList.size()>0">
+                AND t1.store_id IN
+                <foreach collection="storeIdList" item="item" open="(" close=")" separator=",">#{item}</foreach>
+            </if>
+            <if test="status != null and status != ''">
+                AND t1.`status` = #{status}
+            </if>
+            <if test="receivingLogicWarehouseCode != null and receivingLogicWarehouseCode != ''">
+                AND t1.receiving_logic_warehouse_code = #{receivingLogicWarehouseCode}
+            </if>
+            <if test="beginCreationDate != null">
+                AND t1.creation_date &gt;= #{beginCreationDate}
+            </if>
+            <if test="endCreationDate != null">
+                AND t1.creation_date &lt;= #{endCreationDate}
+            </if>
+        </where>
+    </select>
+
+
+</mapper>

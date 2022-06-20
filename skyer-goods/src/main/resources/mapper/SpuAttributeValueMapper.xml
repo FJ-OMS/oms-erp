@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.skyer.goods.infra.mapper.SpuAttributeValueMapper">
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap id="BaseResultMap" type="org.skyer.goods.domain.entity.SpuAttributeValue">
+        <result column="id" property="id" jdbcType="DECIMAL"/>
+        <result column="attribute_id" property="attributeId" jdbcType="DECIMAL"/>
+        <result column="value" property="value" jdbcType="VARCHAR"/>
+        <result column="delete_flag" property="deleteFlag" jdbcType="DECIMAL"/>
+        <result column="sort" property="sort" jdbcType="DECIMAL"/>
+        <result column="spu_id" property="spuId" jdbcType="DECIMAL"/>
+    </resultMap>
+</mapper>

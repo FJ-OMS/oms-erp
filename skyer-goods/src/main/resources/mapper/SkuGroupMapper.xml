@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.skyer.goods.infra.mapper.SkuGroupMapper">
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap id="BaseResultMap" type="org.skyer.goods.domain.entity.SkuGroup">
+        <result column="id" property="id" jdbcType="DECIMAL"/>
+        <result column="spu_id" property="spuId" jdbcType="DECIMAL"/>
+        <result column="spu_code" property="spuCode" jdbcType="VARCHAR"/>
+        <result column="sku_group_code" property="skuGroupCode" jdbcType="VARCHAR"/>
+        <result column="delete_flag" property="deleteFlag" jdbcType="DECIMAL"/>
+        <result column="creation_date" property="creationDate" jdbcType="DATE"/>
+        <result column="last_update_date" property="lastUpdateDate" jdbcType="DATE"/>
+        <result column="created_by" property="createdBy" jdbcType="DECIMAL"/>
+        <result column="last_updated_by" property="lastUpdatedBy" jdbcType="DECIMAL"/>
+        <result column="object_version_number" property="objectVersionNumber" jdbcType="DECIMAL"/>
+        <result column="tenant_id" property="tenantId" jdbcType="DECIMAL"/>
+        <result column="price" property="price" jdbcType="VARCHAR"/>
+        <result column="md5_check_value" property="md5CheckValue" jdbcType="VARCHAR"/>
+        <result column="sku_name" property="skuName" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="queryGroupPageList" resultType="org.skyer.goods.domain.vo.GroupPageResVO">
+         select
+            kg.id groupId, kg.sku_group_code groupCode, spu.spu_code spuCode,
+            spu.name spuName, kg.created_by createdBy, kg.creation_date createDate,
+            kg.last_updated_by lastUpdatedBy, kg.last_update_date lastUpdateDate,
+            spu.id spuId
+         from sgoo_sku_group kg left join sgoo_spu spu on kg.spu_id = spu.id where kg.delete_flag = 0
+        <if test="param.spuCode != null">
+            and spu.spu_code = #{param.spuCode}
+        </if>
+        <if test="param.spuName != null">
+            and spu.name LIKE CONCAT( #{param.spuName}, '%')
+        </if>
+        <if test="tenantId != null">
+            and kg.tenant_id = #{tenantId}
+        </if>
+        order by kg.creation_date desc
+    </select>
+
+
+</mapper>

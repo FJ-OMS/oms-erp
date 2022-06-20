@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.skyer.goods.infra.mapper.SkuAttributeValueDraftMapper">
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap id="BaseResultMap" type="org.skyer.goods.domain.entity.SkuAttributeValueDraft">
+        <result column="id" property="id" jdbcType="DECIMAL"/>
+        <result column="sku_id" property="skuId" jdbcType="DECIMAL"/>
+        <result column="attribute_id" property="attributeId" jdbcType="DECIMAL"/>
+        <result column="attribute_name" property="attributeName" jdbcType="VARCHAR"/>
+        <result column="attribute_value" property="attributeValue" jdbcType="VARCHAR"/>
+        <result column="attribute_type" property="attributeType" jdbcType="DECIMAL"/>
+        <result column="is_sku" property="isSku" jdbcType="DECIMAL"/>
+    </resultMap>
+    <select id="queryAllBySkuId" resultType="org.skyer.goods.domain.entity.SkuAttributeValueDraft">
+        SELECT
+            id,sku_id,attribute_id,attribute_name,attribute_value,attribute_type,is_sku
+        FROM sgoo_sku_attribute_value_draft
+        WHERE sku_id = #{skuId}
+    </select>
+</mapper>

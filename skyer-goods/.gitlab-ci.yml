@@ -1,0 +1,11 @@
+include: http://api.k8s9.com/devops/v1/projects/285085540595404800/ci_contents/pipelines/ce450dff-5aa0-47a1-b397-6f0a71aed0c2/content.yaml
+
+#include: http://api.k8s9.com/devops/v1/projects/285085540595404800/ci_contents/pipelines/3db66342-8915-49a4-b4e0-c0e57c08c657/content.yaml
+#
+##include: http://api.k8s9.com/devops/v1/projects/285085540595404800/ci_contents/pipelines/b2617c66-8f9a-4dca-9e4a-977a83404093/content.yaml
+##
+###include: http://api.k8s9.com/devops/v1/projects/285085540595404800/ci_contents/pipelines/a814fa4b-e039-4a7d-8bcf-e060b751925d/content.yaml
+###
+####include: http://api.baogicloud.com/devops/v1/projects/204888765897510912/ci_contents/pipelines/0cfdcff6-6fe6-43dd-a5d0-9db2c866a451/content.yaml
+####
+#####include: http://api.baogicloud.com/devops/v1/projects/187577360164982784/ci_contents/pipelines/903880b5-824b-42c1-9088-2f59c0598f7e/content.yaml

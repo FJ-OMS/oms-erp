@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.skyer.order.infra.mapper.AfterSaleItemMapper">
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap id="BaseResultMap" type="org.skyer.order.domain.entity.AfterSaleItem">
+        <result column="id" property="id" jdbcType="DECIMAL"/>
+        <result column="outer_order_no" property="outerOrderNo" jdbcType="VARCHAR"/>
+        <result column="inner_order_no" property="innerOrderNo" jdbcType="VARCHAR"/>
+        <result column="type" property="type" jdbcType="VARCHAR"/>
+        <result column="origin_item_id" property="originItemId" jdbcType="DECIMAL"/>
+        <result column="outer_refund_no" property="outerRefundNo" jdbcType="VARCHAR"/>
+        <result column="spu_code" property="spuCode" jdbcType="VARCHAR"/>
+        <result column="spu_type" property="spuType" jdbcType="DECIMAL"/>
+        <result column="sku_code" property="skuCode" jdbcType="VARCHAR"/>
+        <result column="sku_name" property="skuName" jdbcType="VARCHAR"/>
+        <result column="spu_name" property="spuName" jdbcType="VARCHAR"/>
+        <result column="sku_id" property="skuId" jdbcType="DECIMAL"/>
+        <result column="quantity" property="quantity" jdbcType="DECIMAL"/>
+        <result column="unit_price" property="unitPrice" jdbcType="DECIMAL"/>
+        <result column="gift_flag" property="giftFlag" jdbcType="DECIMAL"/>
+        <result column="delete_flag" property="deleteFlag" jdbcType="DECIMAL"/>
+        <result column="creation_date" property="creationDate" jdbcType="DATE"/>
+        <result column="last_update_date" property="lastUpdateDate" jdbcType="DATE"/>
+        <result column="created_by" property="createdBy" jdbcType="DECIMAL"/>
+        <result column="last_updated_by" property="lastUpdatedBy" jdbcType="DECIMAL"/>
+        <result column="object_version_number" property="objectVersionNumber" jdbcType="DECIMAL"/>
+    </resultMap>
+
+    <select id="getReturnListByInnerNo" resultType="org.skyer.order.api.vo.AfterSaleItemVO">
+        SELECT
+        si.id AS originItemId,
+        si.outer_order_no  AS outerOrderNo,
+        si.inner_order_no AS innerOrderNo,
+        si.spu_code  AS spuCode,
+        si.spu_type  AS spuType,
+        si.sku_code   AS skuCode,
+        si.sku_name   AS skuName,
+        si.spu_name   AS spuName,
+        si.sku_id   AS skuId,
+        si.object_version_number   AS objectVersionNumber,
+        COUNT(sil.id)   AS totalQuantity,
+        <!--        //todo 暂时没有已退款数量 -->
+        SUM(CASE WHEN  sil.endorse_status = 2 THEN 0 ELSE 0 END)  AS quantityRefunded,
+        SUM(CASE WHEN  sil.delivery_status = 10511 OR sil.delivery_status = 10510  THEN 1 ELSE 0 END)  AS  undeliveredQuantity,
+        SUM(CASE WHEN  sil.delivery_status in (10510,10511)  AND sil.suspend_status in (11210,11213,11223) THEN 1 ELSE 0 END)  AS  refundableQuantity,
+        SUM(CASE WHEN  sil.delivery_status = 10512 THEN 1 ELSE 0 END) AS  quantityShipped,
+        SUM(CASE WHEN  sil.return_flag = 1 THEN 1 ELSE 0 END)  AS quantityReturned,
+        SUM(CASE WHEN  sil.return_flag = 0 AND sil.delivery_status = 10512  AND sil.suspend_status in (11210,11213,11223) THEN 1 ELSE 0 END) AS returnableQuantity,
+        si.gift_flag   AS giftFlag,
+        sip.amount AS unitPrice
+
+        FROM sord_item si
+        LEFT JOIN sord_item_line sil
+        ON si.id = sil.inner_item_id
+        LEFT JOIN sord_item_price sip
+        ON si.id = sip.order_item_id
+        AND type='8'
+        WHERE si.inner_order_no = #{param.innerOrderNo}
+        GROUP BY si.id
+
+    </select>
+    <select id="getReturnListByOriginItemIds" resultType="org.skyer.order.domain.entity.AfterSaleItem">
+        SELECT
+        si.id AS originItemId,
+        si.outer_order_no  AS outerOrderNo,
+        si.inner_order_no AS innerOrderNo,
+        si.spu_code  AS spuCode,
+        si.spu_type  AS spuType,
+        si.sku_code   AS skuCode,
+        si.sku_name   AS skuName,
+        si.spu_name   AS spuName,
+        si.sku_id   AS skuId,
+        si.gift_flag   AS giftFlag
+
+        FROM sord_item si
+        LEFT JOIN sord_item_price sip
+        ON si.id = sip.order_item_id
+        AND type='8'
+        WHERE si.id IN
+        <foreach collection="itemIds" separator="," open="(" close=")" item="item">
+            #{item}
+        </foreach>
+
+    </select>
+
+
+    <select id="getListByInnerRefundNo" resultType="org.skyer.order.domain.entity.AfterSaleItem">
+        SELECT
+        sasi.*,
+        COUNT(sil.id)   AS totalQuantity,
+        SUM(CASE WHEN  sil.endorse_status = 2 THEN 0 ELSE 0 END)  AS quantityRefunded,
+        SUM(CASE WHEN  sil.delivery_status = 10511 OR sil.delivery_status = 10510  THEN 1 ELSE 0 END)  AS  undeliveredQuantity,
+        SUM(CASE WHEN  sil.delivery_status in (10510,10511)  AND sil.suspend_status in (11210,11213,11223) THEN 1 ELSE 0 END)  AS  refundableQuantity,
+        SUM(CASE WHEN  sil.delivery_status = 10512 THEN 1 ELSE 0 END) AS  quantityShipped,
+        SUM(CASE WHEN  sil.return_flag = 1 THEN 1 ELSE 0 END)  AS quantityReturned,
+        SUM(CASE WHEN  sil.return_flag = 0 AND sil.delivery_status = 10512  AND sil.suspend_status in (11210,11213,11223) THEN 1 ELSE 0 END) AS returnableQuantity
+
+        FROM sord_after_sale_item sasi
+        LEFT JOIN  sord_item_line sil  ON sasi.origin_item_id = sil.inner_item_id
+        WHERE
+        sasi.inner_refund_no=#{InnerRefundNo}
+        GROUP BY sasi.origin_item_id
+    </select>
+
+
+</mapper>

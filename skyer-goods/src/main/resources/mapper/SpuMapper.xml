@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.skyer.goods.infra.mapper.SpuMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="org.skyer.goods.domain.entity.Spu">
+        <result column="id" property="id" />
+        <result column="brand_code" property="brandCode" />
+        <result column="brand_id" property="brandId" />
+        <result column="category_code" property="categoryCode" />
+        <result column="category_id" property="categoryId" />
+        <result column="material_code" property="materialCode" />
+        <result column="material_id" property="materialId" />
+        <result column="name" property="name" />
+        <result column="remark" property="remark" />
+        <result column="spu_code" property="spuCode" />
+        <result column="type" property="type" />
+        <result column="delete_flag" property="deleteFlag" />
+        <result column="creation_date" property="creationDate" />
+        <result column="last_update_date" property="lastUpdateDate" />
+        <result column="created_by" property="createdBy" />
+        <result column="last_updated_by" property="lastUpdatedBy" />
+        <result column="object_version_number" property="objectVersionNumber" />
+        <result column="status" property= "status" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id,
+        brand_code, brand_id, category_code, category_id, material_code, material_id, name, remark, spu_code, type, delete_flag, creation_date, last_update_date, created_by, last_updated_by, object_version_number, tenant_id
+    </sql>
+
+    <select id="queryGoodsListBySpu" resultType="org.skyer.goods.domain.vo.GoodsPageResVO">
+        SELECT
+            id,
+            spu_code spuCode,
+            status,
+            NAME,
+            type,
+            category_id categoryId,
+            material_id materialId,
+            brand_id brandId,
+            created_by createdBy,
+            creation_date createDate,
+            last_update_date lastUpdateDate,
+            last_updated_by lastUpdatedBy,
+            object_version_number objectVersionNumber,
+            remark
+        FROM
+            sgoo_spu where delete_flag = 0
+        <if test="spuList != null">
+            and spu_code in
+        <foreach collection="spuList" item="code" open="(" separator="," close=")">
+            #{code}
+        </foreach>
+        </if>
+    </select>
+
+    <select id="getGoodsList" resultType="org.skyer.goods.domain.vo.GoodsPageResVO">
+        SELECT
+        id,
+        spu_code spuCode,
+        status,
+        NAME,
+        type,
+        category_id categoryId,
+        material_id materialId,
+        brand_id brandId,
+        created_by createdBy,
+        creation_date createDate,
+        last_update_date lastUpdateDate,
+        last_updated_by lastUpdatedBy,
+        object_version_number objectVersionNumber,
+        remark
+        FROM
+        sgoo_spu where delete_flag = 0
+        <if test="param.id !=null">
+            and id =#{param.id}
+        </if>
+        <if test="param.status != null">
+            and status = #{param.status}
+        </if>
+        <if test="param.spuCode != null and param.spuCode.trim().length() > 0">
+            and spu_code LIKE CONCAT('%',#{param.spuCode}, '%')
+        </if>
+        <if test="param.name != null and param.name.trim().length() >0">
+            AND name LIKE CONCAT( #{param.name}, '%')
+        </if>
+        <if test="param.type != null">
+            and type = #{param.type}
+        </if>
+        <if test="param.setFlag != null">
+            and set_flag = #{param.setFlag}
+        </if>
+        <if test="param.categoryIdList != null and  param.categoryIdList.size() >0" >
+            and category_id in
+            <foreach collection="param.categoryIdList" item="categoryId" open="(" separator="," close=")">
+                #{categoryId}
+            </foreach>
+        </if>
+        order by creation_date desc
+    </select>
+</mapper>

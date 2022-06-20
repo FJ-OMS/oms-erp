@@ -1,0 +1,33 @@
+server:
+  port: 8410
+management:
+  server:
+    port: 8401
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+spring:
+  cloud:
+    inetutils:
+      preferred-networks:
+        - 192
+
+eureka:
+  instance:
+    # 以IP注册到注册中心
+    preferIpAddress: ${EUREKA_INSTANCE_PREFER_IP_ADDRESS:true}
+    leaseRenewalIntervalInSeconds: 10
+    leaseExpirationDurationInSeconds: 30
+    # 服务的一些元数据信息k
+    metadata-map:
+      developer: admin
+      VERSION: 1.0.0
+  client:
+    serviceUrl:
+      # 注册中心地址
+      defaultZone: ${EUREKA_DEFAULT_ZONE:http://eureka.ebc.com/eureka}
+    registryFetchIntervalSeconds: 10
+    disable-delta: true
+

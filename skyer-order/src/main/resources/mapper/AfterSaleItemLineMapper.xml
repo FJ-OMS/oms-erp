@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.skyer.order.infra.mapper.AfterSaleItemLineMapper">
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap id="BaseResultMap" type="org.skyer.order.domain.entity.AfterSaleItemLine">
+        <result column="id" property="id" jdbcType="DECIMAL"/>
+        <result column="outer_refund_no" property="outerRefundNo" jdbcType="VARCHAR"/>
+        <result column="inner_refund_no" property="innerRefundNo" jdbcType="VARCHAR"/>
+        <result column="inner_order_no" property="innerOrderNo" jdbcType="VARCHAR"/>
+        <result column="type" property="type" jdbcType="VARCHAR"/>
+        <result column="spu_code" property="spuCode" jdbcType="VARCHAR"/>
+        <result column="sku_id" property="skuId" jdbcType="DECIMAL"/>
+        <result column="spu_type" property="spuType" jdbcType="DECIMAL"/>
+        <result column="sku_code" property="skuCode" jdbcType="VARCHAR"/>
+        <result column="sku_name" property="skuName" jdbcType="VARCHAR"/>
+        <result column="spu_name" property="spuName" jdbcType="VARCHAR"/>
+        <result column="delete_flag" property="deleteFlag" jdbcType="DECIMAL"/>
+        <result column="creation_date" property="creationDate" jdbcType="DATE"/>
+        <result column="last_update_date" property="lastUpdateDate" jdbcType="DATE"/>
+        <result column="created_by" property="createdBy" jdbcType="DECIMAL"/>
+        <result column="last_updated_by" property="lastUpdatedBy" jdbcType="DECIMAL"/>
+        <result column="object_version_number" property="objectVersionNumber" jdbcType="DECIMAL"/>
+    </resultMap>
+
+    <select id="getReturnListByItemId" resultType="org.skyer.order.api.vo.AfterSaleItemLineVO">
+        SELECT
+        sil.id AS originItemLineId,
+        sil.inner_item_id    AS  originItemId,
+        sil.spu_code  AS spuCode,
+        sil.spu_type  AS spuType,
+        sil.sku_code   AS skuCode,
+        sil.sku_name   AS skuName,
+        sil.spu_name   AS spuName,
+        sil.gift_flag   AS giftFlag,
+        sil.delivery_status AS deliveryStatus,
+        sil.source_status  AS sourceStatus,
+        sil.preemption_status   AS preemptionStatus,
+        silp.amount as unitPrice
+        FROM sord_item_line sil
+        LEFT JOIN sord_item_line_price silp
+        ON sil.id = silp.order_line_id
+        AND type='8'
+        WHERE
+        sil.inner_item_id = #{itemId}
+        AND sil.suspend_status in (11210,11213,11223)
+        AND sil.refund_flag = 0
+        AND sil.delivery_status in (10510,10511)
+    </select>
+
+    <select id="getReturnGoodsListByItemId" resultType="org.skyer.order.api.vo.AfterSaleItemLineVO">
+        SELECT
+        sil.id AS originItemLineId,
+        sil.spu_code  AS spuCode,
+        sil.spu_type  AS spuType,
+        sil.sku_code   AS skuCode,
+        sil.sku_name   AS skuName,
+        sil.spu_name   AS spuName,
+        sil.gift_flag   AS giftFlag,
+        sil.delivery_status AS deliveryStatus,
+        sil.source_status  AS sourceStatus,
+        sil.preemption_status   AS preemptionStatus,
+        silp.amount as unitPrice
+
+        FROM sord_item_line sil
+        LEFT JOIN sord_item_line_price silp
+        ON sil.id = silp.order_line_id
+        AND type='8'
+
+        WHERE
+        sil.inner_item_id = #{itemId}
+        AND sil.suspend_status in (11210,11213,11223)
+        AND sil.return_flag = 0
+        AND sil.delivery_status = 10512
+    </select>
+
+
+    <select id="getReturnListByItemIds" resultType="org.skyer.order.domain.entity.AfterSaleItemLine">
+        SELECT
+        sil.id    AS  originItemLineId,
+        sil.inner_item_id    AS  originItemId,
+        sil.spu_code    AS  spuCode ,
+        sil.sku_id    AS skuId,
+        sil.spu_type    AS spuType,
+        sil.sku_code    AS skuCode,
+        sil.sku_name    AS skuName,
+        sil.spu_name    AS spuName,
+        sil.gift_flag    AS giftFlag,
+        silp.amount AS unitPrice
+
+        FROM sord_item_line sil
+        LEFT JOIN sord_item_line_price silp
+        ON sil.id = silp.order_line_id
+        AND type='8'
+        WHERE
+        sil.suspend_status in (11210,11213,11223)
+        AND sil.refund_flag = 0
+        AND sil.delivery_status in (10510,10511)
+        AND sil.inner_item_id in
+        <foreach collection="itemIds" separator="," open="(" close=")" item="item">
+            #{item}
+        </foreach>
+
+
+    </select>
+
+    <select id="getReturnGoodsListByItemIds" resultType="org.skyer.order.domain.entity.AfterSaleItemLine">
+        SELECT
+        sil.id    AS  originItemLineId,
+        sil.inner_item_id    AS  originItemId,
+        sil.spu_code    AS  spuCode ,
+        sil.sku_id    AS skuId,
+        sil.spu_type    AS spuType,
+        sil.sku_code    AS skuCode,
+        sil.sku_name    AS skuName,
+        sil.spu_name    AS spuName,
+        sil.gift_flag    AS giftFlag,
+        silp.amount AS unitPrice
+
+        FROM sord_item_line sil
+        LEFT JOIN sord_item_line_price silp
+        ON sil.id = silp.order_line_id
+        AND type='8'
+        WHERE
+        sil.suspend_status in (11210,11213,11223)
+        AND sil.return_flag = 0
+        AND sil.delivery_status = 10512
+        AND sil.inner_item_id in
+        <foreach collection="itemIds" separator="," open="(" close=")" item="item">
+            #{item}
+        </foreach>
+    </select>
+
+
+
+
+</mapper>

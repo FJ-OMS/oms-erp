@@ -1,0 +1,128 @@
+## 实例运行数量
+replicaCount: 1
+
+## 设置默认的 image、imageTag 和 imagePullPolicy。
+image:
+  repository: harbor.k8s9.com/k8s9-skyer-ebc/skyer-goods
+  pullPolicy: IfNotPresent
+
+deployment:
+  managementPort: 8311
+  nodePort:
+
+kubesphere:
+  app:
+    name: ebc
+    version: v1
+    creator: admin
+    servicemesh: true
+    # statelessservice statefulservice
+    serviceType: statelessservice
+    ingress: false
+
+## Deployment 更新策略
+deploymentUpdate:
+  type: RollingUpdate
+  maxUnavailable: 25%
+  maxSurge: 25%
+
+## Pod 节点分配
+## ref: https://kubernetes.io/docs/user-guide/node-selection/
+##
+nodeSelector: {}
+tolerations: []
+affinity: {}
+## 实例运行时的环境变量
+env:
+  open:
+    # 本实例服务端口
+    SERVER_PORT: 8310
+    # 本实例管理端口
+    MANAGEMENT_SERVER_PORT: 8311
+
+    # 是否启用配置中心
+    SPRING_CLOUD_CONFIG_ENABLED: false
+    # 配置中心地址
+    SPRING_CLOUD_CONFIG_URI: http://skyer-config:8010
+
+    # Redis 主机地址
+    SPRING_REDIS_HOST: skyer-redis
+    # Redis 端口
+    SPRING_REDIS_PORT: 6379
+    # Redis db 固定数据不可更改
+    SPRING_REDIS_DATABASE: 1
+
+    # 数据库连接地址
+    SPRING_DATASOURCE_URL: jdbc:mysql://skyer-mysql:3306/skyer_goods?useUnicode=true&characterEncoding=utf-8&useSSL=false&useInformationSchema=true&remarks=true&serverTimezone=Asia/Shanghai
+    # 数据库用户名
+    SPRING_DATASOURCE_USERNAME: root
+    # 数据库密码
+    SPRING_DATASOURCE_PASSWORD: 123456
+
+    # 注册服务地址
+    EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://skyer-register:8000/eureka/
+    
+    EUREKA_INSTANCE_PREFER_IP_ADDRESS: true
+
+    # 项目级API是否必须检查项目参数
+    SKYER_GATEWAY_FILTER_COMMON_REQUEST_CHECK_PROJECT: true
+    # 组织级API是否必须检查组织参数
+    SKYER_GATEWAY_FILTER_COMMON_REQUEST_CHECK_ORGANIZATION: true
+    # 是否启用标准的权限检查
+    SKYER_GATEWAY_FILTER_COMMON_REQUEST_ENABLE: true
+    # 是否统计API访问情况
+    SKYER_GATEWAY_FILTER_COLLECT_SPAN_ENABLED: true
+    # 是否打印 JWT
+    SKYER_GATEWAY_HELPER_ENABLE_JWT_LOG: false
+    # 主键加密配置 encrypt(主键加密) to_string(主键变字符串类型) do_nothing(关闭加密)
+    SKYER_REQUEST_ENCRYPT_MODE: encrypt
+    LOG_LEVEL: info
+    SKYER_GATEWAY_AUTHENTICATE_REDIS: true
+
+    # 百分比使用物理内存，预留一部分用于堆外内存以及外部程序
+    JAVA_OPTS: >-
+      -XX:MaxRAMPercentage=80.0
+
+## Liveness 和 Readiness 探针相关配置
+## ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/
+livenessProbe:
+  initialDelaySeconds: 180
+  periodSeconds: 30
+  timeoutSeconds: 3
+  successThreshold: 1
+  failureThreshold: 3
+readinessProbe:
+  initialDelaySeconds: 5
+  periodSeconds: 15
+  timeoutSeconds: 3
+  successThreshold: 1
+  failureThreshold: 3
+
+## 资源请求和限制相关配置
+## ref: http://kubernetes.io/docs/user-guide/compute-resources/
+##
+resources:
+  limits:
+    cpu: 900m
+    memory: 2Gi
+  requests:
+    cpu: 100m
+    memory: 2Gi
+
+## service 相关设置
+## ref: http://kubernetes.io/docs/user-guide/services/
+##
+service:
+  enabled: true
+  # LoadBalancer  ClusterIP
+  type: ClusterIP
+  port: 8310
+  nodePort:
+
+persistence:
+  enabled: false
+  ## A manually managed Persistent Volume and Claim
+  ## Requires persistence.enabled: true
+  ## If defined, PVC must be created manually before volume will be bound
+  # existingClaim:
+  # subPath:

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.skyer.order.infra.mapper.ThirdPartyAfterSaleHeaderMapper">
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap id="BaseResultMap" type="org.skyer.order.domain.entity.ThirdPartyAfterSaleHeader">
+        <result column="id" property="id" jdbcType="DECIMAL"/>
+        <result column="out_refund_no" property="outRefundNo" jdbcType="VARCHAR"/>
+        <result column="outer_order_no" property="outerOrderNo" jdbcType="VARCHAR"/>
+        <result column="channel" property="channel" jdbcType="VARCHAR"/>
+        <result column="store_id" property="storeId" jdbcType="DECIMAL"/>
+        <result column="store_code" property="storeCode" jdbcType="VARCHAR"/>
+        <result column="store_name" property="storeName" jdbcType="VARCHAR"/>
+        <result column="exception_status" property="exceptionStatus" jdbcType="VARCHAR"/>
+        <result column="exception_reason" property="exceptionReason" jdbcType="VARCHAR"/>
+        <result column="buyer_remarks" property="buyerRemarks" jdbcType="VARCHAR"/>
+        <result column="goods_quantity" property="goodsQuantity" jdbcType="DECIMAL"/>
+        <result column="total_amount" property="totalAmount" jdbcType="DECIMAL"/>
+        <result column="buyer_nick" property="buyerNick" jdbcType="VARCHAR"/>
+        <result column="refund_time" property="refundTime" jdbcType="DATE"/>
+        <result column="out_receive_info" property="outReceiveInfo" jdbcType="VARCHAR"/>
+        <result column="out_receive_info_MD5" property="outReceiveInfoMd5" jdbcType="VARCHAR"/>
+        <result column="stage" property="stage" jdbcType="VARCHAR"/>
+        <result column="creation_date" property="creationDate" jdbcType="DATE"/>
+        <result column="last_update_date" property="lastUpdateDate" jdbcType="DATE"/>
+        <result column="created_by" property="createdBy" jdbcType="DECIMAL"/>
+        <result column="last_updated_by" property="lastUpdatedBy" jdbcType="DECIMAL"/>
+        <result column="object_version_number" property="objectVersionNumber" jdbcType="DECIMAL"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, out_refund_no, outer_order_no, channel, store_id, store_code, store_name, exception_status, exception_reason, buyer_remarks, goods_quantity, total_amount, buyer_nick, refund_time, stage
+    </sql>
+    <select id="orderPage" resultType="org.skyer.order.api.vo.ThirdPartyAfterSalePageVO">
+        SELECT
+        id id,
+        out_refund_no outRefundNo,
+        outer_order_no outerOrderNo,
+        inner_refund_no innerRefundNo,
+        inner_order_no innerOrderNo,
+        reason reason,
+        channel channel,
+        store_id storeId,
+        store_code storeCode,
+        store_name storeName,
+        exception_status exceptionStatus,
+        exception_reason     exceptionReason,
+        remarks remarks,
+        goods_quantity goodsQuantity,
+        total_amount totalAmount,
+        buyer_nick buyerNick,
+        refund_time refundTime,
+        stage stage
+
+        FROM
+            sord_third_party_after_sale_header stpash
+        <where>
+            stpash.type =#{thirdPartyAfterSalePageDTO.type}
+            <if test="thirdPartyAfterSalePageDTO.orderNo != null and thirdPartyAfterSalePageDTO.orderNo != ''">
+                and (stpash.out_refund_no  = #{thirdPartyAfterSalePageDTO.orderNo} or stpash.outer_order_no  = #{thirdPartyAfterSalePageDTO.orderNo})
+            </if>
+            <if test="thirdPartyAfterSalePageDTO.buyerNick != null and thirdPartyAfterSalePageDTO.buyerNick != ''">
+                and stpash.buyer_nick =#{thirdPartyAfterSalePageDTO.buyerNick}
+            </if>
+            <if test="thirdPartyAfterSalePageDTO.startTime != null">
+                AND DATE_FORMAT(stpash.refund_time,'%Y-%m-%d %H:%i:%S') &gt;=  DATE_FORMAT(#{thirdPartyAfterSalePageDTO.startTime},'%Y-%m-%d %H:%i:%S')
+            </if>
+            <if test="thirdPartyAfterSalePageDTO.endTime != null">
+                AND DATE_FORMAT(stpash.refund_time,'%Y-%m-%d %H:%i:%S') &lt;= DATE_FORMAT(#{thirdPartyAfterSalePageDTO.endTime},'%Y-%m-%d %H:%i:%S')
+            </if>
+            <if test="thirdPartyAfterSalePageDTO.channelTypeCode != null and thirdPartyAfterSalePageDTO.channelTypeCode != ''">
+                and stpash.channel =#{thirdPartyAfterSalePageDTO.channelTypeCode}
+            </if>
+            <if test="thirdPartyAfterSalePageDTO.storeIdList != null and thirdPartyAfterSalePageDTO.storeIdList.size() > 0">
+                and stpash.store_id in
+                <foreach collection="thirdPartyAfterSalePageDTO.storeIdList" item="storeId" open="(" separator="," close=")">
+                    #{storeId}
+                </foreach>
+            </if>
+            <if test="thirdPartyAfterSalePageDTO.exceptionStatus != null and thirdPartyAfterSalePageDTO.exceptionStatus != ''">
+                and stpash.exception_status =#{thirdPartyAfterSalePageDTO.exceptionStatus}
+            </if>
+            order by stpash.creation_date desc
+        </where>
+
+    </select>
+</mapper>

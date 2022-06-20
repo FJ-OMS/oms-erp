@@ -1,0 +1,33 @@
+{
+  "name": "element-table-sortable",
+  "version": "1.1.1",
+  "description": "对 element 表格的拖拽列排序、列宽度、列固定配置 进行用户级保存",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "vue": "2.6.10",
+    "sortablejs": "^1.14.0",
+    "element-ui": "2.13.2"
+  },
+  "devDependencies": {
+    "vue": "2.6.10",
+    "sortablejs": "^1.14.0",
+    "element-ui": "2.13.2"
+  },
+  "keywords": [
+    "element-table-sortable",
+    "element-table",
+    "拖拽排序",
+    "列宽度",
+    "列固定",
+    "保存配置",
+    "用户级",
+    "vue.js",
+    "element-ui",
+    "sortable.js"
+  ],
+  "author": "zxq",
+  "license": "ISC"
+}

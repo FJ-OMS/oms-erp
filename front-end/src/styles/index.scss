@@ -1,0 +1,728 @@
+@import './variables.scss';
+@import './mixin.scss';
+@import './transition.scss';
+@import './element-ui.scss';
+@import './sidebar.scss';
+@import './btn.scss';
+@import './shop.scss';
+
+//[vxe-table 主题](https://vxetable.cn/v3/#/table/start/theme)
+@import 'vxe-table/styles/variable.scss';
+
+// 修改样式变量
+// $vxe-font-size: 30px;
+// $vxe-font-color: red;
+$vxe-primary-color: $main-dark;
+// $vxe-table-font-color: $vxe-font-color;
+// $vxe-table-border-color: red;
+$vxe-table-border-radius: 20px;
+// ...
+
+@import 'vxe-table/styles/icon.scss';
+@import 'vxe-table/styles/table.scss';
+@import 'vxe-table/styles/column.scss';
+@import 'vxe-table/styles/header.scss';
+@import 'vxe-table/styles/footer.scss';
+@import 'vxe-table/styles/filter.scss';
+
+body {
+  height: 100%;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial,
+    sans-serif;
+}
+
+label {
+  font-weight: 700;
+}
+
+html {
+  height: 100%;
+  box-sizing: border-box;
+}
+
+#app {
+  min-height: 100%;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+.no-padding,
+.padding-no {
+  padding: 0px !important;
+}
+.no-margin,
+.margin-no {
+  margin: 0px !important;
+}
+.height100 {
+  height: 100% !important;
+}
+
+.padding-content {
+  padding: 4px 0;
+}
+
+a:focus,
+a:active {
+  outline: none;
+}
+
+a,
+a:focus,
+a:hover {
+  cursor: pointer;
+  color: inherit;
+  text-decoration: none;
+}
+
+div:focus {
+  outline: none;
+}
+
+.fr {
+  float: right;
+}
+
+.fl {
+  float: left;
+}
+
+.pr-5 {
+  padding-right: 5px;
+}
+
+.pl-5 {
+  padding-left: 5px;
+}
+
+.block {
+  display: block;
+}
+
+.el-icon-document-copy,
+.el-icon-edit {
+  cursor: pointer;
+  color: $main-dark;
+  margin-left: 10px;
+}
+.F68710 {
+  color: #f68710;
+}
+.link {
+  color: $sub-dark;
+  cursor: pointer;
+}
+.pointer {
+  cursor: pointer;
+}
+
+.inlineBlock {
+  display: block;
+}
+
+.clearfix {
+  &:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: ' ';
+    clear: both;
+    height: 0;
+  }
+}
+
+aside {
+  background: #eef1f6;
+  padding: 8px 24px;
+  margin-bottom: 20px;
+  border-radius: 2px;
+  display: block;
+  line-height: 32px;
+  font-size: 16px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,
+    'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  color: #2c3e50;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  a {
+    color: #337ab7;
+    cursor: pointer;
+
+    &:hover {
+      color: rgb(32, 160, 255);
+    }
+  }
+}
+.avatar {
+  width: 120px !important;
+  height: 120px !important;
+  display: block;
+}
+// 文本禁止默认选中
+.no-user-select {
+  -moz-user-select: none; /*火狐*/
+  -webkit-user-select: none; /*webkit浏览器*/
+  -ms-user-select: none; /*IE10*/
+  -khtml-user-select: none; /*早期浏览器*/
+  user-select: none;
+}
+//main-container全局样式
+.app-container {
+  padding: 16px 16px;
+  padding-bottom: 10px;
+}
+
+.components-container {
+  margin: 30px 50px;
+  position: relative;
+}
+
+.pagination-container {
+  margin-top: 30px;
+}
+
+.text-center {
+  text-align: center;
+}
+.text-left {
+  text-align: left;
+}
+.text-right {
+  text-align: right;
+}
+.sub-navbar {
+  height: 50px;
+  line-height: 50px;
+  position: relative;
+  width: 100%;
+  text-align: right;
+  padding-right: 20px;
+  transition: 600ms ease position;
+  background: linear-gradient(
+    90deg,
+    rgba(32, 182, 249, 1) 0%,
+    rgba(32, 182, 249, 1) 0%,
+    rgba(33, 120, 241, 1) 100%,
+    rgba(33, 120, 241, 1) 100%
+  );
+
+  .subtitle {
+    font-size: 20px;
+    color: #fff;
+  }
+
+  &.draft {
+    background: #d0d0d0;
+  }
+
+  &.deleted {
+    background: #d0d0d0;
+  }
+}
+
+.link-type,
+.link-type:focus {
+  color: $sub-dark;
+  cursor: pointer;
+
+  &:hover {
+    color: $sub-dark;
+  }
+}
+
+.filter-container {
+  padding-bottom: 10px;
+
+  .filter-item {
+    display: inline-block;
+    vertical-align: middle;
+    margin-bottom: 10px;
+  }
+}
+
+//refine vue-multiselect plugin
+.multiselect {
+  line-height: 16px;
+}
+
+.multiselect--active {
+  z-index: 1000 !important;
+}
+
+// <!-- 最多显示一行 -->
+.ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+// <!-- 最多显示两行 -->
+.multi-ellipsis--l2 {
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 16px 0;
+}
+
+.full-width,
+.width-full {
+  width: 100% !important;
+}
+.el-input-group__append-width-100 .el-input-group__append .el-input {
+  width: 100px;
+}
+.tips {
+  font-size: 10px;
+  color: #c0c4cc;
+}
+.gray {
+  color: #a2a7b1// #c0c4cc;
+}
+
+.el-radio {
+  margin-right: 10px;
+}
+.flag-one {
+  color: #fb0101;
+}
+.flag-two {
+  color: #fcf703;
+}
+.flag-three {
+  color: #0dfc34;
+}
+.flag-four {
+  color: #0150f9;
+}
+.flag-five {
+  color: #d706f1;
+}
+
+.flex {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+.flex-column {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+.flex-center {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.justify-between {
+  justify-content: space-between;
+}
+.justify-center {
+  justify-content: center;
+}
+.justify-around {
+  justify-content: space-around;
+}
+
+.justify-end {
+  justify-content: flex-end;
+}
+
+.justify-start {
+  justify-content: flex-start !important;
+}
+
+.align-items {
+  align-items: center;
+}
+.red {
+  color: red;
+}
+
+.small-img {
+  width: 200px !important;
+}
+
+/**  详情页的公共样式 bj-row ****/
+//通用
+.el-icon-circle-check {
+  color: green;
+}
+.el-icon-warning-outline {
+  color: red;
+}
+.border-no,
+.child-border-no > *,
+.all-border-no,
+.all-border-no > * {
+  border: none !important;
+}
+.border-top {
+  border-left: none !important;
+  border-right: none !important;
+  border-bottom: none !important;
+  border-top: 1px solid rgba(215, 215, 215, 1);
+}
+.border-bottom {
+  border-left: none !important;
+  border-right: none !important;
+  border-top: none !important;
+  border-bottom: 1px solid rgba(215, 215, 215, 1);
+}
+.auto-width {
+  width: auto !important;
+}
+// label 后面加 冒号
+.bj-label-colon div:not(.bj-page) .el-form-item__label::after {
+  content: '\ff1a';
+}
+// // content 前面加冒号
+// .el-form-item-content-colon  .el-form-item__content::before {
+//   content: '\ff1a';
+//   display: inline;
+// }
+// // content 前面加冒号时，label分散对齐
+// .el-form-item-content-colon  .el-form-item__label {
+//   padding-right: 0;
+//   text-align: justify;
+//   text-align-last: justify; //https://caniuse.com/?search=text-align-last
+// }
+// 重设 el-input 的 disabled 样式
+.bj-el-input-disabled .el-input.is-disabled .el-input__inner {
+  background-color: #f7f8f9;
+  color: #97a8be;
+}
+// 块状布局，统一 bj-form-item-label 的宽度
+div:not(.bj-page) {
+  @for $i from 2 through 15 {
+    .bj-col.label-width-#{$i} .bj-form-item-label,
+    .label-width-#{$i} .bj-form-item-label {
+      width: ($i + 1) * 1em; // 在bj-form-item-label::after加冒号，需要占位1em
+    }
+  }
+  .bj-row {
+    border: 1px solid rgba(215, 215, 215, 1);
+    padding: 8px 16px;
+    display: flex;
+    flex-wrap: wrap;
+
+    .bj-col {
+      border-left: 1px solid rgba(215, 215, 215, 0.75);
+      padding: 16px;
+      width: 33.33%;
+    }
+    .bj-col:first-of-type {
+      border-left: none;
+    }
+    @for $i from 1 through 24 {
+      // 按 bj-col-* 布局宽度
+      .bj-col-#{$i} {
+        width: percentage($i/24) !important;
+      }
+      // bj-col 设为100%，按 bj-item-col-* 下的 el/bj-form-item 布局宽度
+      .bj-col.bj-item-col-#{$i} {
+        width: 100%;
+        padding: 0;
+        margin-top: 16px;
+      }
+      .bj-item-col-#{$i} {
+        .bj-form-item,
+        .el-form-item {
+          width: percentage($i/24);
+          float: left;
+          padding: 0 16px;
+          margin-right: 0;
+        }
+      }
+      // title 和 item的样式
+      .bj-col,
+      .bj-col-#{$i} {
+        .bj-form-title {
+          font-size: 14px;
+          font-weight: bold;
+
+          margin-bottom: 16px;
+        }
+        .bj-form-title.empty::after {
+          content: '';
+          display: inline-block;
+        }
+        .right {
+          float: right;
+          font-weight: normal;
+        }
+        .bj-form-item:last-child {
+          margin-bottom: 0;
+        }
+        .bj-form-item {
+          display: flex;
+          font-size: 12px;
+          margin-bottom: 16px;
+          button {
+            margin-bottom: 10px;
+          }
+          .bj-form-item-label {
+            flex: 0 0 auto;
+            color: #000;
+            text-align: right;
+            // text-align: justify;
+            // text-align-last: justify; //https://caniuse.com/?search=text-align-last
+            // height: 1em;
+            // overflow: hidden;
+          }
+          // .bj-form-item-label::after {
+          //   content: '';
+          //   display: inline-block;
+          //   width: 100%;
+          // }
+          // .bj-form-item-value::before {
+          //   content: '\ff1a';
+          // }
+          .bj-form-item-label::after {
+            content: '\ff1a';
+          }
+          .bj-form-item-value {
+            flex: 0 1 auto;
+            color: #6c6c6c; //#7f7f7f;
+          }
+          .bj-form-item-right {
+            flex: 0 0 auto;
+          }
+        }
+        .bj-form-tips {
+          font-size: 14px;
+          font-weight: normal;
+          margin: 6px 0;
+          color: #7f7f7f;
+        }
+      }
+    }
+  }
+}
+/** 高度28px ,解决列表页查询条件高度不一致问题 */
+.el-form-item-28 {
+  height: 28px;
+}
+
+/** 人工标签 的 颜色 START */
+// BjTag的style里
+/** 人工标签 的 颜色 END */
+.hand-tag {
+  padding: 4px 8px;
+  color: #fff !important;
+}
+
+// 长文本，不按单词断行。
+.el-message-box__message {
+  word-break: break-all;
+}
+
+.el-form-item.el-form-item--mini {
+  min-height: 29px;
+}
+
+.require::before {
+  content: '*';
+  color: red;
+  padding: auto 2px;
+}
+/********  TreeSelect  Start  ****************/
+//  class="bj-tree-select"
+
+// .vue-treeselect.bj-tree-select,
+// .bj-tree-select .vue-treeselect__control {
+//   height: 36px;
+//   width: 100%;
+// }
+
+.el-form-item--mini {
+  div.vue-treeselect.bj-tree-select {
+    width: 100%;
+    .vue-treeselect__input {
+      padding: 0;
+    }
+    .vue-treeselect__control {
+      height: 26px;
+      line-height: 26px;
+    }
+
+    .vue-treeselect__input,
+    .vue-treeselect__input-container,
+    .vue-treeselect__placeholder,
+    .vue-treeselect__single-value,
+    .vue-treeselect__control-arrow-container {
+      height: 26px;
+      line-height: 26px;
+    }
+    .vue-treeselect__multi-value,
+    .vue-treeselect__multi-value-item-container,
+    .vue-treeselect__multi-value-item,
+    .vue-treeselect__limit-tip-text,
+    .vue-treeselect__limit-tip,
+    .vue-treeselect-helper-zoom-effect-off {
+      padding: 0;
+      border: none;
+      margin: 0;
+      font-size: 12px;
+      padding-left: 10px;
+    }
+  }
+}
+
+.vue-treeselect.bj-tree-select.mini {
+  width: 100%;
+  .vue-treeselect__input {
+    padding: 0;
+  }
+  .vue-treeselect__control,
+  .vue-treeselect__input,
+  .vue-treeselect__input-container,
+  .vue-treeselect__placeholder,
+  .vue-treeselect__single-value,
+  .vue-treeselect__control-arrow-container {
+    height: 28px;
+    line-height: 28px;
+  }
+  .vue-treeselect__multi-value,
+  .vue-treeselect__multi-value-item-container,
+  .vue-treeselect__multi-value-item,
+  .vue-treeselect__limit-tip-text,
+  .vue-treeselect__limit-tip,
+  .vue-treeselect-helper-zoom-effect-off {
+    padding: 0;
+    // border: none;
+    margin: 0;
+  }
+}
+/********  TreeSelect  End  ****************/
+.xs.el-button {
+  font-size: 12px;
+  padding: 3px 10px;
+  margin-left: 16px;
+}
+
+.input-default-width {
+  width: 200px;
+}
+
+/********  el-tabs  ****************/
+.el-tabs--card > .el-tabs__header .el-tabs__nav {
+  border: none;
+  margin-bottom: -1px;
+}
+.el-tabs--card > .el-tabs__header .el-tabs__item:first-child {
+  border-left: 1px solid #dfe4ed;
+}
+.el-tabs--card > .el-tabs__header .el-tabs__item {
+  border-right: 1px solid #dfe4ed;
+  border-bottom: 1px solid #dfe4ed;
+  border-top: 1px solid #dfe4ed;
+  border-left: none;
+}
+.el-tabs--card > .el-tabs__header .el-tabs__item.is-active {
+  border-top: 2px $main-dark solid;
+  border-bottom: 1px solid #fff;
+}
+/***    表格 text 按钮   ****/
+.el-button--text.edit-btn {
+  color: $sub-dark;
+}
+
+.el-button--text.delete-btn {
+  color: $main-dark;
+}
+
+.el-button--text {
+  color: $sub-dark;
+}
+
+.el-button--text.is-disabled {
+  color: $minor-lighter;
+}
+
+/***    操作栏 btn 按钮   ****/
+.top-left-btn .el-button {
+  color: $main-normal;
+  background: $background-light;
+  border-color: #ffc79f;
+}
+.top-left-btn .el-button.is-disabled {
+  color: $main-light;
+  background-color: #fff1e7;
+  border-color: #ffe3cf;
+}
+.top-left-btn .el-button.main-btn {
+  color: $background-light;
+  background-color: $main-dark;
+  border-color: $main-dark;
+}
+
+/* 浏览器会把letter-spacing加到文字的后面,导致多出来一个宽度，可以用负margin消除这个宽度 */
+.letter-spacing-8 span {
+  letter-spacing: 8px;
+}
+.letter-spacing-8 span:after {
+  content: '';
+  margin-left: -8px;
+}
+.letter-spacing-16 span {
+  letter-spacing: 16px;
+}
+.letter-spacing-16 span:after {
+  content: '';
+  margin-left: -16px;
+}
+
+// 用于table的cellClassName回调，按条件隐藏展开图标。 例：src\views\center-business\after\internal\refund\add.vue
+.bj-cell-expand-hide > div {
+  display: none;
+}
+// vue.draggable chosenClass 属性设置选中元素的样式
+.chosen {
+  background: $ghost !important;
+}
+// vue.draggable ghostClass 目标位置占位符的样式及需要停靠位置的样式。
+.ghost {
+  background: $ghost !important;
+}
+.status-icon-err {
+  font-size: 52px;
+  color: red;
+  background-color: white;
+  border-radius: 50%;
+}
+.status-icon-success {
+  font-size: 52px;
+  color: green;
+  background-color: white;
+  border-radius: 50%;
+}
+
+// .vxe-cell {
+//   font-size: 12px;
+// }
+.table-other-td-item {
+  // padding: 2px 2px;
+}
+.table-other-td-item::after {
+  content: '；';
+  display: inline-block;
+}

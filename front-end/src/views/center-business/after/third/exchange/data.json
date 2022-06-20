@@ -1,0 +1,25 @@
+[
+    {
+      "thirdRefundNo": "210208298559852", 
+      "internalRefundNo": "HH202109161314", 
+      "thirdSellRefundNo": "2102082985597464100",
+      "internalSellRefundNo": "XS202109151819003",
+      "status": "待审核",
+      "reason": "7天无理由换货",
+      "remark": "",
+      "returnGoodsNum": "2",
+      "money": 2.22,
+      "returnStock": "厦门集美仓",
+      "returnNo": "85696653250124",
+      "returnCompany": "申通物流",
+      "nickName": "tb1568246983",
+      "returnName": "钱欧明",
+      "returnPhone": "139****9858",
+      "returnAddress": "福建省 福州市 闽侯县*****",
+      "thirdStatus": "待发货",
+      "storeName": "淘宝_居家旗舰店",
+      "channelType": "淘宝",
+      "time1": "2021-09-13 19:20:11"
+    }
+  ]
+  

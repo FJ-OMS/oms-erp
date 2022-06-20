@@ -1,0 +1,41 @@
+{{- if .Values.service.enabled }}
+kind: Service
+apiVersion: v1
+metadata:
+  name: {{ .Release.Name }}
+  labels:
+{{ include "service.labels.kubesphere" . | indent 4 }}
+  annotations:
+    kubesphere.io/creator: {{ .Values.kubesphere.app.creator }}
+    kubesphere.io/serviceType: {{ .Values.kubesphere.app.serviceType | quote }}
+    {{- if .Values.kubesphere.app.ingress }}
+    service.beta.kubernetes.io/qingcloud-load-balancer-eip-ids: ''
+    service.beta.kubernetes.io/qingcloud-load-balancer-type: '0'
+    {{- end }}
+    servicemesh.kubesphere.io/enabled: '{{ .Values.kubesphere.app.servicemesh }}'
+spec:
+  ports:
+    - name: http-{{ .Values.service.port }}
+      protocol: TCP
+      port: {{ .Values.service.port }}
+      targetPort: {{ .Values.service.port }}
+      {{- if not (empty .Values.service.nodePort) }}
+      nodePort: {{ .Values.service.nodePort }}
+    {{- end }}
+    {{- if not (empty .Values.deployment.managementPort) }}
+    - name: http-{{ .Values.deployment.managementPort }}
+      protocol: TCP
+      port: {{ .Values.deployment.managementPort }}
+      targetPort: {{ .Values.deployment.managementPort }}
+      {{- if not (empty .Values.deployment.nodePort) }}
+      nodePort: {{ .Values.deployment.nodePort }}
+    {{- end }}
+  {{- end }}
+  selector:
+{{ include "service.labels.kubesphere" . | indent 4 }}
+  type: {{ .Values.service.type | quote }}
+  sessionAffinity: None
+  ipFamilies:
+    - IPv4
+  ipFamilyPolicy: SingleStack
+  {{- end }}

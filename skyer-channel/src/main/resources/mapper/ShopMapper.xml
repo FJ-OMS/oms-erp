@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.skyer.channel.infra.mapper.ShopMapper">
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap id="BaseResultMap" type="org.skyer.channel.domain.entity.Shop">
+        <result column="id" property="id" jdbcType="DECIMAL"/>
+        <result column="creation_date" property="creationDate" jdbcType="DATE"/>
+        <result column="last_update_date" property="lastUpdateDate" jdbcType="DATE"/>
+        <result column="created_by" property="createdBy" jdbcType="DECIMAL"/>
+        <result column="last_updated_by" property="lastUpdatedBy" jdbcType="DECIMAL"/>
+        <result column="object_version_number" property="objectVersionNumber" jdbcType="DECIMAL"/>
+        <result column="code" property="code" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="tenant_id" property="tenantId" jdbcType="DECIMAL"/>
+        <result column="type_code" property="typeCode" jdbcType="VARCHAR"/>
+        <result column="category_type" property="categoryType" jdbcType="VARCHAR"/>
+        <result column="channel_warehouse_status" property="channelWarehouseStatus" jdbcType="DECIMAL"/>
+        <result column="channel_warehouse_name" property="channelWarehouseName" jdbcType="VARCHAR"/>
+        <result column="manager" property="manager" jdbcType="VARCHAR"/>
+        <result column="description" property="description" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="DECIMAL"/>
+        <result column="delete_flag" property="deleteFlag" jdbcType="DECIMAL"/>
+        <result column="sales_organizing_id" property="salesOrganizingId" jdbcType="DECIMAL"/>
+        <result column="invoice_type_code" property="invoiceTypeCode" jdbcType="VARCHAR"/>
+        <result column="address" property="address" jdbcType="VARCHAR"/>
+        <result column="country_id" property="countryId" jdbcType="DECIMAL"/>
+        <result column="province_id" property="provinceId" jdbcType="DECIMAL"/>
+        <result column="city_id" property="cityId" jdbcType="DECIMAL"/>
+        <result column="county_id" property="countyId" jdbcType="DECIMAL"/>
+        <result column="url" property="url" jdbcType="VARCHAR"/>
+        <result column="channel_type_code" property="channelTypeCode" jdbcType="VARCHAR"/>
+        <result column="auto_confirm_day" property="autoConfirmDay" jdbcType="DECIMAL"/>
+        <result column="auto_download_goods" property="autoDownloadGoods" jdbcType="DECIMAL"/>
+        <result column="auto_sync_inventory" property="autoSyncInventory" jdbcType="DECIMAL"/>
+        <result column="relation_physical_shop_id" property="relationPhysicalShopId" jdbcType="DECIMAL"/>
+        <result column="self_pickup_flag" property="selfPickupFlag" jdbcType="DECIMAL"/>
+    </resultMap>
+
+    <select id="getSetting" resultType="org.skyer.channel.domain.vo.OnlineShopSettingVO">
+        SELECT
+            id,`name`,auto_confirm_day,auto_download_goods,auto_sync_inventory,object_version_number
+        FROM channel_shop
+        WHERE id = #{id}
+    </select>
+
+    <select id="getOnlineShopList" resultType="org.skyer.channel.domain.vo.OnlineShopVO">
+        SELECT
+            t1.id,t1.code,t1.name,t1.channel_type_code,t1.status,t2.org_name,t1.type_code online_store_type_code,t1.url,
+            t1.channel_warehouse_status,t1.created_by,t1.creation_date,t1.object_version_number,t1.channel_warehouse_name,
+            t3.name relation_physical_shop_name
+        FROM channel_shop t1
+        LEFT JOIN channel_sales_organization t2 ON t1.sales_organizing_id = t2.id
+        LEFT JOIN channel_shop t3 ON t3.id = t1.relation_physical_shop_id
+        <where>
+            t1.delete_flag = 0 AND t1.tenant_id = #{tenantId} AND t1.category_type = 'OnlineShop'
+            <if test="onlineShopShowDTO.code != null and onlineShopShowDTO.code != ''">
+                AND t1.code = #{onlineShopShowDTO.code}
+            </if>
+            <if test="onlineShopShowDTO.name != null and onlineShopShowDTO.name != ''">
+                AND t1.name LIKE CONCAT('%',#{onlineShopShowDTO.name},'%')
+            </if>
+            <if test="onlineShopShowDTO.channelTypeCode != null and onlineShopShowDTO.channelTypeCode != ''">
+                AND t1.channel_type_code = #{onlineShopShowDTO.channelTypeCode}
+            </if>
+            <if test="onlineShopShowDTO.status != null">
+                AND t1.status = #{onlineShopShowDTO.status}
+            </if>
+            <if test="onlineShopShowDTO.orgName != null and onlineShopShowDTO.orgName != ''">
+                AND t2.org_name LIKE CONCAT('%',#{onlineShopShowDTO.orgName},'%')
+            </if>
+            <if test="onlineShopShowDTO.onlineStoreTypeCode != null and onlineShopShowDTO.onlineStoreTypeCode != ''">
+                AND t1.type_code = #{onlineShopShowDTO.onlineStoreTypeCode}
+            </if>
+        </where>
+        ORDER BY t1.creation_date DESC
+    </select>
+
+    <select id="getPhysicalShopList" resultType="org.skyer.channel.domain.vo.PhysicalShopVO">
+        SELECT
+            t1.id,t1.code,t1.name,t1.status,t2.org_name,t1.type_code,t1.address,
+            t1.channel_warehouse_status,t1.created_by,t1.creation_date,t1.object_version_number,
+            t1.channel_warehouse_name, t1.self_pickup_flag, t1.manager
+        FROM channel_shop t1
+        LEFT JOIN channel_sales_organization t2 ON t1.sales_organizing_id = t2.id
+        <where>
+            t1.delete_flag = 0 AND t1.tenant_id = #{tenantId} AND t1.category_type = 'PhysicalShop'
+            <if test="physicalShopDTO.name != null and physicalShopDTO.name != ''">
+                AND t1.name LIKE CONCAT('%',#{physicalShopDTO.name},'%')
+            </if>
+            <if test="physicalShopDTO.channelWarehouseStatus != null">
+                AND t1.status = #{physicalShopDTO.channelWarehouseStatus}
+            </if>
+            <if test="physicalShopDTO.orgName != null and physicalShopDTO.orgName != ''">
+                AND t2.org_name LIKE CONCAT('%',#{physicalShopDTO.orgName},'%')
+            </if>
+            <if test="physicalShopDTO.typeCode != null and physicalShopDTO.typeCode != ''">
+                AND t1.type_code = #{physicalShopDTO.typeCode}
+            </if>
+            <if test="physicalShopDTO.selfPickupFlag != null">
+                AND t1.self_pickup_flag = #{physicalShopDTO.selfPickupFlag}
+            </if>
+            <if test="physicalShopDTO.manager != null and physicalShopDTO.manager != ''">
+                <bind name="managerLike" value="'%' + physicalShopDTO.manager + '%'"/>
+                AND t1.manager LIKE #{managerLike}
+            </if>
+        </where>
+        ORDER BY t1.creation_date DESC
+    </select>
+
+    <select id="getShopList" resultType="org.skyer.channel.domain.vo.ShopListVO">
+        SELECT
+            id,`name`,`code`,category_type,channel_type_code,sales_organizing_id
+        FROM channel_shop
+        <where>
+            AND delete_flag = 0 AND status = 1
+            <if test="dto.code != null and dto.code != ''">
+                AND `code` LIKE CONCAT('%',#{dto.code},'%')
+            </if>
+            <if test="dto.name != null and dto.name != ''">
+                AND `name` LIKE CONCAT('%',#{dto.name},'%')
+            </if>
+            <if test="tenantId != null">
+                AND tenant_id = #{tenantId}
+            </if>
+            <if test="dto.categoryType != null and dto.categoryType != ''">
+                AND category_type = #{dto.categoryType}
+            </if>
+            <if test="dto.channelTypeCode != null and dto.channelTypeCode != ''">
+                AND channel_type_code = #{dto.channelTypeCode}
+            </if>
+            <if test="dto.id != null and dto.id != ''">
+                AND id = #{dto.id}
+            </if>
+            <if test="dto.relationPhysicalShopId != null and dto.relationPhysicalShopId != ''">
+                AND relation_physical_shop_id = #{dto.relationPhysicalShopId}
+            </if>
+            <if test="dto.selfPickupFlag != null and dto.selfPickupFlag != ''">
+                AND self_pickup_flag = #{dto.selfPickupFlag}
+            </if>
+        </where>
+    </select>
+    <select id="getShopByNameAndCategoryTypeAndChannelType" resultType="org.skyer.channel.domain.entity.Shop">
+        SELECT
+            id
+        FROM channel_shop
+        <where>
+            AND delete_flag = 0
+            <if test="name != null and name != ''">
+                AND `name` = #{name}
+            </if>
+            <if test="channelWarehouseName != null and channelWarehouseName != ''">
+                AND channel_warehouse_name = #{channelWarehouseName}
+            </if>
+            <if test="channelType != null and channelType != ''">
+                AND channel_type_code = #{channelType}
+            </if>
+            <if test="categoryType != null and categoryType != ''">
+                AND category_type = #{categoryType}
+            </if>
+        </where>
+    </select>
+
+    <select id="queryChannelOrderSaleReport" resultType="org.skyer.channel.domain.vo.ChannelSaleOrderVO">
+        SELECT
+            shop.NAME storeName,
+            shop.channel_type_code channelTypeCode,
+            shop.CODE storeCode,
+            organizetion.org_name organizationName,
+            shop.category_type storeTypeCode
+        FROM
+            channel_shop shop
+                LEFT JOIN channel_sales_organization organizetion ON shop.sales_organizing_id = organizetion.id
+        WHERE 1= 1
+         <if test="dto.channel != null">
+             and shop.channel_type_code = #{dto.channel}
+         </if>
+         <if test="dto.storeIds != null">
+             and shop.id in
+             <foreach collection="dto.storeIds" item="id" open="(" separator="," close=")">
+                 #{id}
+             </foreach>
+         </if>
+         <if test="dto.storeType != null">
+             AND shop.category_type = #{dto.storeType}
+         </if>
+         <if test="dto.organization != null">
+             and organizetion.org_name = #{dto.organization}
+         </if>
+    </select>
+</mapper>

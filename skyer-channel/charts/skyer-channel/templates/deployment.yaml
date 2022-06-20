@@ -1,0 +1,121 @@
+apiVersion: {{ include "app.deployment.apiVersion" . }}
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+  labels:
+{{ include "service.labels.kubesphere" . | indent 4 }}
+  annotations:
+    deployment.kubernetes.io/revision: '1'
+    kubesphere.io/creator: {{ .Values.kubesphere.app.creator | quote }}
+    servicemesh.kubesphere.io/enabled: '{{ .Values.kubesphere.app.servicemesh }}'
+spec:
+  strategy:
+    type: {{ .Values.deploymentUpdate.type }}
+    {{- if eq .Values.deploymentUpdate.type "RollingUpdate" }}
+    rollingUpdate:
+      maxSurge: {{ .Values.deploymentUpdate.maxSurge }}
+      maxUnavailable: {{ .Values.deploymentUpdate.maxUnavailable }}
+    {{- else }}
+    rollingUpdate: null
+    {{- end}}
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+{{ include "service.labels.kubesphere" . | indent 6 }}
+  template:
+    metadata:
+      annotations:
+        sidecar.istio.io/inject: '{{ .Values.kubesphere.app.servicemesh }}'
+      labels:
+{{ include "service.labels.kubesphere" . | indent 8 }}
+    spec:
+      volumes:
+        - name: host-time
+          hostPath:
+            path: /etc/localtime
+            type: ''
+        - name: data
+          {{- if .Values.persistence.enabled }}
+          persistentVolumeClaim:
+            claimName: {{ .Values.persistence.existingClaim | default ( .Release.Name ) }}
+          {{- else }}
+          emptyDir: {}
+          {{- end }}
+      containers:
+        - name: {{ .Release.Name }}
+          image: {{ include "service.image" . }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            {{- range $name, $value := .Values.env.open }}
+            {{- if ne (len ($value | quote)) 0 }}
+            - name: {{ $name | quote }}
+              value: {{ $value | quote }}
+            {{- end }}
+            {{- end }}
+          ports:
+            - name: http-{{ .Values.service.port }}
+              containerPort: {{ .Values.service.port }}
+              protocol: TCP
+            {{- if not (empty .Values.deployment.managementPort) }}
+            - name: http-{{ .Values.deployment.managementPort }}
+              containerPort: {{ .Values.deployment.managementPort }}
+              protocol: TCP
+            {{- end }}
+          readinessProbe:
+            initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.readinessProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.readinessProbe.timeoutSeconds }}
+            successThreshold: {{ .Values.readinessProbe.successThreshold }}
+            failureThreshold: {{ .Values.readinessProbe.failureThreshold }}
+            exec:
+              command:
+                - /bin/sh
+                - -c
+                - >
+                  nc -z localhost {{ .Values.env.open.SERVER_PORT }}
+                  && curl -s --fail localhost:{{ .Values.env.open.MANAGEMENT_SERVER_PORT }}/actuator/health
+          livenessProbe:
+            initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.livenessProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.livenessProbe.timeoutSeconds }}
+            successThreshold: {{ .Values.livenessProbe.successThreshold }}
+            failureThreshold: {{ .Values.livenessProbe.failureThreshold }}
+            exec:
+              command:
+                - /bin/sh
+                - -c
+                - >
+                  nc -z localhost {{ .Values.env.open.SERVER_PORT }}
+                  && curl -s --fail localhost:{{ .Values.env.open.MANAGEMENT_SERVER_PORT }}/actuator/health
+          resources:
+{{ toYaml .Values.resources | indent 12 }}
+          volumeMounts:
+            - name: host-time
+              readOnly: true
+              mountPath: /etc/localtime
+            - mountPath: /Charts
+              name: data
+              {{- if not (empty .Values.persistence.subPath) }}
+              subPath: {{ .Values.persistence.subPath }}
+          {{- end }}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      serviceAccountName: default
+      serviceAccount: default
+      securityContext: {}
+      schedulerName: default-scheduler
+{{- with .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml . | indent 8 }}
+{{- end }}
+{{- with .Values.affinity }}
+      affinity:
+{{ toYaml . | indent 8 }}
+{{- end }}
+{{- with .Values.tolerations }}
+      tolerations:
+{{ toYaml . | indent 8 }}
+{{- end }}

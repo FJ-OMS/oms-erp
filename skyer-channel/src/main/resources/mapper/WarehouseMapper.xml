@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.skyer.channel.infra.mapper.WarehouseMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="org.skyer.channel.domain.entity.Warehouse">
+        <result column="id" property="id" />
+        <result column="ware_code" property="wareCode" />
+        <result column="ware_name" property="wareName" />
+        <result column="contact_name" property="contactName" />
+        <result column="contact_phone" property="contactPhone" />
+        <result column="tenant_id" property="tenantId" />
+        <result column="country_id" property="countryId" />
+        <result column="province_id" property="provinceId" />
+        <result column="city_id" property="cityId" />
+        <result column="county_id" property="countyId" />
+        <result column="address" property="address" />
+        <result column="description" property="description" />
+        <result column="status" property="status" />
+        <result column="delete_flag" property="deleteFlag" />
+        <result column="creation_date" property="creationDate" />
+        <result column="last_update_date" property="lastUpdateDate" />
+        <result column="created_by" property="createdBy" />
+        <result column="last_updated_by" property="lastUpdatedBy" />
+        <result column="object_version_number" property="objectVersionNumber" />
+        <result column="logic_warehouse_name" property="logicWarehouseName" />
+        <result column="logic_flag" property="logicFlag" />
+
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id,
+        ware_code, ware_name,logic_warehouse_name,logic_flag, contact_name, contact_phone, tenant_id, country_id, province_id, city_id, county_id, address, description, status, delete_flag, creation_date, last_update_date, created_by, last_updated_by, object_version_number
+    </sql>
+
+    <select id="pageWarehouseList" resultType="org.skyer.channel.domain.vo.WarehouseListVO">
+
+        select
+            <include refid="Base_Column_List"/>
+        from
+            channel_warehouse
+        <where>
+                delete_flag = 0
+            <if test="wareName != null and wareName != ''">
+                and ware_name like  concat('%',#{wareName},'%')
+            </if>
+            <if test="status !=null">
+                and status =#{status}
+            </if>
+        </where>
+    </select>
+</mapper>

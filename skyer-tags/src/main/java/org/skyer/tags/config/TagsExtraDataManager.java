@@ -12,7 +12,7 @@ import org.skyer.swagger.swagger.extra.ExtraDataManager;
 /**
  * 服务基本信息
  *
- * @author gaokuo.dai@hand-china.com 2018年7月20日下午4:49:12
+ *
  */
 @SkyerExtraData
 public class TagsExtraDataManager implements ExtraDataManager {

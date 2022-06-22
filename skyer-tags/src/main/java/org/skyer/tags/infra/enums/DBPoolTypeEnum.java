@@ -4,7 +4,7 @@ package org.skyer.tags.infra.enums;
  * 
  * 连接池类型
  * 
- * @author xianzhi.chen@hand-china.com 2018年10月23日下午2:47:03
+ *
  */
 public enum DBPoolTypeEnum {
     /**

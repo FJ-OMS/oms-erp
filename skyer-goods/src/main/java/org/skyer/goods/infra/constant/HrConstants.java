@@ -21,7 +21,7 @@ public class HrConstants {
     /**
      * 维度类型
      *
-     * @author jian.zhang02@hand-china.com 2018年6月26日下午3:14:53
+     *
      */
     public static class DimensionType {
         /**

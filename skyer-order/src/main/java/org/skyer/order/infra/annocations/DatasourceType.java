@@ -5,7 +5,7 @@ import java.lang.annotation.*;
 /**
  * 数据源类型
  *
- * @author xiaoyu.zhao@hand-china.com
+ *
  */
 @Inherited
 @Target({ElementType.TYPE})

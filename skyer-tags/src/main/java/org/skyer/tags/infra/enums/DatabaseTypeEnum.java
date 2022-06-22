@@ -6,7 +6,7 @@ import org.skyer.tags.infra.constant.Constants;
  * 
  * 数据库类型
  * 
- * @author xianzhi.chen@hand-china.com 2018年10月23日下午2:47:03
+ *
  */
 public enum DatabaseTypeEnum {
     /**

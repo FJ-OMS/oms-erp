@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * HPFM Properties
  *
- * @author gaokuo.dai@hand-china.com 2018年8月20日下午4:24:58
+ *
  */
 @ConfigurationProperties(prefix = OrderProperties.PREFIX)
 public class OrderProperties {

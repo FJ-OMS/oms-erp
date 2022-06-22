@@ -21,7 +21,7 @@ import org.skyer.core.exception.CommonException;
 /**
  * description
  *
- * @author shuangfei.zhu@hand-china.com 2019/08/28 19:31
+ *
  */
 @Component
 public class MessageHandler extends SocketMessageHandler {

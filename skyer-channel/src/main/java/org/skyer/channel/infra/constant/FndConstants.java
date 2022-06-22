@@ -3,7 +3,7 @@ package org.skyer.channel.infra.constant;
 /**
  * 基础模块常量
  *
- * @author gaokuo.dai@hand-china.com 2018年6月12日下午2:38:50
+ *
  */
 public interface FndConstants {
 
@@ -308,7 +308,7 @@ public interface FndConstants {
     /**
      * 数据来源
      *
-     * @author gaokuo.dai@hand-china.com 2018年8月27日下午4:39:03
+     *
      */
     interface DataSource {
         String SKYER = "SKYER";

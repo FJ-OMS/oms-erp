@@ -20,7 +20,7 @@ import org.skyer.core.util.ResponseUtils;
 /**
  * Json工具类
  *
- * @author gaokuo.dai@hand-china.com 2018年7月5日下午6:05:08
+ *
  * @see ResponseUtils
  */
 public class JsonUtils {

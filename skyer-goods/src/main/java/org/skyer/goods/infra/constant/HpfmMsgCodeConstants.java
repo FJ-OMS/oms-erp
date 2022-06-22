@@ -3,7 +3,7 @@ package org.skyer.goods.infra.constant;
 /**
  * 维护返回异常信息
  *
- * @author xiaoyu.zhao@hand-china.com 2019/01/17 20:25
+ *
  */
 public class HpfmMsgCodeConstants {
 

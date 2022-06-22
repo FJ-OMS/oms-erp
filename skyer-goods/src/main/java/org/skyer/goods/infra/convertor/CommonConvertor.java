@@ -8,7 +8,7 @@ import org.skyer.core.convert.CommonConverter;
 /**
  * 通用对象转换工具
  *
- * @author min.wang01@hand-china.com 2018/08/08 11:52
+ *
  */
 public class CommonConvertor<T, V> {
     /**

@@ -5,7 +5,7 @@ import org.skyer.common.SkyerService;
 /**
  * 平台常量
  *
- * @author gaokuo.dai@hand-china.com 2018年6月12日下午2:38:38
+ *
  */
 public interface Constants {
     /**
@@ -50,7 +50,7 @@ public interface Constants {
     /**
      * kafka topic常量
      *
-     * @author gaokuo.dai@hand-china.com 2018年7月10日上午11:15:11
+     *
      */
     interface KafkaTopics {
         /**
@@ -70,7 +70,7 @@ public interface Constants {
     /**
      * 编码规则代码
      *
-     * @author gaokuo.dai@hand-china.com 2018年7月10日下午5:27:21
+     *
      */
     interface RuleCodes {
         /**

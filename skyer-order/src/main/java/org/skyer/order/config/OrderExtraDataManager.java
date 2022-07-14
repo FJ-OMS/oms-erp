@@ -11,7 +11,7 @@ import org.springframework.core.env.Environment;
 /**
  * 服务基本信息
  *
- *
+ * @author
  */
 @SkyerExtraData
 public class OrderExtraDataManager implements ExtraDataManager {

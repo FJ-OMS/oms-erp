@@ -13,7 +13,7 @@ import org.skyer.swagger.swagger.extra.ExtraDataManager;
 /**
  * 服务基本信息
  *
- *
+ * @author
  */
 @SkyerExtraData
 public class GoodsExtraDataManager implements ExtraDataManager {

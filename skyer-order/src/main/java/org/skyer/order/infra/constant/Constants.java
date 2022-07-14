@@ -49,7 +49,7 @@ public interface Constants {
     /**
      * kafka topic常量
      *
-     *
+     * @author
      */
     interface KafkaTopics {
         /**
@@ -69,7 +69,7 @@ public interface Constants {
     /**
      * 编码规则代码
      *
-     *
+     * @author
      */
     interface RuleCodes {
         /**

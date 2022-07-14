@@ -4,14 +4,14 @@ package org.skyer.goods.infra.constant;
 /**
  * 公司常量类
  *
- *
+ * @author
  */
 public class CompanyConstants {
 
     /**
      * 企业审批后续处理类型
      *
-     *
+     * @author
      */
     public static class CompanyApprovalProcessType {
         /**
@@ -31,7 +31,7 @@ public class CompanyConstants {
     /**
      * 企业审批后续处理状态
      *
-     *
+     * @author
      */
     public static class CompanyApprovalProcessStatus {
         /**

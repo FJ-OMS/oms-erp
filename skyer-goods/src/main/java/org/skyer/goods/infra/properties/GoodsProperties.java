@@ -7,7 +7,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 /**
  * HPFM Properties
  *
- *
+ * @author
  */
 @ConfigurationProperties(prefix = GoodsProperties.PREFIX)
 public class GoodsProperties {

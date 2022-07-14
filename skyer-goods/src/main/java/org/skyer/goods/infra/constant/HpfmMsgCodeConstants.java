@@ -3,7 +3,7 @@ package org.skyer.goods.infra.constant;
 /**
  * 维护返回异常信息
  *
- *
+ * @author
  */
 public class HpfmMsgCodeConstants {
 

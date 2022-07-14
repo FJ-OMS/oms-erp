@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * 用户信息远程 Feign 调用
  *
- *
+ * @author
  */
 @FeignClient(value = SkyerService.Oauth.NAME, fallback = UserDetailRemoteServiceImpl.class, path = "/oauth/api/user")
 public interface UserDetailRemoteService {

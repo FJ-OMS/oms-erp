@@ -7,7 +7,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 /**
  * HPFM Properties
  *
- *
+ * @author
  */
 @ConfigurationProperties(prefix = TagsProperties.PREFIX)
 public class TagsProperties {

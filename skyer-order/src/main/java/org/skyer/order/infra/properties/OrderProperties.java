@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * HPFM Properties
  *
- *
+ * @author
  */
 @ConfigurationProperties(prefix = OrderProperties.PREFIX)
 public class OrderProperties {

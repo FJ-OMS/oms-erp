@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * 用户信息远程调用失败回调
  *
- *
+ * @author
  */
 @Component
 public class UserDetailRemoteServiceImpl implements UserDetailRemoteService {

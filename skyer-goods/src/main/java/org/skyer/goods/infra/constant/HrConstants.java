@@ -21,7 +21,7 @@ public class HrConstants {
     /**
      * 维度类型
      *
-     *
+     * @author
      */
     public static class DimensionType {
         /**

@@ -126,7 +126,7 @@ const actions = {
           dateTimeFormat: 'YYYY-MM-DD HH:mm:ss',
           changePasswordFlag: 0,
           title: 'HZERO技术平台',
-          logo: 'https://file.open.hand-china.com/hsop-image/doc_classify/0/8ff6ad27c153445d90606db2eca4c268/logo.png',
+          logo: '/hsop-image/doc_classify/0/8ff6ad27c153445d90606db2eca4c268/logo.png',
           menuLayout: 'side-all',
           menuLayoutTheme: 'color',
           roleMergeFlag: 0,
@@ -136,7 +136,7 @@ const actions = {
           currentRoleName: '管理员1',
           currentRoleLevel: 'site',
           favicon:
-            'https://file.open.hand-china.com/hsop-image/doc_classify/0/8ff6ad27c153445d90606db2eca4c268/logo.png',
+            '/hsop-image/doc_classify/0/8ff6ad27c153445d90606db2eca4c268/logo.png',
           dataHierarchyFlag: 0,
           recentAccessTenantList: [],
         };

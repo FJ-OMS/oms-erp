@@ -8,7 +8,7 @@ import java.util.Map;
 /**
  * 通用对象转换工具
  *
- *
+ * @author
  */
 public class CommonConvertor<T, V> {
     /**

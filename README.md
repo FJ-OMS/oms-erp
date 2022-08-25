@@ -1,6 +1,8 @@
-
+[English](./README_EN.md) | 简体中文
 ![img](https://github.com/eeveek/oms/blob/main/front-end/fj.png) 
+
 <p align="center">
+  
 [![HitCount](http://hits.dwyl.com/eeveek/oms.svg)](http://hits.dwyl.com/eeveek/oms)
 ![GitHub All Releases](https://img.shields.io/github/downloads/eeveek/oms/total)
 [![GitHub issues](https://img.shields.io/github/issues/eeveek/oms)](https://github.com/eeveek/oms/issues)
@@ -11,6 +13,7 @@
 [![GitHub license](https://img.shields.io/github/license/eeveek/oms)](https://github.com/eeveek/oms/blob/master/LICENSE)
 ![img](https://img.shields.io/badge/python-3.5-brightgreen)
 [![img](https://img.shields.io/badge/chat-wechat-green)](https://github.com/eeveek/oms#%E5%8A%A0%E5%85%A5%E7%A4%BE%E5%8C%BA)
+
 </p>
 # 开源的新零售业务中台OMS   
 ```

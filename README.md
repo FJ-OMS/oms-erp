@@ -1,5 +1,17 @@
 
-![img](https://github.com/eeveek/oms/blob/main/front-end/fj.png) ![img](https://github.com/eeveek/oms/blob/main/QQ%E6%88%AA%E5%9B%BE20220825230701.png) 
+![img](https://github.com/eeveek/oms/blob/main/front-end/fj.png) 
+<p align="center">
+[![HitCount](http://hits.dwyl.com/eeveek/oms.svg)](http://hits.dwyl.com/eeveek/oms)
+![GitHub All Releases](https://img.shields.io/github/downloads/eeveek/oms/total)
+[![GitHub issues](https://img.shields.io/github/issues/eeveek/oms)](https://github.com/eeveek/oms/issues)
+![GitHub closed issues](https://img.shields.io/github/issues-closed/eeveek/oms)
+[![GitHub forks](https://img.shields.io/github/forks/eeveek/oms)](https://github.com/eeveek/oms/network)
+[![GitHub stars](https://img.shields.io/github/stars/eeveek/oms)](https://github.com/eeveek/oms/stargazers)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/eeveek/oms)
+[![GitHub license](https://img.shields.io/github/license/eeveek/oms)](https://github.com/eeveek/oms/blob/master/LICENSE)
+![img](https://img.shields.io/badge/python-3.5-brightgreen)
+[![img](https://img.shields.io/badge/chat-wechat-green)](https://github.com/eeveek/oms#%E5%8A%A0%E5%85%A5%E7%A4%BE%E5%8C%BA)
+</p>
 # 开源的新零售业务中台OMS   
 ```
 全渠道一盘货订单管理系统OMS,基于业内领先的微服务架构，打造电商通用业务中台，快速部署，助力企业加速实现业务一体化与数字化转型。企业可以处理来自所有渠道的订单，降低库存仓位将资金周转率提升至少50%，减少占订单金额2%-10%左右的内部损耗，将开发部署周期减少到几周内，将开发成本控制在百万元左右，能自主可控的让系统跟上业务的变化。

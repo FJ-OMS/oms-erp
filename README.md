@@ -38,8 +38,6 @@ __业务架构__
 __技术架构__
 ![img](https://github.com/eeveek/oms/blob/main/%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84.png)
 
-## 联系方式
-![img](https://github.com/eeveek/oms/blob/main/front-end/we.png)  ![img](https://github.com/eeveek/oms/blob/main/front-end/gzh.png)
 
 ## 安装教程
 
@@ -69,3 +67,6 @@ __测试__
 ```
 包括测试用例管理、测试计划管理、测试执行管理、缺陷管理、 测试报告管理，支持手工测试并提供API测试、性能测试、流量 回归测试、UI测试等自动化测试能力，测试任务还可嵌入开发流 水线，持续测试有效保障产品质量
 ```
+
+## 联系方式
+![img](https://github.com/eeveek/oms/blob/main/front-end/we.png)  ![img](https://github.com/eeveek/oms/blob/main/front-end/gzh.png)

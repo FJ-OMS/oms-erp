@@ -41,3 +41,11 @@ __技术架构__
 ## 联系方式
 ![img](https://github.com/eeveek/oms/blob/main/front-end/we.png)  ![img](https://github.com/eeveek/oms/blob/main/front-end/gzh.png)
 
+## 安装教程
+
+## 使用说明
+
+## 参与贡献
+
+## 特技
+

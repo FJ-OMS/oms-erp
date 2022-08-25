@@ -32,5 +32,8 @@ __飞骥中台会帮助企业解决以下的问题__
 
 6、市场变化太快，系统无法及时跟得上业务的问题。
 ```
-业务架构
+__业务架构__
 ![img](https://github.com/eeveek/oms/blob/main/%E4%B8%9A%E5%8A%A1%E6%9E%B6%E6%9E%84.png)
+
+__技术架构__
+![img](https://github.com/eeveek/oms/blob/main/%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84.png)

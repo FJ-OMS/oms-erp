@@ -37,3 +37,7 @@ __业务架构__
 
 __技术架构__
 ![img](https://github.com/eeveek/oms/blob/main/%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84.png)
+
+## 联系方式
+![img](https://github.com/eeveek/oms/blob/main/front-end/we.png)  ![img](https://github.com/eeveek/oms/blob/main/front-end/gzh.png)
+

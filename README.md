@@ -11,8 +11,7 @@
 [![GitHub stars](https://img.shields.io/github/stars/eeveek/oms)](https://github.com/eeveek/oms/stargazers)
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/eeveek/oms)
 [![GitHub license](https://img.shields.io/github/license/eeveek/oms)](https://github.com/eeveek/oms/blob/master/LICENSE)
-[![img](https://img.shields.io/badge/python-3.5-brightgreen)
-[![img](https://img.shields.io/badge/chat-wechat-green)](https://github.com/eeveek/oms#%E5%8A%A0%E5%85%A5%E7%A4%BE%E5%8C%BA)
+
 </p>
 
 

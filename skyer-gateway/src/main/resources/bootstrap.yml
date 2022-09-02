@@ -1,0 +1,43 @@
+server:
+  port: 8080
+management:
+  server:
+    port: 8081
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+spring:
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:default}
+  cloud:
+    config:
+      fail-fast: false
+      # 是否启用配置中心
+      enabled: ${SPRING_CLOUD_CONFIG_ENABLED:true}
+      # 配置中心地址
+      uri: ${SPRING_CLOUD_CONFIG_URI:http://dev.skyer.org:8010}
+      retry:
+        # 最大重试次数
+        maxAttempts: 6
+        multiplier: 1.1
+        # 重试间隔时间
+        maxInterval: 2000
+      # 标签
+      label: ${SPRING_CLOUD_CONFIG_LABEL:}
+eureka:
+  instance:
+    # 以IP注册到注册中心
+    preferIpAddress: ${EUREKA_INSTANCE_PREFER_IP_ADDRESS:true}
+    leaseRenewalIntervalInSeconds: ${EUREKA_RENEWAL_INTERVAL:10}
+    leaseExpirationDurationInSeconds: ${EUREKA_EXPIRATION_DURATION:30}
+    # 服务的一些元数据信息
+    metadata-map:
+      VERSION: 1.4.0
+  client:
+    serviceUrl:
+      # 注册中心地址
+      defaultZone: ${EUREKA_DEFAULT_ZONE:http://eureka.skyer.org/eureka}
+    registryFetchIntervalSeconds: 10
+    disable-delta: true

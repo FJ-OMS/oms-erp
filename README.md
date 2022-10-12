@@ -1,5 +1,4 @@
 [English](./README_EN.md) | 简体中文
-![img](https://github.com/eeveek/oms/blob/main/front-end/fj.png) 
 
 <p align="center">
   

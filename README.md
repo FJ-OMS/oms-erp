@@ -52,11 +52,6 @@ __技术架构__
 ![img](https://github.com/eeveek/oms/blob/main/%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84.png)
 
 
-## 安装教程
-
-## 使用说明
-
-## 参与贡献
 
 ## 特技
 
@@ -90,3 +85,9 @@ __测试__
 微信:blowbing
 
 ![img](https://github.com/eeveek/oms/blob/main/front-end/we.png)  ![img](https://github.com/eeveek/oms/blob/main/front-end/gzh.png)
+
+## 安装教程
+
+## 使用说明
+
+## 参与贡献

@@ -50,13 +50,13 @@ public class CategoryController extends BaseController {
         return Results.success();
     }
 
-//    @ApiOperation(value = "修改商品分类表")
-//    @Permission(level = ResourceLevel.ORGANIZATION)
-//    @PostMapping("/update")
-//    public ResponseEntity<Category> update(@RequestBody Category category) {
-//        categoryRepository.updateByPrimaryKeySelective(category);
-//        return Results.success(category);
-//    }
+    @ApiOperation(value = "修改商品分类表")
+    @Permission(level = ResourceLevel.ORGANIZATION)
+    @PostMapping("/update")
+    public ResponseEntity<Category> update(@RequestBody Category category) {
+        categoryRepository.updateByPrimaryKeySelective(category);
+        return Results.success(category);
+    }
     @ApiOperation(value = "修改商品状态")
     @Permission(level = ResourceLevel.ORGANIZATION, permissionLogin = true)
     @PostMapping("/update/status")

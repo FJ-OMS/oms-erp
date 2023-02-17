@@ -44,8 +44,6 @@ public class DealerServiceImpl implements DealerService {
 			dealer.setDealerCode(UUID.randomUUID().toString().replace("-", ""));
 		}
 		CustomUserDetails userDetails = DetailsHelper.getUserDetails();
-		logger.info("获取当前用户==============》" + userDetails);
-		logger.info("获取当前用户租户ID==============》" + userDetails.getTenantId());
 		Long tenantId = userDetails.getTenantId();
 		dealer.setTenantId(tenantId);
 		return dealerRepository.insert(dealer) > 0;

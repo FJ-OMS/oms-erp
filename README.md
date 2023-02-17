@@ -47,8 +47,8 @@ __帮助企业和个人解决以下的问题__
 ```
 ## 软件展示和业务架构
 
-![img](https://github.com/FJ-OMS/oms-erp/blob/main/%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83.png)
-![img](https://github.com/FJ-OMS/oms-erp/blob/main/%E4%B8%9A%E5%8A%A1%E4%B8%AD%E5%BF%83.png)
+![img](https://github.com/FJ-OMS/oms-erp/blob/main/%E4%B8%9A%E5%8A%A1.png)
+![img](https://github.com/FJ-OMS/oms-erp/blob/main/%E9%85%8D%E7%BD%AE.png)
 
 __业务架构__
 

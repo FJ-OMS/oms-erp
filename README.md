@@ -54,7 +54,10 @@ __业务架构__
 
 ![img](https://github.com/eeveek/oms/blob/main/%E4%B8%9A%E5%8A%A1%E6%9E%B6%E6%9E%84.png)
 
-__技术架构__
+__技术架构__ 
+
+    基于spring cloud 微服务框架 支持多租户体系 微服务工作流Zeebe和activiti 报表自定义等功能，除了上述的应用功能，还将Redis、MyBatis、分布式事务saga、分布式锁和检索等一系列服务组件化，便于二次开发。
+
 
 ![img](https://github.com/FJ-OMS/oms-erp/blob/main/%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84.png)
 

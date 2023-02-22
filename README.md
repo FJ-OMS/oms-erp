@@ -63,22 +63,18 @@ __技术架构__
 ## 特技
 
 __云原生__
-![img](https://github.com/eeveek/oms/blob/main/front-end/%E4%BA%91%E5%8E%9F%E7%94%9F.png)
 ```
 基于分布部署和统一运管，以分布式云，以容器、微 服务、DevOps等技术为基础建立技术产品体系
 ```
 __开发__
-![img](https://github.com/eeveek/oms/blob/main/front-end/%E5%BC%80%E5%8F%91.png)
+
 ```
 包括集成GitLab的代码统一管理能力、支持多种类型的制品库管理能力、集成CI/CD的自动化流水线、内建的代码扫描与质量分析，全流程跟进开发过程
 ```
 __部署__
-![img](https://github.com/eeveek/oms/blob/main/front-end/%E9%83%A8%E7%BD%B2.png)
 ```
 包括集群管理、环境管理、资源管理，支持集群与环境的统一管理和集中分配，支持自动化部署流水线与一键式的手工部署，高效灵活地支撑产品运维
 ```
-__测试__
-![img](https://github.com/eeveek/oms/blob/main/front-end/%E6%B5%8B%E8%AF%95.png)
 ```
 包括测试用例管理、测试计划管理、测试执行管理、缺陷管理、 测试报告管理，支持手工测试并提供API测试、性能测试、流量 回归测试、UI测试等自动化测试能力，测试任务还可嵌入开发流 水线，持续测试有效保障产品质量
 ```

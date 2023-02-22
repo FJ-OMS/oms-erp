@@ -51,6 +51,8 @@ __帮助企业和个人解决以下的问题__
 ![img](https://github.com/FJ-OMS/oms-erp/blob/main/%E9%85%8D%E7%BD%AE.png)
 
 __业务架构__
+ 
+    通过汇总源于京东、淘宝、天猫、抖音和拼多多等渠道订单，并在业务中台内部转化成内部订单，整合订单中心和采购中心与库存中心、财务中心的业务流程，使企业的订单、库存和财务三方数据形成铁三角。
 
 ![img](https://github.com/eeveek/oms/blob/main/%E4%B8%9A%E5%8A%A1%E6%9E%B6%E6%9E%84.png)
 

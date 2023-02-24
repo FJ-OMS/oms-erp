@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.skyer.stock.infra.mapper.GoodsStockDetailMapper">
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap id="BaseResultMap" type="org.skyer.stock.domain.entity.GoodsStockDetail">
+        <result column="id" property="id" jdbcType="DECIMAL"/>
+        <result column="creation_date" property="creationDate" jdbcType="DATE"/>
+        <result column="last_update_date" property="lastUpdateDate" jdbcType="DATE"/>
+        <result column="created_by" property="createdBy" jdbcType="DECIMAL"/>
+        <result column="last_updated_by" property="lastUpdatedBy" jdbcType="DECIMAL"/>
+        <result column="tenant_id" property="tenantId" jdbcType="DECIMAL"/>
+        <result column="object_version_number" property="objectVersionNumber" jdbcType="DECIMAL"/>
+        <result column="warehouse_code" property="warehouseCode" jdbcType="VARCHAR"/>
+        <result column="sku_code" property="skuCode" jdbcType="VARCHAR"/>
+        <result column="stock_num" property="stockNum" jdbcType="DECIMAL"/>
+    </resultMap>
+    <select id="getStockBySkuCodeAndWarehouseCode" resultType="org.skyer.stock.domain.entity.GoodsStockDetail">
+        SELECT
+            id,object_version_number,sku_code,stock_num,warehouse_code,warehouse_id
+        FROM sstock_goods_stock_detail
+        WHERE sku_code = #{skuCode} AND warehouse_code = #{warehouseCode}
+    </select>
+</mapper>

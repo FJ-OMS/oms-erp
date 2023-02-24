@@ -1,0 +1,46 @@
+[
+  {
+    "id": null,
+    "name": "商品重量",
+    "code": "weight",
+    "skuFlag": false,
+    "status": 1,
+    "formType": 3,
+    "sourceType": 1,
+    "remark": "系统默认属性",
+    "attributeValueList": []
+  },
+  {
+    "id": null,
+    "name": "商品长度",
+    "code": "length",
+    "skuFlag": false,
+    "status": 1,
+    "formType": 3,
+    "sourceType": 1,
+    "remark": "系统默认属性",
+    "attributeValueList": []
+  },
+  {
+    "id": null,
+    "name": "商品宽度",
+    "code": "width",
+    "skuFlag": false,
+    "status": 1,
+    "formType": 3,
+    "sourceType": 1,
+    "remark": "系统默认属性",
+    "attributeValueList": []
+  },
+  {
+    "id": null,
+    "name": "商品高度",
+    "code": "height",
+    "skuFlag": false,
+    "status": 1,
+    "formType": 3,
+    "sourceType": 1,
+    "remark": "系统默认属性",
+    "attributeValueList": []
+  }
+]

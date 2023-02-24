@@ -1,0 +1,58 @@
+// 品牌 主色
+$main-dark: #ff7310;
+$main-normal: #ff8d13;
+$main-light: #febb14;
+// 中性色 次色
+$minor-dark: #333333;
+$minor-normal: #666666;
+$minor-light: #999999;
+$minor-lighter: #d9d9d9;
+// 辅助色
+$sub-dark: #3173d0;
+$sub-normal: #ffeebf;
+$sub-light: #eeeaeb;
+// 背景色
+$background-dark: #f5f5f5;
+$background-normal: #fbfbfb;
+$background-light: #ffffff;
+
+// base color
+$blue: #324157;
+$light-blue: #3a71a8;
+$red: #c03639;
+$pink: #e65d6e;
+$green: #30b08f;
+$tiffany: #4ab7bd;
+$yellow: #fec171;
+$panGreen: #30b08f;
+$danger: #f56c6c;
+
+// sidebar
+$menuText: $minor-normal; // #bfcbd9;
+$menuActiveText: $main-dark; // #409eff;
+$subMenuActiveText: #f4f4f5; // https://github.com/ElemeFE/element/issues/12951
+
+$menuBg: $background-normal; //#304156;
+$menuHover: $background-dark; //#263445;
+
+$subMenuBg: #1f2d3d;
+$subMenuHover: #001528;
+
+$sideBarWidth: 180px;
+$sideBarWidthHide: 0px;
+// 拖拽样式
+$ghost: #eee;
+
+// the :export directive is the magic sauce for webpack
+// https://www.bluematador.com/blog/how-to-share-variables-between-js-and-sass
+:export {
+  menuText: $menuText;
+  menuActiveText: $menuActiveText;
+  subMenuActiveText: $subMenuActiveText;
+  menuBg: $menuBg;
+  menuHover: $menuHover;
+  subMenuBg: $subMenuBg;
+  subMenuHover: $subMenuHover;
+  sideBarWidth: $sideBarWidth;
+  ghost: $ghost;
+}

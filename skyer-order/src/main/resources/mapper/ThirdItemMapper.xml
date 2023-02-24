@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.skyer.order.infra.mapper.ThirdItemMapper">
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap id="BaseResultMap" type="org.skyer.order.domain.entity.ThirdItem">
+        <result column="id" property="id" jdbcType="DECIMAL"/>
+        <result column="outer_order_no" property="outerOrderNo" jdbcType="VARCHAR"/>
+        <result column="inner_order_no" property="innerOrderNo" jdbcType="VARCHAR"/>
+        <result column="outer_item_id" property="outerItemId" jdbcType="DECIMAL"/>
+        <result column="spu_code" property="spuCode" jdbcType="VARCHAR"/>
+        <result column="spu_type" property="spuType" jdbcType="DECIMAL"/>
+        <result column="sku_code" property="skuCode" jdbcType="VARCHAR"/>
+        <result column="sku_name" property="skuName" jdbcType="VARCHAR"/>
+        <result column="quantity" property="quantity" jdbcType="DECIMAL"/>
+        <result column="set_flag" property="setFlag" jdbcType="DECIMAL"/>
+        <result column="gift_flag" property="giftFlag" jdbcType="DECIMAL"/>
+        <result column="multi_flag" property="multiFlag" jdbcType="DECIMAL"/>
+        <result column="exception_flag" property="exceptionFlag" jdbcType="DECIMAL"/>
+        <result column="exception_reason" property="exceptionReason" jdbcType="VARCHAR"/>
+        <result column="delete_flag" property="deleteFlag" jdbcType="DECIMAL"/>
+        <result column="creation_date" property="creationDate" jdbcType="DATE"/>
+        <result column="last_update_date" property="lastUpdateDate" jdbcType="DATE"/>
+        <result column="created_by" property="createdBy" jdbcType="DECIMAL"/>
+        <result column="last_updated_by" property="lastUpdatedBy" jdbcType="DECIMAL"/>
+        <result column="object_version_number" property="objectVersionNumber" jdbcType="DECIMAL"/>
+        <result column="spu_name" property="spuName" jdbcType="VARCHAR"/>
+        <result column="sku_id" property="skuId" jdbcType="DECIMAL"/>
+        <result column="main_item_code" property="mainItemCode" jdbcType="VARCHAR"/>
+        <result column="order_item_code" property="orderItemCode" jdbcType="VARCHAR"/>
+        <result column="system_pick_flag" property="systemPickFlag" jdbcType="DECIMAL"/>
+        <result column="activity_id" property="activityId" jdbcType="DECIMAL"/>
+    </resultMap>
+</mapper>

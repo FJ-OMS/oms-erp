@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.skyer.goods.infra.mapper.CategoryMapper">
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap id="BaseResultMap" type="org.skyer.goods.domain.entity.Category">
+        <result column="id" property="id" jdbcType="DECIMAL"/>
+        <result column="code" property="code" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="parent_id" property="parentId" jdbcType="DECIMAL"/>
+        <result column="status_flag" property="statusFlag" jdbcType="DECIMAL"/>
+        <result column="level" property="level" jdbcType="DECIMAL"/>
+        <result column="sub_flag" property="subFlag" jdbcType="DECIMAL"/>
+        <result column="sort" property="sort" jdbcType="DECIMAL"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+        <result column="creation_date" property="creationDate" jdbcType="DATE"/>
+        <result column="last_update_date" property="lastUpdateDate" jdbcType="DATE"/>
+        <result column="created_by" property="createdBy" jdbcType="DECIMAL"/>
+        <result column="last_updated_by" property="lastUpdatedBy" jdbcType="DECIMAL"/>
+        <result column="object_version_number" property="objectVersionNumber" jdbcType="DECIMAL"/>
+    </resultMap>
+    <!-- 通用结果字段 -->
+    <sql id="BaseColumnList">
+        id, code, name, parent_id, status_flag, level, sub_flag, sort, remark,
+        creation_date, last_update_date, created_by, last_updated_by, object_version_number
+    </sql>
+    <!-- 通用查询条件 -->
+    <sql id="BaseWhere">
+        <if test="id != null">
+            id = #{id}
+        </if>
+        <if test="code != null and code != ''">
+            AND code = #{code}
+        </if>
+        <if test="name != null and name != ''">
+            <bind name="nameLike" value="'%' + name + '%'"/>
+            AND name like #{nameLike}
+        </if>
+        <if test="parentId != null">
+            AND parent_id = #{parentId}
+        </if>
+        <if test="statusFlag != null">
+            AND status_flag = #{statusFlag}
+        </if>
+        <if test="level != null">
+            AND level = #{level}
+        </if>
+        <if test="subFlag != null">
+            AND sub_flag = #{subFlag}
+        </if>
+        <if test="sort != null">
+            AND sort = #{sort}
+        </if>
+        <if test="remark != null and remark != ''">
+            AND remark = #{remark}
+        </if>
+    </sql>
+    <!--包含属性值映射 -->
+    <resultMap id="IncludedAttrResultMap" type="org.skyer.goods.domain.vo.CategoryVO" >
+        <id column="id" property="id" jdbcType="DECIMAL"/>
+        <result column="code" property="code" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="parent_id" property="parentId" jdbcType="DECIMAL"/>
+        <result column="parent_name" property="parentName" jdbcType="VARCHAR"/>
+        <result column="status_flag" property="statusFlag" jdbcType="DECIMAL"/>
+        <result column="level" property="level" jdbcType="DECIMAL"/>
+        <result column="sub_flag" property="subFlag" jdbcType="DECIMAL"/>
+        <result column="sort" property="sort" jdbcType="DECIMAL"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+        <result column="object_version_number" property="objectVersionNumber" jdbcType="DECIMAL"/>
+        <result column="has_sub_or_spu_flag" property="hasSubOrSPUFlag" javaType="Boolean"/>
+
+        <!-- ofType="org.skyer.goods.domain.vo.CategoryAttributeVO" -->
+        <collection property="attributeList"
+                    column="{categoryId=id}"
+                    select="org.skyer.goods.infra.mapper.CategoryAttributeMapper.listIncludedValue">
+        </collection>
+    </resultMap>
+
+    <select id="selectList" resultMap="BaseResultMap">
+        SELECT
+            <include refid="BaseColumnList" />
+        FROM sgoo_category t1
+        <where>
+            <include refid="BaseWhere" />
+        </where>
+    </select>
+
+    <select id="listIncludedAttr" resultMap="IncludedAttrResultMap">
+        SELECT
+            t1.id,
+            t1.code,
+            t1.name,
+            t1.parent_id,
+            (select name from sgoo_category as t2 where t2.id = t1.parent_id) as parent_name,
+            t1.status_flag,
+            t1.level,
+            t1.sub_flag,
+            t1.sort,
+            t1.remark,
+            t1.object_version_number,
+            (
+                CASE
+                    WHEN  t1.sub_flag = 1 THEN
+                        (select count(1)>0 from sgoo_spu t_spu where  t_spu.category_id = t1.id)
+                    ELSE
+                        (select count(1)>0 from sgoo_category as t3 where t3.parent_id = t1.id)
+                END
+            ) as has_sub_or_spu_flag
+
+        FROM sgoo_category t1
+        <where>
+            <include refid="BaseWhere" />
+        </where>
+        order by t1.creation_date desc
+    </select>
+
+</mapper>

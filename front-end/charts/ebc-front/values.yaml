@@ -1,0 +1,72 @@
+## 实例运行数量
+replicaCount: 1
+## 设置默认的 image、imageTag 和 imagePullPolicy。
+image:
+  # 需设置镜像地址 repository: xxxxxx
+  pullPolicy: IfNotPresent
+deployment:
+  managementPort:
+  nodePort:
+kubesphere:
+  app:
+    name: ebc
+    version: v1
+    creator: admin
+    servicemesh: true
+    # statelessservice statefulservice
+    serviceType: statelessservice
+    ingress: true
+## Deployment 更新策略
+deploymentUpdate:
+  type: RollingUpdate
+  maxUnavailable: 25%
+  maxSurge: 25%
+## Pod 节点分配
+## ref: https://kubernetes.io/docs/user-guide/node-selection/
+##
+nodeSelector: {}
+tolerations: []
+affinity: {}
+## 资源请求和限制相关配置
+## ref: http://kubernetes.io/docs/user-guide/compute-resources/
+##
+resources:
+  limits:
+    cpu: 900m
+    memory: 2Gi
+  requests:
+    cpu: 100m
+    memory: 512Mi
+## service 相关设置
+## ref: http://kubernetes.io/docs/user-guide/services/
+##
+service:
+  enabled: true
+  # LoadBalancer  ClusterIP
+  type: LoadBalancer
+  port: 8080
+  nodePort:
+persistence:
+  enabled: false
+  ## A manually managed Persistent Volume and Claim
+  ## Requires persistence.enabled: true
+  ## If defined, PVC must be created manually before volume will be bound
+  # existingClaim:
+  # subPath:
+env:
+  open:
+    SERVER_PORT: 8080
+    BUILD_BASE_PATH: /
+    BUILD_WEBSOCKET_HOST: ws://192.168.16.173:8120
+    BUILD_CLIENT_ID: ebc-front-uat
+    BUILD_API_HOST:  http://192.168.12.101:8080/
+    PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: true
+    BUILD_PLATFORM_VERSION: SAAS
+    BUILD_MULTIPLE_SKIN_ENABLE: false
+    BUILD_TOP_MENU_LABELS: HZERO_MENU
+    BUILD_TOP_MENU_UNION_LABEL: false
+    BUILD_TRACE_LOG_ENABLE: true
+    BUILD_IM_ENABLE: true
+    BUILD_IM_WEBSOCKET_HOST: ws://172.23.16.46:9876
+    BUILD_INVALID_TIME: 120
+    BUILD_CUSTOMIZE_ICON_NAME: customize-icon

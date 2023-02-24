@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.skyer.stock.infra.mapper.StorageAreaMapper">
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap id="BaseResultMap" type="org.skyer.stock.domain.entity.StorageArea">
+        <result column="id" property="id" jdbcType="DECIMAL"/>
+        <result column="delete_flag" property="deleteFlag" jdbcType="BOOLEAN"/>
+        <result column="creation_date" property="creationDate" jdbcType="DATE"/>
+        <result column="last_update_date" property="lastUpdateDate" jdbcType="DATE"/>
+        <result column="created_by" property="createdBy" jdbcType="DECIMAL"/>
+        <result column="last_updated_by" property="lastUpdatedBy" jdbcType="DECIMAL"/>
+        <result column="tenant_id" property="tenantId" jdbcType="DECIMAL"/>
+        <result column="object_version_number" property="objectVersionNumber" jdbcType="DECIMAL"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="code" property="code" jdbcType="VARCHAR"/>
+        <result column="warehouse_id" property="warehouseId" jdbcType="DECIMAL"/>
+        <result column="province_code" property="provinceCode" jdbcType="VARCHAR"/>
+        <result column="province_name" property="provinceName" jdbcType="VARCHAR"/>
+        <result column="city_code" property="cityCode" jdbcType="VARCHAR"/>
+        <result column="city_name" property="cityName" jdbcType="VARCHAR"/>
+        <result column="district_code" property="districtCode" jdbcType="VARCHAR"/>
+        <result column="district_name" property="districtName" jdbcType="VARCHAR"/>
+        <result column="detail_address" property="detailAddress" jdbcType="VARCHAR"/>
+        <result column="lng" property="lng" jdbcType="VARCHAR"/>
+        <result column="lat" property="lat" jdbcType="VARCHAR"/>
+        <result column="contact_name" property="contactName" />
+        <result column="contact_phone" property="contactPhone" />
+        <result column="description" property="description" />
+        <result column="enable_flag" property="enableFlag" jdbcType="BOOLEAN"/>
+    </resultMap>
+
+    <select id="pageStorageAreaList" resultType="org.skyer.stock.domain.vo.StorageAreaListVO">
+        select
+            ssa.id      as   id,
+            ssa.name    as   name,
+            ssa.code    as   code,
+            ssa.warehouse_id   as   warehouseId,
+            ssa.contact_name   as   contactName,
+            ssa.contact_phone  as   contactPhone,
+            ssa.creation_date  as   creationDate,
+            ssa.created_by     as   createdBy,
+            ssa.province_name  as   provinceName,
+            ssa.city_name      as   cityName,
+            ssa.district_name  as   districtName,
+            ssa.detail_address as   detailAddress,
+            ssa.description    as   description,
+            ssa.delete_flag    as   deleteFlag,
+            ssa.enable_flag    as   enableFlag,
+            sw.name as logicalWarehouseName,
+            sw.status as logicalFlag
+        from
+            sstock_storage_area ssa
+        LEFT JOIN sstock_warehouse sw ON ssa.warehouse_id = sw.id
+        <where>
+            ssa.delete_flag = false
+            <if test="listReqDTO.name != null and listReqDTO.name != ''">
+                and ssa.name like concat('%',#{listReqDTO.name},'%')
+            </if>
+            <if test="listReqDTO.code != null and listReqDTO.code != ''">
+                and ssa.code like concat('%',#{listReqDTO.code},'%')
+            </if>
+            <if test="listReqDTO.enableFlag !=null">
+                and ssa.enable_flag = #{listReqDTO.enableFlag}
+            </if>
+        </where>
+    </select>
+
+    <select id="getStorageAreaListByIds" resultType="org.skyer.stock.domain.entity.StorageArea">
+        select *
+        from sstock_storage_area ssa
+        <where>
+            ssa.id in
+            <foreach item="item" index="idx" collection="ids" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </where>
+    </select>
+    <select id="getByLogicWarehouseId" resultType="org.skyer.stock.domain.entity.StorageArea">
+        SELECT
+            *
+        FROM sstock_storage_area WHERE warehouse_id = #{logicWarehouseId}
+    </select>
+    <select id="getByLogicWarehouseCode" resultType="org.skyer.stock.domain.entity.StorageArea">
+        SELECT
+            t1.*
+        FROM sstock_storage_area t1
+        LEFT JOIN sstock_warehouse t2 ON t1.warehouse_id = t2.id
+        WHERE t2.code = #{logicWarehouseCode}
+    </select>
+
+</mapper>

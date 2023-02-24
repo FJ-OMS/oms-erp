@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.skyer.stock.infra.mapper.OutboundDeliveryOrderDetailMapper">
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap id="BaseResultMap" type="org.skyer.stock.domain.entity.OutboundDeliveryOrderDetail">
+        <result column="id" property="id" jdbcType="DECIMAL"/>
+        <result column="odo_id" property="odoId" jdbcType="DECIMAL"/>
+        <result column="sku_code" property="skuCode" jdbcType="VARCHAR"/>
+        <result column="sku_name" property="skuName" jdbcType="VARCHAR"/>
+        <result column="spu_code" property="spuCode" jdbcType="VARCHAR"/>
+        <result column="spu_name" property="spuName" jdbcType="VARCHAR"/>
+        <result column="category_name" property="categoryName" jdbcType="VARCHAR"/>
+        <result column="planned_qty" property="plannedQty" jdbcType="DECIMAL"/>
+        <result column="already_out_qty" property="alreadyOutQty" jdbcType="DECIMAL"/>
+        <result column="wait_out_qty" property="waitOutQty" jdbcType="DECIMAL"/>
+        <result column="cancel_qty" property="cancelQty" jdbcType="DECIMAL"/>
+    </resultMap>
+    <select id="getByOdoId" resultType="org.skyer.stock.domain.entity.OutboundDeliveryOrderDetail">
+        SELECT
+            *
+        FROM sstock_outbound_delivery_order_detail
+        WHERE odo_id = #{odoId}
+    </select>
+
+    <resultMap id="OdoQtyVoMap" type="org.skyer.stock.domain.vo.OdoQtyVO">
+        <result column="planned_qty" property="plannedQty" />
+        <result column="already_out_qty" property="alreadyOutQty" />
+    </resultMap>
+    <select id="statsByOdoId" resultMap="OdoQtyVoMap">
+        SELECT
+            SUM( planned_qty ) planned_qty,
+            SUM( already_out_qty ) already_out_qty
+        FROM
+            sstock_outbound_delivery_order_detail
+        WHERE odo_id = #{odoId}
+    </select>
+</mapper>

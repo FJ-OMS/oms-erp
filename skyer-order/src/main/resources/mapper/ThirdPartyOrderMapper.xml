@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.skyer.order.infra.mapper.ThirdPartyOrderMapper">
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap id="BaseResultMap" type="org.skyer.order.domain.entity.ThirdPartyOrder">
+        <result column="id" property="id" jdbcType="DECIMAL"/>
+        <result column="outer_order_no" property="outerOrderNo" jdbcType="VARCHAR"/>
+        <result column="inner_order_no" property="innerOrderNo" jdbcType="VARCHAR"/>
+        <result column="shop_id" property="shopId" jdbcType="DECIMAL"/>
+        <result column="channel" property="channel" jdbcType="VARCHAR"/>
+        <result column="flow_status" property="flowStatus" jdbcType="DECIMAL"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+        <result column="back_write_status" property="backWriteStatus" jdbcType="DECIMAL"/>
+        <result column="delete_flag" property="deleteFlag" jdbcType="DECIMAL"/>
+        <result column="creation_date" property="creationDate" jdbcType="DATE"/>
+        <result column="last_update_date" property="lastUpdateDate" jdbcType="DATE"/>
+        <result column="created_by" property="createdBy" jdbcType="DECIMAL"/>
+        <result column="last_updated_by" property="lastUpdatedBy" jdbcType="DECIMAL"/>
+        <result column="object_version_number" property="objectVersionNumber" jdbcType="DECIMAL"/>
+    </resultMap>
+</mapper>

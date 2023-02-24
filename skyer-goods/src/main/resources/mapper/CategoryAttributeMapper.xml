@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.skyer.goods.infra.mapper.CategoryAttributeMapper">
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap id="BaseResultMap" type="org.skyer.goods.domain.entity.CategoryAttribute">
+        <id column="id" property="id" jdbcType="DECIMAL"/>
+        <result column="category_id" property="categoryId" jdbcType="DECIMAL"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="code" property="code" jdbcType="VARCHAR"/>
+        <result column="sort" property="sort" jdbcType="DECIMAL"/>
+        <result column="form_type" property="formType" jdbcType="DECIMAL"/>
+        <result column="sku_flag" property="skuFlag" jdbcType="DECIMAL"/>
+        <result column="status_flag" property="statusFlag" jdbcType="DECIMAL"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+        <result column="source_type" property="sourceType" jdbcType="DECIMAL"/>
+
+    </resultMap>
+
+    <!-- 包含属性值的结果集映射 -->
+    <resultMap id="IncludedValueResultMap" type="org.skyer.goods.domain.vo.CategoryAttributeVO">
+        <id column="id" />
+        <result column="category_id" property="categoryId" jdbcType="DECIMAL"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="code" property="code" jdbcType="VARCHAR"/>
+        <result column="sort" property="sort" jdbcType="DECIMAL"/>
+        <result column="form_type" property="formType" jdbcType="DECIMAL"/>
+        <result column="sku_flag" property="skuFlag" jdbcType="DECIMAL"/>
+        <result column="status_flag" property="statusFlag" jdbcType="DECIMAL"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+        <result column="source_type" property="sourceType" jdbcType="DECIMAL"/>
+        <!--
+            resultMap="org.skyer.goods.infra.mapper.CategoryAttributeValueMapper.BaseResultMap"
+            ofType="org.skyer.goods.domain.entity.CategoryAttributeValue"
+        -->
+        <collection property="attributeValueList"
+                    ofType="org.skyer.goods.domain.vo.CategoryAttributeValueVO">
+            <id column="value_id" />
+            <result column="value_value" property="value" jdbcType="VARCHAR"/>
+            <result column="value_sort" property="sort" jdbcType="DECIMAL"/>
+        </collection>
+    </resultMap>
+
+    <select id="listIncludedValue" resultMap="IncludedValueResultMap">
+        SELECT t_attr.id id,
+               t_attr.category_id,
+               t_attr.name,
+               t_attr.code,
+               t_attr.sort,
+               t_attr.form_type,
+               t_attr.sku_flag,
+               t_attr.status_flag,
+               t_attr.remark,
+               t_attr.source_type,
+
+               t_value.id value_id,
+               t_value.attribute_id value_attribute_id,
+               t_value.value value_value,
+               t_value.sort value_sort
+        FROM sgoo_category_attribute t_attr LEFT JOIN sgoo_category_attribute_value t_value ON t_attr.id = t_value.attribute_id
+        <where>
+            <if test="id != null">
+                t_attr.id = #{id}
+            </if>
+            <if test="categoryId != null">
+                AND t_attr.category_id = #{categoryId}
+            </if>
+            <if test="formType != null">
+                AND t_attr.form_type = #{formType}
+            </if>
+            <if test="skuFlag != null">
+                AND t_attr.sku_flag = #{skuFlag}
+            </if>
+            <if test="statusFlag != null">
+                AND t_attr.status_flag = #{statusFlag}
+            </if>
+            <if test="sourceType != null">
+                AND t_attr.source_type = #{sourceType}
+            </if>
+        </where>
+        ORDER BY sort, id, value_sort, value_id
+    </select>
+
+</mapper>

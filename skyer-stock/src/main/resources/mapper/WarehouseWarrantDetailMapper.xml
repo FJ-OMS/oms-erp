@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.skyer.stock.infra.mapper.WarehouseWarrantDetailMapper">
+
+    <select id="statsQty" resultType="org.skyer.stock.domain.vo.WarehouseWarrantQtyVO">
+        SELECT SUM(planned_qty)       total_qty,
+               SUM(already_input_qty) already_total_qty
+        FROM sstock_warehouse_warrant_detail
+        WHERE warehouse_warrant_id = #{warehouseWarrantId}
+    </select>
+
+    <select id="getAllByWarehouseWarrantId" resultType="org.skyer.stock.domain.entity.WarehouseWarrantDetail">
+        SELECT
+            id,sku_code,sku_name,spu_code,spu_name,planned_qty,already_input_qty
+        FROM sstock_warehouse_warrant_detail
+        WHERE warehouse_warrant_id = #{warehouseWarrantId}
+    </select>
+</mapper>

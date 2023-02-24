@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.skyer.order.infra.mapper.ItemLineMapper">
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap id="BaseResultMap" type="org.skyer.order.domain.entity.ItemLine">
+        <result column="id" property="id" jdbcType="DECIMAL"/>
+        <result column="outer_order_no" property="outerOrderNo" jdbcType="VARCHAR"/>
+        <result column="inner_order_no" property="innerOrderNo" jdbcType="VARCHAR"/>
+        <result column="outer_item_id" property="outerItemId" jdbcType="DECIMAL"/>
+        <result column="spu_code" property="spuCode" jdbcType="VARCHAR"/>
+        <result column="spu_type" property="spuType" jdbcType="DECIMAL"/>
+        <result column="sku_code" property="skuCode" jdbcType="VARCHAR"/>
+        <result column="sku_name" property="skuName" jdbcType="VARCHAR"/>
+        <result column="suspend_status" property="suspendStatus" jdbcType="VARCHAR"/>
+        <result column="endorse_status" property="endorseStatus" jdbcType="VARCHAR"/>
+        <result column="preemption_status" property="preemptionStatus" jdbcType="VARCHAR"/>
+        <result column="source_status" property="sourceStatus" jdbcType="VARCHAR"/>
+        <result column="delivery_status" property="deliveryStatus" jdbcType="VARCHAR"/>
+        <result column="preemp_notice_id" property="preempNoticeId" jdbcType="DECIMAL"/>
+        <result column="preemp_result_id" property="preempResultId" jdbcType="DECIMAL"/>
+        <result column="source_notice_id" property="sourceNoticeId" jdbcType="DECIMAL"/>
+        <result column="source_result_id" property="sourceResultId" jdbcType="DECIMAL"/>
+        <result column="channel_warehouse_id" property="channelWarehouseId" jdbcType="DECIMAL"/>
+        <result column="virtual_warehouse_id" property="virtualWarehouseId" jdbcType="DECIMAL"/>
+        <result column="logical_warehouse_id" property="logicalWarehouseId" jdbcType="DECIMAL"/>
+        <result column="refund_flag" property="refundFlag" jdbcType="DECIMAL"/>
+        <result column="return_flag" property="returnFlag" jdbcType="DECIMAL"/>
+        <result column="gift_flag" property="giftFlag" jdbcType="DECIMAL"/>
+        <result column="set_flag" property="setFlag" jdbcType="DECIMAL"/>
+        <result column="multi_flag" property="multiFlag" jdbcType="DECIMAL"/>
+        <result column="delete_flag" property="deleteFlag" jdbcType="DECIMAL"/>
+        <result column="creation_date" property="creationDate" jdbcType="DATE"/>
+        <result column="last_update_date" property="lastUpdateDate" jdbcType="DATE"/>
+        <result column="created_by" property="createdBy" jdbcType="DECIMAL"/>
+        <result column="last_updated_by" property="lastUpdatedBy" jdbcType="DECIMAL"/>
+        <result column="object_version_number" property="objectVersionNumber" jdbcType="DECIMAL"/>
+    </resultMap>
+
+    <select id="totalCurrentLineStatus" resultType="org.skyer.order.api.vo.OrderStatusTotalVO">
+        SELECT
+	        sum( CASE WHEN current_status = "11000"  THEN 1 ELSE 0 END)  AS finishCount,
+	        sum( CASE WHEN current_status = "11010"  THEN 1 ELSE 0 END )  AS cancelCount,
+	        sum( CASE WHEN (current_status != "11010" and current_status != "11000") or current_status is null  THEN 1 ELSE 0 END ) AS unfinishedCount
+        FROM
+	        sord_item_line
+        WHERE
+	        inner_order_no = #{innerOrderNo}
+    </select>
+
+    <select id="totalUnfinishedLineStatus" resultType="org.skyer.order.api.vo.UnfinishedTotalVO">
+        SELECT
+	        sum( CASE WHEN preemption_status = "10103" and current_status != "11010" THEN 1 ELSE 0 END  ) AS outStockCount,
+	        sum( CASE WHEN source_status = "10303"  and current_status != "11010" THEN 1 ELSE 0 END ) AS failSeekCount,
+	        sum( CASE WHEN delivery_status = "10511"  and current_status != "11010" THEN 1 ELSE 0 END ) AS waitSendCount,
+	        sum( CASE WHEN  current_status = "10211" or current_status = "10221"  THEN 1 ELSE 0 END ) AS preempAuditCount,
+	        sum( CASE WHEN current_status = "10411" or current_status = "10421"  THEN 1 ELSE 0 END ) AS seekAuditCount,
+            sum( CASE WHEN receiving_Status  = "10521"  THEN 1 ELSE 0 END ) AS waitReceiveCount
+        FROM
+	        sord_item_line
+        WHERE
+	        inner_order_no = #{innerOrderNo}
+    </select>
+
+    <select id="totalWaitDealLineStatus" resultType="org.skyer.order.api.vo.WaitDealTotalVO">
+	    SELECT
+	        sum( CASE WHEN preemption_status = "10103"  and current_status != "11010" THEN 1 ELSE 0 END ) AS outStockCount,
+	        sum( CASE WHEN source_status = "10303"  and current_status != "11010" THEN 1 ELSE 0 END ) AS failSeekCount,
+	        sum( CASE WHEN sync_preemp_status = "10113"  and current_status != "11010" THEN 1 ELSE 0 END ) AS failSyncPreempCount,
+	        sum( CASE WHEN sync_preemp_status = "10533"  and current_status != "11010" THEN 1 ELSE 0 END ) AS failSyncSendCount,
+	        sum( CASE WHEN current_status = "10211" or current_status = "10221" or current_status = "10411" or current_status = "10421" THEN 1 ELSE 0 END  ) AS waitAudit,
+            sum( CASE WHEN receiving_Status  = "10521"  THEN 1 ELSE 0 END ) AS waitReceiveCount
+        FROM
+	        sord_item_line
+        WHERE
+	        inner_order_no = #{innerOrderNo}
+    </select>
+
+    <select id="countStockout" resultType="java.lang.Integer">
+        SELECT
+           COUNT(*)
+        from
+            sord_item_line
+        where
+            store_id =#{storeId} and sku_code =#{skuCode} and preemption_status="10103"
+    </select>
+</mapper>

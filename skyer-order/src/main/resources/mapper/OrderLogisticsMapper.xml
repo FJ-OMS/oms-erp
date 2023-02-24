@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.skyer.order.infra.mapper.OrderLogisticsMapper">
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap id="BaseResultMap" type="org.skyer.order.domain.entity.OrderLogistics">
+        <result column="id" property="id" jdbcType="DECIMAL"/>
+        <result column="outer_order_no" property="outerOrderNo" jdbcType="VARCHAR"/>
+        <result column="inner_order_no" property="innerOrderNo" jdbcType="VARCHAR"/>
+        <result column="logistics_no" property="logisticsNo" jdbcType="VARCHAR"/>
+        <result column="out_stock_no" property="outStockNo" jdbcType="VARCHAR"/>
+        <result column="logistics_company" property="logisticsCompany" jdbcType="VARCHAR"/>
+        <result column="logistics_business_name" property="logisticsBusinessName" jdbcType="VARCHAR"/>
+        <result column="logistics_status" property="logisticsStatus" jdbcType="VARCHAR"/>
+        <result column="type" property="type" jdbcType="DECIMAL"/>
+        <result column="receive_user" property="receiveUser" jdbcType="VARCHAR"/>
+        <result column="receive_phone" property="receivePhone" jdbcType="VARCHAR"/>
+        <result column="receive_address" property="receiveAddress" jdbcType="VARCHAR"/>
+        <result column="send_stock_id" property="sendStockId" jdbcType="DECIMAL"/>
+        <result column="send_stock_name" property="sendStockName" jdbcType="VARCHAR"/>
+        <result column="send_user" property="sendUser" jdbcType="VARCHAR"/>
+        <result column="send_phone" property="sendPhone" jdbcType="VARCHAR"/>
+        <result column="send_address" property="sendAddress" jdbcType="VARCHAR"/>
+        <result column="send_time" property="sendTime" jdbcType="DATE"/>
+        <result column="creation_date" property="creationDate" jdbcType="DATE"/>
+        <result column="last_update_date" property="lastUpdateDate" jdbcType="DATE"/>
+        <result column="created_by" property="createdBy" jdbcType="DECIMAL"/>
+        <result column="last_updated_by" property="lastUpdatedBy" jdbcType="DECIMAL"/>
+        <result column="object_version_number" property="objectVersionNumber" jdbcType="DECIMAL"/>
+    </resultMap>
+</mapper>

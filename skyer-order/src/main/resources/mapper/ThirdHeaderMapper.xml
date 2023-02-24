@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.skyer.order.infra.mapper.ThirdHeaderMapper">
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap id="BaseResultMap" type="org.skyer.order.domain.entity.ThirdHeader">
+        <result column="id" property="id" jdbcType="DECIMAL"/>
+        <result column="inner_order_no" property="innerOrderNo" jdbcType="VARCHAR"/>
+        <result column="outer_order_no" property="outerOrderNo" jdbcType="VARCHAR"/>
+        <result column="channel" property="channel" jdbcType="VARCHAR"/>
+        <result column="business_type" property="businessType" jdbcType="VARCHAR"/>
+        <result column="store_id" property="storeId" jdbcType="DECIMAL"/>
+        <result column="store_code" property="storeCode" jdbcType="VARCHAR"/>
+        <result column="store_name" property="storeName" jdbcType="VARCHAR"/>
+        <result column="circulation_status" property="circulationStatus" jdbcType="VARCHAR"/>
+        <result column="failure_reason" property="failureReason" jdbcType="VARCHAR"/>
+        <result column="sync_status" property="syncStatus" jdbcType="VARCHAR"/>
+        <result column="receiving_status" property="receivingStatus" jdbcType="VARCHAR"/>
+        <result column="buyer_remarks" property="buyerRemarks" jdbcType="VARCHAR"/>
+        <result column="service_remarks" property="serviceRemarks" jdbcType="VARCHAR"/>
+        <result column="goods_quantity" property="goodsQuantity" jdbcType="DECIMAL"/>
+        <result column="total_amount" property="totalAmount" jdbcType="DECIMAL"/>
+        <result column="total_discount" property="totalDiscount" jdbcType="DECIMAL"/>
+        <result column="buyer_pay_amount" property="buyerPayAmount" jdbcType="DECIMAL"/>
+        <result column="amount_receivable" property="amountReceivable" jdbcType="DECIMAL"/>
+        <result column="business_discount_amount" property="businessDiscountAmount" jdbcType="DECIMAL"/>
+        <result column="third_discount_amount" property="thirdDiscountAmount" jdbcType="DECIMAL"/>
+        <result column="buyer_nick" property="buyerNick" jdbcType="VARCHAR"/>
+        <result column="order_time" property="orderTime" jdbcType="DATE"/>
+        <result column="pay_time" property="payTime" jdbcType="DATE"/>
+    </resultMap>
+</mapper>

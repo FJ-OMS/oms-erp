@@ -1,0 +1,2134 @@
+[
+  {
+    "permissionType": "api",
+    "title": "配置中心",
+    "icon": "el-icon-s-operation",
+    "code": "Setting",
+    "hiddenFlag": false,
+    "sort": 0,
+    "children": [
+      {
+        "permissionType": "api",
+        "title": "用户",
+        "icon": null,
+        "code": "SettingUser",
+        "hiddenFlag": false,
+        "sort": 0,
+        "children": [
+          {
+            "permissionType": "api",
+            "title": "组织架构",
+            "icon": null,
+            "code": "SettingUserOrganization",
+            "hiddenFlag": false,
+            "sort": 0,
+            "children": [
+              {
+                "permissionType": "tab",
+                "title": "集团设置",
+                "icon": null,
+                "code": "SettingUserOrganizationGroup",
+                "hiddenFlag": true,
+                "sort": 0
+              },
+              {
+                "permissionType": "tab",
+                "title": "下属公司",
+                "icon": null,
+                "code": "SettingUserOrganizationCompany",
+                "hiddenFlag": true,
+                "sort": 1
+              },
+              {
+                "permissionType": "btn",
+                "title": "编辑-集团设置",
+                "icon": null,
+                "code": "SettingUserOrganizationGroup_Edit",
+                "hiddenFlag": true,
+                "sort": 2
+              },
+              {
+                "permissionType": "btn",
+                "title": "删除-下属公司",
+                "icon": null,
+                "code": "SettingUserOrganizationCompany_Delete",
+                "hiddenFlag": true,
+                "sort": 3
+              },
+              {
+                "permissionType": "btn",
+                "title": "新增公司-下属公司",
+                "icon": null,
+                "code": "SettingUserOrganizationCompany_Add",
+                "hiddenFlag": true,
+                "sort": 4
+              },
+              {
+                "permissionType": "btn",
+                "title": "编辑-下属公司",
+                "icon": null,
+                "code": "SettingUserOrganizationCompany_Edit",
+                "hiddenFlag": true,
+                "sort": 5
+              },
+              {
+                "permissionType": "btn",
+                "title": "禁用/启用-下属公司",
+                "icon": null,
+                "code": "SettingUserOrganizationCompany_Status",
+                "hiddenFlag": true,
+                "sort": 6
+              }
+            ]
+          },
+          {
+            "permissionType": "api",
+            "title": "账号安全策略",
+            "icon": null,
+            "code": "SettingUserAccount",
+            "hiddenFlag": false,
+            "sort": 1,
+            "children": [
+              {
+                "permissionType": "page",
+                "title": "账号安全策略配置",
+                "icon": null,
+                "code": "SettingUserAccountStrategy",
+                "hiddenFlag": true,
+                "sort": 0
+              },
+              {
+                "permissionType": "btn",
+                "title": "保存-账号安全策略配置",
+                "icon": null,
+                "code": "SettingUserAccountStrategy_Save",
+                "hiddenFlag": true,
+                "sort": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "permissionType": "api",
+        "title": "商品",
+        "icon": null,
+        "code": "SettingGoods",
+        "hiddenFlag": false,
+        "sort": 1,
+        "children": [
+          {
+            "permissionType": "api",
+            "title": "商品审核策略",
+            "icon": null,
+            "code": "SettingGoodsAudit",
+            "hiddenFlag": false,
+            "sort": 0,
+            "children": [
+              {
+                "permissionType": "page",
+                "title": "商品审核策略",
+                "icon": null,
+                "code": "SettingGoodsAuditStrategyIndex",
+                "hiddenFlag": true,
+                "sort": 0
+              },
+              {
+                "permissionType": "btn",
+                "title": "保存-商品审核策略",
+                "icon": null,
+                "code": "SettingGoodsAuditStrategyIndex_Save",
+                "hiddenFlag": true,
+                "sort": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "permissionType": "api",
+        "title": "基础数据",
+        "icon": null,
+        "code": "SettingBaseData",
+        "hiddenFlag": false,
+        "sort": 2,
+        "children": [
+          {
+            "permissionType": "api",
+            "title": "编码规则",
+            "icon": null,
+            "code": "SettingBaseDataCodeRule",
+            "hiddenFlag": false,
+            "sort": 0,
+            "children": [
+              {
+                "permissionType": "page",
+                "title": "编码规则",
+                "icon": null,
+                "code": "SettingBaseDataCodeRuleIndex",
+                "hiddenFlag": true,
+                "sort": 0
+              },
+              {
+                "permissionType": "btn",
+                "title": "新增-编码规则",
+                "icon": null,
+                "code": "SettingBaseDataCodeRule_Add",
+                "hiddenFlag": true,
+                "sort": 1
+              },
+              {
+                "permissionType": "page",
+                "title": "编辑-编码规则",
+                "icon": null,
+                "code": "SettingBaseDataCodeRuleEdit",
+                "hiddenFlag": true,
+                "sort": 2
+              },
+              {
+                "permissionType": "btn",
+                "title": "删除-编码规则",
+                "icon": null,
+                "code": "SettingBaseDataCodeRule_Delete",
+                "hiddenFlag": true,
+                "sort": 3
+              }
+            ]
+          },
+          {
+            "permissionType": "api",
+            "title": "国家定义",
+            "icon": null,
+            "code": "SettingBaseDataCountry",
+            "hiddenFlag": false,
+            "sort": 1,
+            "children": [
+              {
+                "permissionType": "page",
+                "title": "国家定义",
+                "icon": null,
+                "code": "SettingBaseDataCountryIndex",
+                "hiddenFlag": true,
+                "sort": 0
+              },
+              {
+                "permissionType": "btn",
+                "title": "新增-国家",
+                "icon": null,
+                "code": "SettingBaseDataCountryIndex_Add",
+                "hiddenFlag": true,
+                "sort": 1
+              },
+              {
+                "permissionType": "btn",
+                "title": "编辑-国家",
+                "icon": null,
+                "code": "SettingBaseDataCountryIndex_Edit",
+                "hiddenFlag": true,
+                "sort": 2
+              },
+              {
+                "permissionType": "btn",
+                "title": "启用/禁用-国家",
+                "icon": null,
+                "code": "SettingBaseDataCountryIndex_Status",
+                "hiddenFlag": true,
+                "sort": 3
+              }
+            ]
+          },
+          {
+            "permissionType": "api",
+            "title": "中国行政区定义",
+            "icon": null,
+            "code": "SettingBaseDataRegion",
+            "hiddenFlag": false,
+            "sort": 2,
+            "children": [
+              {
+                "permissionType": "page",
+                "title": "中国行政区定义",
+                "icon": null,
+                "code": "SettingBaseDataRegionIndex",
+                "hiddenFlag": true,
+                "sort": 0
+              },
+              {
+                "permissionType": "btn",
+                "title": "新增-中国行政区",
+                "icon": null,
+                "code": "SettingBaseDataRegionIndex_Add",
+                "hiddenFlag": true,
+                "sort": 1
+              },
+              {
+                "permissionType": "btn",
+                "title": "编辑-中国行政区",
+                "icon": null,
+                "code": "SettingBaseDataRegionIndex_Edit",
+                "hiddenFlag": true,
+                "sort": 2
+              },
+              {
+                "permissionType": "btn",
+                "title": "删除-中国行政区",
+                "icon": null,
+                "code": "SettingBaseDataRegionIndex_Delete",
+                "hiddenFlag": true,
+                "sort": 3
+              },
+              {
+                "permissionType": "btn",
+                "title": "新建下级区域-中国行政区",
+                "icon": null,
+                "code": "SettingBaseDataRegionIndex_AddChild",
+                "hiddenFlag": true,
+                "sort": 4
+              }
+            ]
+          },
+          {
+            "permissionType": "api",
+            "title": "售后原因",
+            "icon": null,
+            "code": "SettingBaseDataAfterSalesReason",
+            "hiddenFlag": false,
+            "sort": 3,
+            "children": [
+              {
+                "permissionType": "tab",
+                "title": "仅退款原因",
+                "icon": null,
+                "code": "SettingBaseDataAfterSalesReasonRefundIndex",
+                "hiddenFlag": true,
+                "sort": 0
+              },
+              {
+                "permissionType": "btn",
+                "title": "新增仅退款原因",
+                "icon": null,
+                "code": "SettingBaseDataAfterSalesReasonRefundIndex_Add",
+                "hiddenFlag": true,
+                "sort": 1
+              },
+              {
+                "permissionType": "btn",
+                "title": "编辑仅退款原因",
+                "icon": null,
+                "code": "SettingBaseDataAfterSalesReasonRefundIndex_Edit",
+                "hiddenFlag": true,
+                "sort": 2
+              },
+              {
+                "permissionType": "btn",
+                "title": "禁用/启用仅退款原因",
+                "icon": null,
+                "code": "SettingBaseDataAfterSalesReasonRefundIndex_Status",
+                "hiddenFlag": true,
+                "sort": 3
+              },
+              {
+                "permissionType": "btn",
+                "title": "删除仅退款原因",
+                "icon": null,
+                "code": "SettingBaseDataAfterSalesReasonRefundIndex_Delete",
+                "hiddenFlag": true,
+                "sort": 4
+              },
+              {
+                "permissionType": "tab",
+                "title": "退货退款原因",
+                "icon": null,
+                "code": "SettingBaseDataAfterSalesReasonReturnIndex",
+                "hiddenFlag": true,
+                "sort": 5
+              },
+              {
+                "permissionType": "btn",
+                "title": "新增退货退款原因",
+                "icon": null,
+                "code": "SettingBaseDataAfterSalesReasonReturnIndex_Add",
+                "hiddenFlag": true,
+                "sort": 6
+              },
+              {
+                "permissionType": "btn",
+                "title": "编辑退货退款原因",
+                "icon": null,
+                "code": "SettingBaseDataAfterSalesReasonReturnIndex_Edit",
+                "hiddenFlag": true,
+                "sort": 7
+              },
+              {
+                "permissionType": "btn",
+                "title": "禁用/启用退货退款原因",
+                "icon": null,
+                "code": "SettingBaseDataAfterSalesReasonReturnIndex_Status",
+                "hiddenFlag": true,
+                "sort": 8
+              },
+              {
+                "permissionType": "btn",
+                "title": "删除退货退款原因",
+                "icon": null,
+                "code": "SettingBaseDataAfterSalesReasonReturnIndex_Delete",
+                "hiddenFlag": true,
+                "sort": 9
+              }
+            ]
+          },
+          {
+            "permissionType": "api",
+            "title": "值集管理",
+            "icon": null,
+            "code": "SettingBaseDataLov",
+            "hiddenFlag": false,
+            "sort": 4,
+            "children": [
+              {
+                "permissionType": "page",
+                "title": "值集管理",
+                "icon": null,
+                "code": "SettingBaseDataLovIndex",
+                "hiddenFlag": true,
+                "sort": 0
+              },
+              {
+                "permissionType": "btn",
+                "title": "创建值集值",
+                "icon": null,
+                "code": "SettingBaseDataLovIndex_Add",
+                "hiddenFlag": true,
+                "sort": 1
+              },
+              {
+                "permissionType": "btn",
+                "title": "编辑值集值",
+                "icon": null,
+                "code": "SettingBaseDataLovIndex_Edit",
+                "hiddenFlag": true,
+                "sort": 2
+              },
+              {
+                "permissionType": "btn",
+                "title": "删除值集值",
+                "icon": null,
+                "code": "SettingBaseDataLovIndex_Delete",
+                "hiddenFlag": true,
+                "sort": 3
+              },
+              {
+                "permissionType": "btn",
+                "title": "启用/禁用",
+                "icon": null,
+                "code": "SettingBaseDataLovIndex_Status",
+                "hiddenFlag": true,
+                "sort": 4
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "permissionType": "api",
+        "title": "索引配置",
+        "icon": null,
+        "code": "SettingIndexes",
+        "hiddenFlag": false,
+        "sort": 3,
+        "children": [
+          {
+            "permissionType": "api",
+            "title": "索引配置列表",
+            "icon": null,
+            "code": "SettingIndexesConfig",
+            "hiddenFlag": false,
+            "sort": 0,
+            "children": [
+              {
+                "permissionType": "page",
+                "title": "索引配置列表",
+                "icon": null,
+                "code": "SettingIndexesConfigListIndex",
+                "hiddenFlag": true,
+                "sort": 0
+              },
+              {
+                "permissionType": "page",
+                "title": "新增索引",
+                "icon": null,
+                "code": "SettingIndexesConfigListAdd",
+                "hiddenFlag": true,
+                "sort": 1
+              },
+              {
+                "permissionType": "page",
+                "title": "编辑索引",
+                "icon": null,
+                "code": "SettingIndexesConfigListEdit",
+                "hiddenFlag": true,
+                "sort": 2
+              },
+              {
+                "permissionType": "btn",
+                "title": "启用/禁用-索引",
+                "icon": null,
+                "code": "SettingIndexesConfigList_Status",
+                "hiddenFlag": true,
+                "sort": 3
+              }
+            ]
+          },
+          {
+            "permissionType": "api",
+            "title": "查询配置",
+            "icon": null,
+            "code": "SettingInquiry",
+            "hiddenFlag": false,
+            "sort": 1,
+            "children": [
+              {
+                "permissionType": "page",
+                "title": "查询配置",
+                "icon": null,
+                "code": "SettingInquiryIndex",
+                "hiddenFlag": true,
+                "sort": 0
+              },
+              {
+                "permissionType": "page",
+                "title": "添加查询配置",
+                "icon": null,
+                "code": "SettingInquiryAdd",
+                "hiddenFlag": true,
+                "sort": 1
+              },
+              {
+                "permissionType": "page",
+                "title": "编辑查询配置",
+                "icon": null,
+                "code": "SettingInquiryEdit",
+                "hiddenFlag": true,
+                "sort": 2
+              },
+              {
+                "permissionType": "btn",
+                "title": "删除-查询配置",
+                "icon": null,
+                "code": "SettingInquiry_Delete",
+                "hiddenFlag": true,
+                "sort": 3
+              }
+            ]
+          },
+          {
+            "permissionType": "api",
+            "title": "索引同步",
+            "icon": null,
+            "code": "SettingIndexesSync",
+            "hiddenFlag": false,
+            "sort": 2,
+            "children": [
+              {
+                "permissionType": "page",
+                "title": "索引同步",
+                "icon": null,
+                "code": "SettingIndexesSyncIndex",
+                "hiddenFlag": true,
+                "sort": 0
+              },
+              {
+                "permissionType": "page",
+                "title": "添加同步索引",
+                "icon": null,
+                "code": "SettingIndexesSyncAdd",
+                "hiddenFlag": true,
+                "sort": 1
+              },
+              {
+                "permissionType": "page",
+                "title": "编辑同步索引",
+                "icon": null,
+                "code": "SettingIndexesSyncEdit",
+                "hiddenFlag": true,
+                "sort": 2
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "permissionType": "api",
+        "title": "文件管理",
+        "icon": null,
+        "code": "SettingFile",
+        "hiddenFlag": false,
+        "sort": 4,
+        "children": [
+          {
+            "permissionType": "api",
+            "title": "汇总查询",
+            "icon": null,
+            "code": "SettingFileSearch",
+            "hiddenFlag": false,
+            "sort": 0,
+            "children": [
+              {
+                "permissionType": "page",
+                "title": "汇总查询",
+                "icon": null,
+                "code": "SettingFileSearchIndex",
+                "hiddenFlag": true,
+                "sort": 0
+              },
+              {
+                "permissionType": "btn",
+                "title": "文件上传-汇总查询",
+                "icon": null,
+                "code": "SettingFileSearchIndex_UpLoad",
+                "hiddenFlag": true,
+                "sort": 1
+              },
+              {
+                "permissionType": "btn",
+                "title": "预览-汇总查询",
+                "icon": null,
+                "code": "SettingFileSearchIndex_View",
+                "hiddenFlag": true,
+                "sort": 2
+              },
+              {
+                "permissionType": "btn",
+                "title": "下载-汇总查询",
+                "icon": null,
+                "code": "SettingFileSearchIndex_DownLoad",
+                "hiddenFlag": true,
+                "sort": 3
+              }
+            ]
+          },
+          {
+            "permissionType": "api",
+            "title": "存储配置",
+            "icon": null,
+            "code": "SettingFileStorage",
+            "hiddenFlag": false,
+            "sort": 1,
+            "children": [
+              {
+                "permissionType": "page",
+                "title": "存储配置",
+                "icon": null,
+                "code": "SettingFileStorageIndex",
+                "hiddenFlag": true,
+                "sort": 0
+              },
+              {
+                "permissionType": "btn",
+                "title": "新增-存储配置",
+                "icon": null,
+                "code": "SettingFileStorageIndex_Add",
+                "hiddenFlag": true,
+                "sort": 1
+              },
+              {
+                "permissionType": "btn",
+                "title": "编辑-存储配置",
+                "icon": null,
+                "code": "SettingFileStorageIndex_Edit",
+                "hiddenFlag": true,
+                "sort": 2
+              },
+              {
+                "permissionType": "btn",
+                "title": "删除-存储配置",
+                "icon": null,
+                "code": "SettingFileStorageIndex_Delete",
+                "hiddenFlag": true,
+                "sort": 3
+              }
+            ]
+          },
+          {
+            "permissionType": "api",
+            "title": "上传容量配置",
+            "icon": null,
+            "code": "SettingFileUploadRam",
+            "hiddenFlag": false,
+            "sort": 2,
+            "children": [
+              {
+                "permissionType": "page",
+                "title": "上传容量配置",
+                "icon": null,
+                "code": "SettingFileUploadRamIndex",
+                "hiddenFlag": true,
+                "sort": 0
+              },
+              {
+                "permissionType": "btn",
+                "title": "保存-上传容量配置",
+                "icon": null,
+                "code": "SettingFileUploadRamIndex_Save",
+                "hiddenFlag": true,
+                "sort": 1
+              }
+            ]
+          },
+          {
+            "permissionType": "api",
+            "title": "上传详细配置",
+            "icon": null,
+            "code": "SettingFileUploadConfig",
+            "hiddenFlag": false,
+            "sort": 3,
+            "children": [
+              {
+                "permissionType": "page",
+                "title": "上传详细配置",
+                "icon": null,
+                "code": "SettingFileUploadConfigIndex",
+                "hiddenFlag": true,
+                "sort": 0
+              },
+              {
+                "permissionType": "btn",
+                "title": "新增-上传详细配置",
+                "icon": null,
+                "code": "SettingFileUploadConfigIndex_Add",
+                "hiddenFlag": true,
+                "sort": 1
+              },
+              {
+                "permissionType": "btn",
+                "title": "编辑-上传详细配置",
+                "icon": null,
+                "code": "SettingFileUploadConfigIndex_Edit",
+                "hiddenFlag": true,
+                "sort": 2
+              },
+              {
+                "permissionType": "btn",
+                "title": "删除-上传详细配置",
+                "icon": null,
+                "code": "SettingFileUploadConfigIndex_Delete",
+                "hiddenFlag": true,
+                "sort": 3
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "permissionType": "api",
+        "title": "事务管理",
+        "icon": null,
+        "code": "SettingInstance",
+        "hiddenFlag": false,
+        "sort": 5,
+        "children": [
+          {
+            "permissionType": "api",
+            "title": "事务列表",
+            "icon": null,
+            "code": "SettingInstanceManage",
+            "hiddenFlag": false,
+            "sort": 0,
+            "children": [
+              {
+                "permissionType": "page",
+                "title": "事务列表",
+                "icon": null,
+                "code": "SettingInstanceManageIndex",
+                "hiddenFlag": true,
+                "sort": 0
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "permissionType": "api",
+    "title": "业务中心",
+    "icon": "el-icon-notebook-1",
+    "code": "Business",
+    "hiddenFlag": false,
+    "sort": 1,
+    "children": [
+      {
+        "permissionType": "api",
+        "title": "用户管理",
+        "icon": null,
+        "code": "BusinessUser",
+        "hiddenFlag": false,
+        "sort": 0,
+        "children": [
+          {
+            "permissionType": "api",
+            "title": "账户管理",
+            "icon": null,
+            "code": "BusinessUserAccount",
+            "hiddenFlag": false,
+            "sort": 0,
+            "children": [
+              {
+                "permissionType": "page",
+                "title": "账户管理",
+                "icon": null,
+                "code": "BusinessUserAccountIndex",
+                "hiddenFlag": true,
+                "sort": 0
+              },
+              {
+                "permissionType": "page",
+                "title": "新建账户",
+                "icon": null,
+                "code": "BusinessUserAccountAdd",
+                "hiddenFlag": true,
+                "sort": 1
+              },
+              {
+                "permissionType": "page",
+                "title": "编辑账户",
+                "icon": null,
+                "code": "BusinessUserAccountEdit",
+                "hiddenFlag": true,
+                "sort": 2
+              },
+              {
+                "permissionType": "btn",
+                "title": "关联组织架构",
+                "icon": null,
+                "code": "BusinessUserAccountIndex_RelatedCompany",
+                "hiddenFlag": true,
+                "sort": 3
+              },
+              {
+                "permissionType": "btn",
+                "title": "修改密码",
+                "icon": null,
+                "code": "BusinessUserAccountIndex_ChangePassword",
+                "hiddenFlag": true,
+                "sort": 4
+              },
+              {
+                "permissionType": "btn",
+                "title": "启用/禁用",
+                "icon": null,
+                "code": "BusinessUserAccountIndex_UseStatus",
+                "hiddenFlag": true,
+                "sort": 5
+              },
+              {
+                "permissionType": "btn",
+                "title": "锁定/解锁",
+                "icon": null,
+                "code": "BusinessUserAccountIndex_Locked",
+                "hiddenFlag": true,
+                "sort": 6
+              },
+              {
+                "permissionType": "btn",
+                "title": "删除账户",
+                "icon": null,
+                "code": "BusinessUserAccountIndex_Delete",
+                "hiddenFlag": true,
+                "sort": 7
+              }
+            ]
+          },
+          {
+            "permissionType": "api",
+            "title": "角色管理",
+            "icon": null,
+            "code": "BusinessUserRole",
+            "hiddenFlag": false,
+            "sort": 1,
+            "children": [
+              {
+                "permissionType": "page",
+                "title": "角色管理",
+                "icon": null,
+                "code": "BusinessUserRoleIndex",
+                "hiddenFlag": true,
+                "sort": 0
+              },
+              {
+                "permissionType": "page",
+                "title": "分配用户",
+                "icon": null,
+                "code": "BusinessUserRoleAllotUser",
+                "hiddenFlag": true,
+                "sort": 1
+              },
+              {
+                "permissionType": "page",
+                "title": "分配数据权限",
+                "icon": null,
+                "code": "BusinessUserRoleAllotData",
+                "hiddenFlag": true,
+                "sort": 2
+              },
+              {
+                "permissionType": "page",
+                "title": "分配菜单权限",
+                "icon": null,
+                "code": "BusinessUserRoleAllotMenu",
+                "hiddenFlag": true,
+                "sort": 3
+              },
+              {
+                "permissionType": "btn",
+                "title": "创建角色",
+                "icon": null,
+                "code": "BusinessUserRoleIndex_AddRole",
+                "hiddenFlag": true,
+                "sort": 4
+              },
+              {
+                "permissionType": "btn",
+                "title": "编辑角色",
+                "icon": null,
+                "code": "BusinessUserRoleIndex_Edit",
+                "hiddenFlag": true,
+                "sort": 5
+              },
+              {
+                "permissionType": "btn",
+                "title": "启用/禁用",
+                "icon": null,
+                "code": "BusinessUserRoleIndex_Status",
+                "hiddenFlag": true,
+                "sort": 6
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "permissionType": "api",
+        "title": "渠道管理",
+        "icon": null,
+        "code": "BusinessChannel",
+        "hiddenFlag": false,
+        "sort": 1,
+        "children": [
+          {
+            "permissionType": "api",
+            "title": "网店管理",
+            "icon": null,
+            "code": "BusinessChannelOnline",
+            "hiddenFlag": false,
+            "sort": 0,
+            "children": [
+              {
+                "permissionType": "page",
+                "title": "网店管理",
+                "icon": null,
+                "code": "BusinessChannelOnlineIndex",
+                "hiddenFlag": true,
+                "sort": 0
+              },
+              {
+                "permissionType": "btn",
+                "title": "创建网店",
+                "icon": null,
+                "code": "BusinessChannelOnlineList_Add",
+                "hiddenFlag": true,
+                "sort": 1
+              },
+              {
+                "permissionType": "btn",
+                "title": "编辑网店",
+                "icon": null,
+                "code": "BusinessChannelOnlineList_Edit",
+                "hiddenFlag": true,
+                "sort": 2
+              },
+              {
+                "permissionType": "btn",
+                "title": "删除网店",
+                "icon": null,
+                "code": "BusinessChannelOnlineList_Delete",
+                "hiddenFlag": true,
+                "sort": 3
+              },
+              {
+                "permissionType": "btn",
+                "title": "启用/禁用",
+                "icon": null,
+                "code": "BusinessChannelOnlineList_Status",
+                "hiddenFlag": true,
+                "sort": 4
+              }
+            ]
+          },
+          {
+            "permissionType": "api",
+            "title": "门店管理",
+            "icon": null,
+            "code": "BusinessChannelPhysical",
+            "hiddenFlag": false,
+            "sort": 1,
+            "children": [
+              {
+                "permissionType": "page",
+                "title": "门店管理",
+                "icon": null,
+                "code": "BusinessChannelPhysicalIndex",
+                "hiddenFlag": true,
+                "sort": 0
+              },
+              {
+                "permissionType": "btn",
+                "title": "创建门店",
+                "icon": null,
+                "code": "BusinessChannelPhysicalList_Add",
+                "hiddenFlag": true,
+                "sort": 1
+              },
+              {
+                "permissionType": "btn",
+                "title": "编辑门店",
+                "icon": null,
+                "code": "BusinessChannelPhysicalList_Edit",
+                "hiddenFlag": true,
+                "sort": 2
+              },
+              {
+                "permissionType": "btn",
+                "title": "删除门店",
+                "icon": null,
+                "code": "BusinessChannelPhysicalList_Delete",
+                "hiddenFlag": true,
+                "sort": 3
+              },
+              {
+                "permissionType": "btn",
+                "title": "启用/禁用",
+                "icon": null,
+                "code": "BusinessChannelPhysicalList_Status",
+                "hiddenFlag": true,
+                "sort": 4
+              }
+            ]
+          },
+          {
+            "permissionType": "api",
+            "title": "仓储管理",
+            "icon": null,
+            "code": "BusinessChannelStorage",
+            "hiddenFlag": false,
+            "sort": 2,
+            "children": [
+              {
+                "permissionType": "page",
+                "title": "仓储管理",
+                "icon": null,
+                "code": "BusinessChannelStorageIndex",
+                "hiddenFlag": true,
+                "sort": 0
+              },
+              {
+                "permissionType": "btn",
+                "title": "创建仓储",
+                "icon": null,
+                "code": "BusinessChannelStorageIndex_Add",
+                "hiddenFlag": true,
+                "sort": 1
+              },
+              {
+                "permissionType": "btn",
+                "title": "编辑仓储",
+                "icon": null,
+                "code": "BusinessChannelStorageIndex_Edit",
+                "hiddenFlag": true,
+                "sort": 2
+              },
+              {
+                "permissionType": "btn",
+                "title": "启用/禁用",
+                "icon": null,
+                "code": "BusinessChannelStorageIndex_Status",
+                "hiddenFlag": true,
+                "sort": 3
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "permissionType": "api",
+        "title": "商品管理",
+        "icon": null,
+        "code": "BusinessGoods",
+        "hiddenFlag": false,
+        "sort": 2,
+        "children": [
+          {
+            "permissionType": "api",
+            "title": "商品管理",
+            "icon": null,
+            "code": "BusinessGoodsSpu",
+            "hiddenFlag": false,
+            "sort": 0,
+            "children": [
+              {
+                "permissionType": "tab",
+                "title": "普通商品管理",
+                "icon": null,
+                "code": "BusinessGoodsSpuOrdinaryIndex",
+                "hiddenFlag": true,
+                "sort": 0
+              },
+              {
+                "permissionType": "page",
+                "title": "普通商品详情",
+                "icon": null,
+                "code": "BusinessGoodsSpuOrdinaryView",
+                "hiddenFlag": true,
+                "sort": 1
+              },
+              {
+                "permissionType": "page",
+                "title": "添加普通商品",
+                "icon": null,
+                "code": "BusinessGoodsSpuOrdinaryAdd",
+                "hiddenFlag": true,
+                "sort": 2
+              },
+              {
+                "permissionType": "page",
+                "title": "编辑普通商品",
+                "icon": null,
+                "code": "BusinessGoodsSpuOrdinaryEdit",
+                "hiddenFlag": true,
+                "sort": 3
+              },
+              {
+                "permissionType": "btn",
+                "title": "普通商品-导入数据",
+                "icon": null,
+                "code": "BusinessGoodsSpuOrdinary_ImportData",
+                "hiddenFlag": true,
+                "sort": 4
+              },
+              {
+                "permissionType": "btn",
+                "title": "普通商品-下载模板",
+                "icon": null,
+                "code": "BusinessGoodsSpuOrdinary_DownloadTemplate",
+                "hiddenFlag": true,
+                "sort": 5
+              },
+              {
+                "permissionType": "btn",
+                "title": "普通商品-删除商品",
+                "icon": null,
+                "code": "BusinessGoodsSpuOrdinary_Delete",
+                "hiddenFlag": true,
+                "sort": 6
+              },
+              {
+                "permissionType": "btn",
+                "title": "普通商品-启用/禁用",
+                "icon": null,
+                "code": "BusinessGoodsSpuOrdinary_Status",
+                "hiddenFlag": true,
+                "sort": 7
+              },
+              {
+                "permissionType": "tab",
+                "title": "套餐商品管理",
+                "icon": null,
+                "code": "BusinessGoodsSpuPackageIndex",
+                "hiddenFlag": true,
+                "sort": 8
+              },
+              {
+                "permissionType": "page",
+                "title": "套餐商品详情",
+                "icon": null,
+                "code": "BusinessGoodsSpuPackageView",
+                "hiddenFlag": true,
+                "sort": 9
+              },
+              {
+                "permissionType": "page",
+                "title": "添加套餐商品",
+                "icon": null,
+                "code": "BusinessGoodsSpuPackageAdd",
+                "hiddenFlag": true,
+                "sort": 10
+              },
+              {
+                "permissionType": "page",
+                "title": "编辑套餐商品",
+                "icon": null,
+                "code": "BusinessGoodsSpuPackageEdit",
+                "hiddenFlag": true,
+                "sort": 11
+              },
+              {
+                "permissionType": "btn",
+                "title": "套餐商品-导入数据",
+                "icon": null,
+                "code": "BusinessGoodsSpuPackage_ImportData",
+                "hiddenFlag": true,
+                "sort": 12
+              },
+              {
+                "permissionType": "btn",
+                "title": "套餐商品-下载模板",
+                "icon": null,
+                "code": "BusinessGoodsSpuPackage_DownloadTemplate",
+                "hiddenFlag": true,
+                "sort": 13
+              },
+              {
+                "permissionType": "btn",
+                "title": "套餐商品-删除商品",
+                "icon": null,
+                "code": "BusinessGoodsSpuPackage_Delete",
+                "hiddenFlag": true,
+                "sort": 14
+              },
+              {
+                "permissionType": "btn",
+                "title": "套餐商品-启用/禁用",
+                "icon": null,
+                "code": "BusinessGoodsSpuPackage_Status",
+                "hiddenFlag": true,
+                "sort": 15
+              }
+            ]
+          },
+          {
+            "permissionType": "api",
+            "title": "SKU管理",
+            "icon": null,
+            "code": "BusinessGoodsSku",
+            "hiddenFlag": false,
+            "sort": 1,
+            "children": [
+              {
+                "permissionType": "tab",
+                "title": "普通SKU列表",
+                "icon": null,
+                "code": "BusinessGoodsSkuOrdinaryIndex",
+                "hiddenFlag": true,
+                "sort": 0
+              },
+              {
+                "permissionType": "page",
+                "title": "添加普通SKU",
+                "icon": null,
+                "code": "BusinessGoodsSkuOrdinaryAdd",
+                "hiddenFlag": true,
+                "sort": 1
+              },
+              {
+                "permissionType": "page",
+                "title": "编辑普通SKU",
+                "icon": null,
+                "code": "BusinessGoodsSkuOrdinaryEdit",
+                "hiddenFlag": true,
+                "sort": 2
+              },
+              {
+                "permissionType": "page",
+                "title": "查看普通SKU",
+                "icon": null,
+                "code": "BusinessGoodsSkuOrdinaryView",
+                "hiddenFlag": true,
+                "sort": 3
+              },
+              {
+                "permissionType": "btn",
+                "title": "普通SKU-导入数据",
+                "icon": null,
+                "code": "BusinessGoodsSkuOrdinary_ImportData",
+                "hiddenFlag": true,
+                "sort": 4
+              },
+              {
+                "permissionType": "btn",
+                "title": "普通SKU-下载模板",
+                "icon": null,
+                "code": "BusinessGoodsSkuOrdinary_DownloadTemplate",
+                "hiddenFlag": true,
+                "sort": 5
+              },
+              {
+                "permissionType": "btn",
+                "title": "普通SKU-删除SKU",
+                "icon": null,
+                "code": "BusinessGoodsSkuOrdinary_Delete",
+                "hiddenFlag": true,
+                "sort": 6
+              },
+              {
+                "permissionType": "btn",
+                "title": "普通SKU-启用/禁用",
+                "icon": null,
+                "code": "BusinessGoodsSkuOrdinary_Status",
+                "hiddenFlag": true,
+                "sort": 7
+              },
+              {
+                "permissionType": "btn",
+                "title": "普通SKU-提交",
+                "icon": null,
+                "code": "BusinessGoodsSkuOrdinary_Audit",
+                "hiddenFlag": true,
+                "sort": 8
+              },
+              {
+                "permissionType": "tab",
+                "title": "套餐SKU列表",
+                "icon": null,
+                "code": "BusinessGoodsSkuPackageIndex",
+                "hiddenFlag": true,
+                "sort": 9
+              },
+              {
+                "permissionType": "page",
+                "title": "添加套餐SKU",
+                "icon": null,
+                "code": "BusinessGoodsSkuPackageAdd",
+                "hiddenFlag": true,
+                "sort": 10
+              },
+              {
+                "permissionType": "page",
+                "title": "编辑套餐SKU",
+                "icon": null,
+                "code": "BusinessGoodsSkuPackageEdit",
+                "hiddenFlag": true,
+                "sort": 11
+              },
+              {
+                "permissionType": "page",
+                "title": "查看套餐SKU",
+                "icon": null,
+                "code": "BusinessGoodsSkuPackageView",
+                "hiddenFlag": true,
+                "sort": 12
+              },
+              {
+                "permissionType": "btn",
+                "title": "套餐SKU-导入数据",
+                "icon": null,
+                "code": "BusinessGoodsSkuPackage_ImportData",
+                "hiddenFlag": true,
+                "sort": 13
+              },
+              {
+                "permissionType": "btn",
+                "title": "套餐SKU-下载模板",
+                "icon": null,
+                "code": "BusinessGoodsSkuPackage_DownloadTemplate",
+                "hiddenFlag": true,
+                "sort": 14
+              },
+              {
+                "permissionType": "btn",
+                "title": "套餐SKU-删除SKU",
+                "icon": null,
+                "code": "BusinessGoodsSkuPackage_Delete",
+                "hiddenFlag": true,
+                "sort": 15
+              },
+              {
+                "permissionType": "btn",
+                "title": "套餐SKU-启用/禁用",
+                "icon": null,
+                "code": "BusinessGoodsSkuPackage_Status",
+                "hiddenFlag": true,
+                "sort": 16
+              },
+              {
+                "permissionType": "btn",
+                "title": "套餐SKU-提交",
+                "icon": null,
+                "code": "BusinessGoodsSkuPackage_Audit",
+                "hiddenFlag": true,
+                "sort": 17
+              },
+              {
+                "permissionType": "tab",
+                "title": "草稿SKU列表",
+                "icon": null,
+                "code": "BusinessGoodsSkuDraftIndex",
+                "hiddenFlag": true,
+                "sort": 18
+              },
+              {
+                "permissionType": "btn",
+                "title": "草稿SKU-提交",
+                "icon": null,
+                "code": "BusinessGoodsSkuDraft_Audit",
+                "hiddenFlag": true,
+                "sort": 19
+              }
+            ]
+          },
+          {
+            "permissionType": "api",
+            "title": "分类管理",
+            "icon": null,
+            "code": "BusinessGoodsClassify",
+            "hiddenFlag": false,
+            "sort": 2,
+            "children": [
+              {
+                "permissionType": "page",
+                "title": "分类管理",
+                "icon": null,
+                "code": "BusinessGoodsClassifyIndex",
+                "hiddenFlag": true,
+                "sort": 0
+              },
+              {
+                "permissionType": "btn",
+                "title": "添加分类",
+                "icon": null,
+                "code": "BusinessGoodsClassify_Add",
+                "hiddenFlag": true,
+                "sort": 1
+              },
+              {
+                "permissionType": "btn",
+                "title": "编辑分类",
+                "icon": null,
+                "code": "BusinessGoodsClassify_Edit",
+                "hiddenFlag": true,
+                "sort": 2
+              },
+              {
+                "permissionType": "btn",
+                "title": "导入数据",
+                "icon": null,
+                "code": "BusinessGoodsClassify_ImportData",
+                "hiddenFlag": true,
+                "sort": 3
+              },
+              {
+                "permissionType": "btn",
+                "title": "下载模板",
+                "icon": null,
+                "code": "BusinessGoodsClassify_DownloadTemplate",
+                "hiddenFlag": true,
+                "sort": 4
+              },
+              {
+                "permissionType": "btn",
+                "title": "删除分类",
+                "icon": null,
+                "code": "BusinessGoodsClassify_Delete",
+                "hiddenFlag": true,
+                "sort": 5
+              },
+              {
+                "permissionType": "btn",
+                "title": "启用/禁用",
+                "icon": null,
+                "code": "BusinessGoodsClassify_Status",
+                "hiddenFlag": true,
+                "sort": 6
+              }
+            ]
+          },
+          {
+            "permissionType": "api",
+            "title": "品牌管理",
+            "icon": null,
+            "code": "BusinessGoodsBrand",
+            "hiddenFlag": false,
+            "sort": 3,
+            "children": [
+              {
+                "permissionType": "page",
+                "title": "品牌管理",
+                "icon": null,
+                "code": "BusinessGoodsBrandIndex",
+                "hiddenFlag": true,
+                "sort": 0
+              },
+              {
+                "permissionType": "btn",
+                "title": "创建品牌",
+                "icon": null,
+                "code": "BusinessGoodsBrandIndex_Add",
+                "hiddenFlag": true,
+                "sort": 1
+              },
+              {
+                "permissionType": "btn",
+                "title": "编辑品牌",
+                "icon": null,
+                "code": "BusinessGoodsBrandIndex_Edit",
+                "hiddenFlag": true,
+                "sort": 2
+              },
+              {
+                "permissionType": "btn",
+                "title": "删除品牌",
+                "icon": null,
+                "code": "BusinessGoodsBrandIndex_Delete",
+                "hiddenFlag": true,
+                "sort": 3
+              },
+              {
+                "permissionType": "btn",
+                "title": "启用/禁用",
+                "icon": null,
+                "code": "BusinessGoodsBrandIndex_Status",
+                "hiddenFlag": true,
+                "sort": 4
+              }
+            ]
+          },
+          {
+            "permissionType": "api",
+            "title": "素材管理",
+            "icon": null,
+            "code": "BusinessGoodsMaterial",
+            "hiddenFlag": false,
+            "sort": 4,
+            "children": [
+              {
+                "permissionType": "page",
+                "title": "素材管理",
+                "icon": null,
+                "code": "BusinessGoodsMaterialIndex",
+                "hiddenFlag": true,
+                "sort": 0
+              },
+              {
+                "permissionType": "btn",
+                "title": "创建素材",
+                "icon": null,
+                "code": "BusinessGoodsMaterialIndex_Add",
+                "hiddenFlag": true,
+                "sort": 1
+              },
+              {
+                "permissionType": "btn",
+                "title": "编辑素材",
+                "icon": null,
+                "code": "BusinessGoodsMaterialIndex_Edit",
+                "hiddenFlag": true,
+                "sort": 2
+              },
+              {
+                "permissionType": "btn",
+                "title": "删除素材",
+                "icon": null,
+                "code": "BusinessGoodsMaterialIndex_Delete",
+                "hiddenFlag": true,
+                "sort": 3
+              }
+            ]
+          },
+          {
+            "permissionType": "api",
+            "title": "价格项管理",
+            "icon": null,
+            "code": "BusinessGoodsPriceItem",
+            "hiddenFlag": false,
+            "sort": 5,
+            "children": [
+              {
+                "permissionType": "page",
+                "title": "价格项管理",
+                "icon": null,
+                "code": "BusinessGoodsPriceItemIndex",
+                "hiddenFlag": true,
+                "sort": 0
+              },
+              {
+                "permissionType": "btn",
+                "title": "编辑价格项",
+                "icon": null,
+                "code": "BusinessGoodsPriceItemIndex_Edit",
+                "hiddenFlag": true,
+                "sort": 1
+              },
+              {
+                "permissionType": "btn",
+                "title": "启用/禁用",
+                "icon": null,
+                "code": "BusinessGoodsPriceItemIndex_Status",
+                "hiddenFlag": true,
+                "sort": 2
+              }
+            ]
+          },
+          {
+            "permissionType": "api",
+            "title": "商品审核",
+            "icon": null,
+            "code": "BusinessGoodsAudit",
+            "hiddenFlag": false,
+            "sort": 6,
+            "children": [
+              {
+                "permissionType": "tab",
+                "title": "商品SKU审核",
+                "icon": null,
+                "code": "BusinessGoodsAuditSkuOrdinaryIndex",
+                "hiddenFlag": true,
+                "sort": 0
+              },
+              {
+                "permissionType": "page",
+                "title": "查看商品SKU审核详情",
+                "icon": null,
+                "code": "BusinessGoodsAuditSkuOrdinaryView",
+                "hiddenFlag": true,
+                "sort": 1
+              },
+              {
+                "permissionType": "page",
+                "title": "审核商品SKU审核详情",
+                "icon": null,
+                "code": "BusinessGoodsAuditSkuOrdinaryAudit",
+                "hiddenFlag": true,
+                "sort": 2
+              },
+              {
+                "permissionType": "btn",
+                "title": "商品SKU审核-通过",
+                "icon": null,
+                "code": "BusinessGoodsAuditSkuOrdinary_Pass",
+                "hiddenFlag": true,
+                "sort": 3
+              },
+              {
+                "permissionType": "btn",
+                "title": "商品SKU审核-驳回",
+                "icon": null,
+                "code": "BusinessGoodsAuditSkuOrdinary_reject",
+                "hiddenFlag": true,
+                "sort": 4
+              },
+              {
+                "permissionType": "tab",
+                "title": "套餐SKU审核",
+                "icon": null,
+                "code": "BusinessGoodsAuditSkuPackageIndex",
+                "hiddenFlag": true,
+                "sort": 5
+              },
+              {
+                "permissionType": "page",
+                "title": "查看套餐SKU审核详情",
+                "icon": null,
+                "code": "BusinessGoodsAuditSkuPackageView",
+                "hiddenFlag": true,
+                "sort": 6
+              },
+              {
+                "permissionType": "page",
+                "title": "审核套餐SKU审核详情",
+                "icon": null,
+                "code": "BusinessGoodsAuditSkuPackageAudit",
+                "hiddenFlag": true,
+                "sort": 7
+              },
+              {
+                "permissionType": "btn",
+                "title": "套餐SKU审核-通过",
+                "icon": null,
+                "code": "BusinessGoodsAuditSkuPackage_Pass",
+                "hiddenFlag": true,
+                "sort": 8
+              },
+              {
+                "permissionType": "btn",
+                "title": "套餐SKU审核-驳回",
+                "icon": null,
+                "code": "BusinessGoodsAuditSkuPackage_reject",
+                "hiddenFlag": true,
+                "sort": 9
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "permissionType": "api",
+        "title": "库存管理",
+        "icon": null,
+        "code": "BusinessStock",
+        "hiddenFlag": false,
+        "sort": 3,
+        "children": [
+          {
+            "permissionType": "api",
+            "title": "库存查询",
+            "icon": null,
+            "code": "BusinessStockSearch",
+            "hiddenFlag": false,
+            "sort": 0,
+            "children": [
+              {
+                "permissionType": "page",
+                "title": "库存查询",
+                "icon": null,
+                "code": "BusinessStockSearchIndex",
+                "hiddenFlag": true,
+                "sort": 0
+              }
+            ]
+          },
+          {
+            "permissionType": "api",
+            "title": "库存变动查询",
+            "icon": null,
+            "code": "BusinessStockChange",
+            "hiddenFlag": false,
+            "sort": 1,
+            "children": [
+              {
+                "permissionType": "page",
+                "title": "库存变动查询",
+                "icon": null,
+                "code": "BusinessStockChangeIndex",
+                "hiddenFlag": true,
+                "sort": 0
+              }
+            ]
+          },
+          {
+            "permissionType": "api",
+            "title": "入库管理",
+            "icon": null,
+            "code": "BusinessStockEntry",
+            "hiddenFlag": false,
+            "sort": 2,
+            "children": [
+              {
+                "permissionType": "tab",
+                "title": "入库通知单",
+                "icon": null,
+                "code": "BusinessStockEntryInformIndex",
+                "hiddenFlag": true,
+                "sort": 0
+              },
+              {
+                "permissionType": "page",
+                "title": "入库通知单详情",
+                "icon": null,
+                "code": "BusinessStockEntryInformView",
+                "hiddenFlag": true,
+                "sort": 1
+              },
+              {
+                "permissionType": "tab",
+                "title": "入库结果单",
+                "icon": null,
+                "code": "BusinessStockEntryResultIndex",
+                "hiddenFlag": true,
+                "sort": 2
+              },
+              {
+                "permissionType": "page",
+                "title": "入库结果单详情",
+                "icon": null,
+                "code": "BusinessStockEntryResultView",
+                "hiddenFlag": true,
+                "sort": 3
+              }
+            ]
+          },
+          {
+            "permissionType": "api",
+            "title": "出库管理",
+            "icon": null,
+            "code": "BusinessStockDelivery",
+            "hiddenFlag": false,
+            "sort": 3,
+            "children": [
+              {
+                "permissionType": "tab",
+                "title": "出库通知单",
+                "icon": null,
+                "code": "BusinessStockDeliveryInformIndex",
+                "hiddenFlag": true,
+                "sort": 0
+              },
+              {
+                "permissionType": "page",
+                "title": "出库通知单详情",
+                "icon": null,
+                "code": "BusinessStockDeliveryInformView",
+                "hiddenFlag": true,
+                "sort": 1
+              },
+              {
+                "permissionType": "tab",
+                "title": "出库结果单",
+                "icon": null,
+                "code": "BusinessStockDeliveryResultIndex",
+                "hiddenFlag": true,
+                "sort": 2
+              },
+              {
+                "permissionType": "page",
+                "title": "出库结果单详情",
+                "icon": null,
+                "code": "BusinessStockDeliveryResultView",
+                "hiddenFlag": true,
+                "sort": 3
+              }
+            ]
+          },
+          {
+            "permissionType": "api",
+            "title": "数据同步管理",
+            "icon": null,
+            "code": "BusinessStockSynchronization",
+            "hiddenFlag": false,
+            "sort": 4,
+            "children": [
+              {
+                "permissionType": "page",
+                "title": "数据同步管理",
+                "icon": null,
+                "code": "BusinessStockSynchronizationIndex",
+                "hiddenFlag": true,
+                "sort": 0
+              },
+              {
+                "permissionType": "page",
+                "title": "新建数据同步",
+                "icon": null,
+                "code": "BusinessStockSynchronizationAdd",
+                "hiddenFlag": true,
+                "sort": 1
+              },
+              {
+                "permissionType": "btn",
+                "title": "审核通过",
+                "icon": null,
+                "code": "BusinessStockSynchronizationIndex_Pass",
+                "hiddenFlag": true,
+                "sort": 2
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "permissionType": "api",
+        "title": "普通订单",
+        "icon": null,
+        "code": "BusinessOrder",
+        "hiddenFlag": false,
+        "sort": 4,
+        "children": [
+          {
+            "permissionType": "api",
+            "title": "三方销售单",
+            "icon": null,
+            "code": "BusinessOrderThird",
+            "hiddenFlag": false,
+            "sort": 0,
+            "children": [
+              {
+                "permissionType": "page",
+                "title": "三方销售单",
+                "icon": null,
+                "code": "BusinessOrderThirdIndex",
+                "hiddenFlag": true,
+                "sort": 0
+              },
+              {
+                "permissionType": "page",
+                "title": "三方单录入",
+                "icon": null,
+                "code": "BusinessOrderThirdAdd",
+                "hiddenFlag": true,
+                "sort": 1
+              },
+              {
+                "permissionType": "page",
+                "title": "三方销售单详情",
+                "icon": null,
+                "code": "BusinessOrderThirdView",
+                "hiddenFlag": true,
+                "sort": 2
+              }
+            ]
+          },
+          {
+            "permissionType": "api",
+            "title": "内部销售单",
+            "icon": null,
+            "code": "BusinessOrderInternal",
+            "hiddenFlag": false,
+            "sort": 1,
+            "children": [
+              {
+                "permissionType": "page",
+                "title": "内部销售单",
+                "icon": null,
+                "code": "BusinessOrderInternalIndex",
+                "hiddenFlag": true,
+                "sort": 0
+              },
+              {
+                "permissionType": "page",
+                "title": "内部销售单详情",
+                "icon": null,
+                "code": "BusinessOrderInternalView",
+                "hiddenFlag": true,
+                "sort": 1
+              },
+              {
+                "permissionType": "page",
+                "title": "销售单录入",
+                "icon": null,
+                "code": "BusinessOrderInternalAdd",
+                "hiddenFlag": true,
+                "sort": 2
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "permissionType": "api",
+        "title": "售后管理",
+        "icon": null,
+        "code": "BusinessAfter",
+        "hiddenFlag": false,
+        "sort": 5,
+        "children": [
+          {
+            "permissionType": "api",
+            "title": "三方售后单",
+            "icon": null,
+            "code": "BusinessAfterThird",
+            "hiddenFlag": false,
+            "sort": 0,
+            "children": [
+              {
+                "permissionType": "tab",
+                "title": "三方仅退款",
+                "icon": null,
+                "code": "BusinessAfterThirdRefundIndex",
+                "hiddenFlag": true,
+                "sort": 0
+              },
+              {
+                "permissionType": "page",
+                "title": "三方仅退款详情",
+                "icon": null,
+                "code": "BusinessAfterThirdRefundView",
+                "hiddenFlag": true,
+                "sort": 1
+              },
+              {
+                "permissionType": "page",
+                "title": "新增三方仅退款单",
+                "icon": null,
+                "code": "BusinessAfterThirdRefundAdd",
+                "hiddenFlag": true,
+                "sort": 2
+              },
+              {
+                "permissionType": "tab",
+                "title": "三方退货退款",
+                "icon": null,
+                "code": "BusinessAfterThirdReturnIndex",
+                "hiddenFlag": true,
+                "sort": 3
+              },
+              {
+                "permissionType": "page",
+                "title": "三方退货退款详情",
+                "icon": null,
+                "code": "BusinessAfterThirdReturnView",
+                "hiddenFlag": true,
+                "sort": 4
+              },
+              {
+                "permissionType": "page",
+                "title": "新增三方退货退款单",
+                "icon": null,
+                "code": "BusinessAfterThirdReturnAdd",
+                "hiddenFlag": true,
+                "sort": 5
+              }
+            ]
+          },
+          {
+            "permissionType": "api",
+            "title": "内部售后单",
+            "icon": null,
+            "code": "BusinessAfterInternal",
+            "hiddenFlag": false,
+            "sort": 1,
+            "children": [
+              {
+                "permissionType": "tab",
+                "title": "内部仅退款",
+                "icon": null,
+                "code": "BusinessAfterInternalRefundIndex",
+                "hiddenFlag": true,
+                "sort": 0
+              },
+              {
+                "permissionType": "page",
+                "title": "新增内部仅退款单",
+                "icon": null,
+                "code": "BusinessAfterInternalRefundAdd",
+                "hiddenFlag": true,
+                "sort": 1
+              },
+              {
+                "permissionType": "page",
+                "title": "内部仅退款单详情",
+                "icon": null,
+                "code": "BusinessAfterInternalRefundView",
+                "hiddenFlag": true,
+                "sort": 2
+              },
+              {
+                "permissionType": "tab",
+                "title": "内部退货退款",
+                "icon": null,
+                "code": "BusinessAfterInternalReturnIndex",
+                "hiddenFlag": true,
+                "sort": 3
+              },
+              {
+                "permissionType": "page",
+                "title": "新增内部退货退款单",
+                "icon": null,
+                "code": "BusinessAfterInternalReturnAdd",
+                "hiddenFlag": true,
+                "sort": 4
+              },
+              {
+                "permissionType": "page",
+                "title": "内部退货退款单详情",
+                "icon": null,
+                "code": "BusinessAfterInternalReturnView",
+                "hiddenFlag": true,
+                "sort": 5
+              },
+              {
+                "permissionType": "page",
+                "title": "新增内部换货单",
+                "icon": null,
+                "code": "BusinessAfterInternalExchangeAdd",
+                "hiddenFlag": true,
+                "sort": 6
+              },
+              {
+                "permissionType": "page",
+                "title": "内部换货单详情",
+                "icon": null,
+                "code": "BusinessAfterInternalExchangeView",
+                "hiddenFlag": true,
+                "sort": 7
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "permissionType": "api",
+        "title": "标签管理",
+        "icon": null,
+        "code": "BusinessLabel",
+        "hiddenFlag": false,
+        "sort": 6,
+        "children": [
+          {
+            "permissionType": "api",
+            "title": "系统标签",
+            "icon": null,
+            "code": "BusinessLabelSys",
+            "hiddenFlag": false,
+            "sort": 0,
+            "children": [
+              {
+                "permissionType": "page",
+                "title": "系统标签",
+                "icon": null,
+                "code": "BusinessLabelSysIndex",
+                "hiddenFlag": true,
+                "sort": 0
+              },
+              {
+                "permissionType": "btn",
+                "title": "启用/禁用",
+                "icon": null,
+                "code": "BusinessLabelSysIndex_Status",
+                "hiddenFlag": true,
+                "sort": 1
+              }
+            ]
+          },
+          {
+            "permissionType": "api",
+            "title": "人工标签",
+            "icon": null,
+            "code": "BusinessLabelHand",
+            "hiddenFlag": false,
+            "sort": 1,
+            "children": [
+              {
+                "permissionType": "page",
+                "title": "人工标签",
+                "icon": null,
+                "code": "BusinessLabelHandIndex",
+                "hiddenFlag": true,
+                "sort": 0
+              },
+              {
+                "permissionType": "btn",
+                "title": "新增",
+                "icon": null,
+                "code": "BusinessLabelHandIndex_Add",
+                "hiddenFlag": true,
+                "sort": 1
+              },
+              {
+                "permissionType": "btn",
+                "title": "编辑",
+                "icon": null,
+                "code": "BusinessLabelHandIndex_Edit",
+                "hiddenFlag": true,
+                "sort": 2
+              },
+              {
+                "permissionType": "btn",
+                "title": "启用/禁用",
+                "icon": null,
+                "code": "BusinessLabelHandIndex_Status",
+                "hiddenFlag": true,
+                "sort": 3
+              },
+              {
+                "permissionType": "btn",
+                "title": "删除",
+                "icon": null,
+                "code": "BusinessLabelHandIndex_Delete",
+                "hiddenFlag": true,
+                "sort": 4
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

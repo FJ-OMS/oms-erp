@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.skyer.order.infra.mapper.AfterSaleHeaderMapper">
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap id="BaseResultMap" type="org.skyer.order.domain.entity.AfterSaleHeader">
+        <result column="id" property="id" jdbcType="DECIMAL"/>
+        <result column="inner_order_no" property="innerOrderNo" jdbcType="VARCHAR"/>
+        <result column="outer_order_no" property="outerOrderNo" jdbcType="VARCHAR"/>
+        <result column="outer_refund_no" property="outerRefundNo" jdbcType="VARCHAR"/>
+        <result column="inner_refund_no" property="innerRefundNo" jdbcType="VARCHAR"/>
+        <result column="type" property="type" jdbcType="VARCHAR"/>
+        <result column="endorse_status" property="endorseStatus" jdbcType="VARCHAR"/>
+        <result column="channel" property="channel" jdbcType="VARCHAR"/>
+        <result column="store_id" property="storeId" jdbcType="DECIMAL"/>
+        <result column="store_name" property="storeName" jdbcType="VARCHAR"/>
+        <result column="store_code" property="storeCode" jdbcType="VARCHAR"/>
+        <result column="buyer_nick" property="buyerNick" jdbcType="VARCHAR"/>
+        <result column="action_type" property="actionType" jdbcType="VARCHAR"/>
+        <result column="refund_type" property="refundType" jdbcType="VARCHAR"/>
+        <result column="out_return_time" property="outReturnTime" jdbcType="DATE"/>
+        <result column="reason" property="reason" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="VARCHAR"/>
+        <result column="pay_type" property="payType" jdbcType="VARCHAR"/>
+        <result column="receiver_name" property="receiverName" jdbcType="VARCHAR"/>
+        <result column="goods_quantity" property="goodsQuantity" jdbcType="DECIMAL"/>
+        <result column="refund_amount" property="refundAmount" jdbcType="DECIMAL"/>
+        <result column="tags" property="tags" jdbcType="VARCHAR"/>
+        <result column="accessory" property="accessory" jdbcType="VARCHAR"/>
+        <result column="complete_date" property="completeDate" jdbcType="DATE"/>
+        <result column="endorse_refuse_reason" property="endorseRefuseReason" jdbcType="VARCHAR"/>
+        <result column="delete_flag" property="deleteFlag" jdbcType="DECIMAL"/>
+        <result column="creation_date" property="creationDate" jdbcType="DATE"/>
+        <result column="last_update_date" property="lastUpdateDate" jdbcType="DATE"/>
+        <result column="created_by" property="createdBy" jdbcType="DECIMAL"/>
+        <result column="last_updated_by" property="lastUpdatedBy" jdbcType="DECIMAL"/>
+        <result column="object_version_number" property="objectVersionNumber" jdbcType="DECIMAL"/>
+        <result column="receiving_warehouse_id" property="receivingWarehouseId" jdbcType="DECIMAL"/>
+        <result column="receiving_warehouse_name" property="receivingWarehouseName" jdbcType="VARCHAR"/>
+        <result column="receiving_warehouse_status" property="receivingWarehouseStatus" jdbcType="VARCHAR"/>
+    </resultMap>
+    <select id="refundPage" resultType="org.skyer.order.api.vo.RefundPageVO">
+        select
+         sash.id id,
+         sash.inner_order_no     innerOrderNo,
+         sash.outer_order_no           outerOrderNo,
+         sash.outer_refund_no           outerRefundNo,
+         sash.inner_refund_no           innerRefundNo,
+         sash.type           type,
+         sash.status           status,
+         sash.action_type           actionType,
+         sash.reason           reason,
+         sash.buyer_remarks           buyerRemarks,
+         sash.service_remarks           serviceRemarks,
+         sash.goods_quantity           goodsQuantity,
+         sash.refund_amount           refundAmount,
+         sash.pay_type         payType,
+         sash.receiving_warehouse_name     receivingWarehouseName,
+         sash.buyer_nick           buyerNick,
+         sash.receiver_name           receiverName,
+         sash.mobile           mobile,
+         sash.address           address,
+         sash.channel           channel,
+         sash.store_id           storeId,
+         sash.store_name           storeName,
+         sash.out_return_time           outReturnTime,
+         sash.creation_date           creationDate,
+         sash.complete_date           completeDate,
+         sash.origin_order_id originOrderId,
+         sash.order_refund_type           orderRefundType,
+         sash.refund_type   refundType
+        from
+            sord_after_sale_header sash
+        <where>
+            sash.type =#{refundPageDTO.type}
+            <if test="refundPageDTO.orderNo != null and refundPageDTO.orderNo != ''">
+                and (sash.inner_order_no  = #{refundPageDTO.orderNo} or sash.inner_refund_no  = #{refundPageDTO.orderNo}   or sash.outer_order_no  = #{refundPageDTO.orderNo}  or sash.outer_refund_no  = #{refundPageDTO.orderNo})
+            </if>
+            <if test="refundPageDTO.innerRefundNo != null and refundPageDTO.innerRefundNo != ''">
+                and sash.inner_refund_no =#{refundPageDTO.innerRefundNo}
+            </if>
+            <if test="refundPageDTO.actionType != null and refundPageDTO.actionType != ''">
+                and sash.action_type =#{refundPageDTO.actionType}
+            </if>
+            <if test="refundPageDTO.buyerNick != null and refundPageDTO.buyerNick != ''">
+                and sash.buyer_nick =#{refundPageDTO.buyerNick}
+            </if>
+            <if test="refundPageDTO.channelTypeCode != null and refundPageDTO.channelTypeCode != ''">
+                and sash.channel =#{refundPageDTO.channelTypeCode}
+            </if>
+            <if test="refundPageDTO.storeIdList != null and refundPageDTO.storeIdList.size() > 0">
+                and sash.store_id in
+                <foreach collection="refundPageDTO.storeIdList" item="storeId" open="(" separator="," close=")">
+                    #{storeId}
+                </foreach>
+            </if>
+            <if test="refundPageDTO.receiver != null and refundPageDTO.receiver != ''">
+                and sash.receiver_name LIKE CONCAT(#{refundPageDTO.receiver}, '%')
+            </if>
+            <if test="refundPageDTO.status != null and refundPageDTO.status != ''">
+                and sash.status =#{refundPageDTO.status}
+            </if>
+            <if test="refundPageDTO.startTime != null">
+                AND DATE_FORMAT(sash.out_return_time,'%Y-%m-%d %H:%i:%S') &gt;=  DATE_FORMAT(#{refundPageDTO.startTime},'%Y-%m-%d %H:%i:%S')
+            </if>
+            <if test="refundPageDTO.endTime != null">
+                AND DATE_FORMAT(sash.out_return_time,'%Y-%m-%d %H:%i:%S') &lt;= DATE_FORMAT(#{refundPageDTO.endTime},'%Y-%m-%d %H:%i:%S')
+            </if>
+            order by sash.creation_date desc
+        </where>
+    </select>
+
+    <select id="refundAuditPage" resultType="org.skyer.order.api.vo.RefundPageVO">
+        select
+        sash.id id,
+        sash.inner_order_no     innerOrderNo,
+        sash.outer_order_no           outerOrderNo,
+        sash.outer_refund_no           outerRefundNo,
+        sash.inner_refund_no           innerRefundNo,
+        sash.type           type,
+        sash.status           status,
+        sash.action_type           actionType,
+        sash.reason           reason,
+        sash.buyer_remarks           buyerRemarks,
+        sash.service_remarks           serviceRemarks,
+        sash.goods_quantity           goodsQuantity,
+        sash.refund_amount           refundAmount,
+        sash.pay_type         payType,
+        sash.receiving_warehouse_name     receivingWarehouseName,
+        sash.buyer_nick           buyerNick,
+        sash.receiver_name           receiverName,
+        sash.mobile           mobile,
+        sash.address           address,
+        sash.channel           channel,
+        sash.store_id           storeId,
+        sash.store_name           storeName,
+        sash.out_return_time           outReturnTime,
+        sash.creation_date           creationDate,
+        sash.complete_date           completeDate,
+        sash.origin_order_id originOrderId,
+        sash.refund_type   refundType,
+        sash.order_refund_type           orderRefundType,
+        sash.endorse_status    endorseStatus
+        from
+        sord_after_sale_header sash
+        left JOIN sord_after_sale_logistics sasl on sasl.inner_refund_no = sash.inner_refund_no
+        <where>
+            sash.exception_status = "0"
+            <if test="refundPageDTO.type != null and refundPageDTO.type != ''">
+                and sash.type =#{refundPageDTO.type}
+            </if>
+            <if test="refundPageDTO.actionType != null and refundPageDTO.actionType != ''">
+                and sash.action_type =#{refundPageDTO.actionType}
+            </if>
+            <if test="refundPageDTO.logisticsNo != null and refundPageDTO.logisticsNo != ''">
+                and sasl.logistics_no =#{refundPageDTO.logisticsNo}
+            </if>
+            <if test="refundPageDTO.logisticsCompanyId != null ">
+                and sasl.logistics_company_id =#{refundPageDTO.logisticsCompanyId}
+            </if>
+            <if test="refundPageDTO.endorseStatusList != null and refundPageDTO.endorseStatusList.size() > 0">
+                and sash.endorse_status in
+                <foreach collection="refundPageDTO.endorseStatusList" item="itemStr" open="(" separator="," close=")">
+                    #{itemStr}
+                </foreach>
+            </if>
+            <if test="refundPageDTO.orderNo != null and refundPageDTO.orderNo != ''">
+                and (sash.inner_order_no  = #{refundPageDTO.orderNo} or sash.inner_refund_no  = #{refundPageDTO.orderNo}   or sash.outer_order_no  = #{refundPageDTO.orderNo}  or sash.outer_refund_no  = #{refundPageDTO.orderNo})
+            </if>
+            <if test="refundPageDTO.orderRefundType != null and refundPageDTO.orderRefundType != ''">
+                and sash.order_refund_type =#{refundPageDTO.orderRefundType}
+            </if>
+            <if test="refundPageDTO.buyerNick != null and refundPageDTO.buyerNick != ''">
+                and sash.buyer_nick =#{refundPageDTO.buyerNick}
+            </if>
+            <if test="refundPageDTO.status != null and refundPageDTO.status != ''">
+                and sash.status =#{refundPageDTO.status}
+            </if>
+            <if test="refundPageDTO.payType != null and refundPageDTO.payType != ''">
+                and sash.pay_type =#{refundPageDTO.payType}
+            </if>
+            <if test="refundPageDTO.channelTypeCode != null and refundPageDTO.channelTypeCode != ''">
+                and sash.channel =#{refundPageDTO.channelTypeCode}
+            </if>
+            <if test="refundPageDTO.storeIdList != null and refundPageDTO.storeIdList.size() > 0">
+                and sash.store_id in
+                <foreach collection="refundPageDTO.storeIdList" item="storeId" open="(" separator="," close=")">
+                    #{storeId}
+                </foreach>
+            </if>
+            <if test="refundPageDTO.receiver != null and refundPageDTO.receiver != ''">
+                and sash.receiver_name LIKE CONCAT(#{refundPageDTO.receiver}, '%')
+            </if>
+            <if test="refundPageDTO.status != null and refundPageDTO.status != ''">
+                and sash.status =#{refundPageDTO.status}
+            </if>
+            <if test="refundPageDTO.startTime != null">
+                AND DATE_FORMAT(sash.out_return_time,'%Y-%m-%d %H:%i:%S') &gt;=  DATE_FORMAT(#{refundPageDTO.startTime},'%Y-%m-%d %H:%i:%S')
+            </if>
+            <if test="refundPageDTO.endTime != null">
+                AND DATE_FORMAT(sash.out_return_time,'%Y-%m-%d %H:%i:%S') &lt;= DATE_FORMAT(#{refundPageDTO.endTime},'%Y-%m-%d %H:%i:%S')
+            </if>
+        </where>
+        GROUP BY sash.id
+        ORDER by sash.creation_date desc
+    </select>
+
+
+    <select id="refundOnlyPage" resultType="org.skyer.order.api.vo.RefundOnlyPageVO">
+
+        select
+        sash.id id,
+        sash.origin_order_id originOrderId,
+        sash.inner_order_no     innerOrderNo,
+        sash.outer_order_no           outerOrderNo,
+        sash.outer_refund_no           outerRefundNo,
+        sash.inner_refund_no           innerRefundNo,
+        sash.type           type,
+        sash.status           status,
+        sash.action_type           actionType,
+        sash.reason           reason,
+        sash.buyer_remarks           buyerRemarks,
+        sash.service_remarks           serviceRemarks,
+        sash.goods_quantity           goodsQuantity,
+        sash.refund_amount           refundAmount,
+        sash.pay_type         payType,
+        sash.receiving_warehouse_name     receivingWarehouseName,
+        sash.buyer_nick           buyerNick,
+        sash.receiver_name           receiverName,
+        sash.channel           channel,
+        sash.store_id           storeId,
+        sash.store_name           storeName,
+        sash.out_return_time           outReturnTime,
+        sash.creation_date           creationDate,
+        sash.complete_date           completeDate,
+        sash.order_refund_type           orderRefundType,
+        sash.refund_type   refundType
+        from
+        sord_after_sale_header sash
+        <where>
+            sash.type = '1'
+            <if test="param.orderNo != null and param.orderNo != ''">
+                and (sash.inner_order_no  = #{param.orderNo} or sash.inner_refund_no  = #{param.orderNo}   or sash.outer_order_no  = #{param.orderNo}  or sash.outer_refund_no  = #{param.orderNo})
+            </if>
+            <if test="param.actionType != null and param.actionType != ''">
+                and sash.action_type =#{param.actionType}
+            </if>
+            <if test="param.buyerNick != null and param.buyerNick != ''">
+                and sash.buyer_nick =#{param.buyerNick}
+            </if>
+            <if test="param.orderRefundType != null and param.orderRefundType != ''">
+                and sash.order_refund_type =#{param.orderRefundType}
+            </if>
+            <if test="param.channelTypeCode != null and param.channelTypeCode != ''">
+                <if test="param.storeIdList == null">
+                    and sash.channel =#{param.channelTypeCode}
+                </if>
+            </if>
+            <if test="param.storeIdList != null and param.storeIdList.size() > 0">
+                and sash.store_id in
+                <foreach collection="param.storeIdList" item="storeId" open="(" separator="," close=")">
+                    #{storeId}
+                </foreach>
+            </if>
+            <if test="param.status != null and param.status != ''">
+                and sash.status =#{param.status}
+            </if>
+            <if test="param.outReturnTimeStart != null">
+                AND DATE_FORMAT(sash.out_return_time,'%Y-%m-%d %H:%i:%S') &gt;=  DATE_FORMAT(#{param.outReturnTimeStart},'%Y-%m-%d %H:%i:%S')
+            </if>
+            <if test="param.outReturnTimeEnd != null">
+                AND DATE_FORMAT(sash.out_return_time,'%Y-%m-%d %H:%i:%S') &lt;= DATE_FORMAT(#{param.outReturnTimeEnd},'%Y-%m-%d %H:%i:%S')
+            </if>
+            order by sash.creation_date desc
+        </where>
+
+    </select>
+    <select id="getDetail" resultType="org.skyer.order.api.vo.AfterSaleDetailVO">
+        SELECT
+            '售后单' order_type,t1.refund_amount,t2.sku_code,t2.spu_name,t2.spu_code,
+            t2.quantity qty,t2.unit_price,t1.inner_order_no orderCode
+        FROM sord_after_sale_header t1
+        INNER JOIN sord_after_sale_item t2 ON t1.inner_refund_no =t2.inner_refund_no
+        WHERE t1.inner_refund_no = #{refundCode}
+    </select>
+
+    <select id="queryAfterHeaderToSaleReport" resultType="org.skyer.order.api.vo.OrderSaleReportVO">
+        SELECT
+        <if test="orderSaleDTO.type == 1">
+            header.channel type,
+        </if>
+        <if test="orderSaleDTO.type == 2 and orderSaleDTO.dateType == 1">
+            DATE_FORMAT(header.order_time,'%Y年%m月') type,
+        </if>
+        <if test="orderSaleDTO.type == 2 and orderSaleDTO.dateType == 2">
+            DATE_FORMAT(header.creation_date,'%Y年%m月') type,
+        </if>
+        <if test="orderSaleDTO.type == 3">
+            receiver.province type,
+        </if>
+            count( afterHeader.id ) reverseOrderCount,
+            sum( afterHeader.refund_amount ) reverseOrderAmount,
+            sum( afterHeader.goods_quantity ) reverseItemCount
+        FROM
+            sord_after_sale_header afterHeader
+            Left join sord_header header on afterHeader.inner_order_no = header.inner_order_no
+            LEFT JOIN sord_receiver_info receiver ON afterHeader.inner_order_no = receiver.inner_order_no
+        WHERE 1 = 1
+        <if test="orderSaleDTO.startDate != null and orderSaleDTO.dateType == 1">
+            AND header.order_time &gt;= #{orderSaleDTO.startDate}
+            AND header.order_time &lt;= #{orderSaleDTO.endDate}
+        </if>
+        <if test="orderSaleDTO.startDate != null and orderSaleDTO.dateType == 2">
+            AND header.creation_date &gt;= #{orderSaleDTO.startDate}
+            AND header.creation_date &lt;= #{orderSaleDTO.endDate}
+        </if>
+        <if test="orderSaleDTO.channel != null">
+            AND header.channel = #{orderSaleDTO.channel}
+        </if>
+        <if test="orderSaleDTO.type == 1">
+            group by header.channel
+        </if>
+        <if test="orderSaleDTO.type == 2 and orderSaleDTO.dateType == 1">
+            group by DATE_FORMAT(header.order_time,'%Y年%m月')
+        </if>
+        <if test="orderSaleDTO.type == 2 and orderSaleDTO.dateType == 2">
+            group by DATE_FORMAT(header.pay_time,'%Y年%m月')
+        </if>
+        <if test="orderSaleDTO.type == 3">
+            group by receiver.province
+        </if>
+        order by header.order_time desc
+    </select>
+
+    <select id="queryParReverseChannelSaleReport" resultType="org.skyer.order.app.vo.ChannelSaleOrderVO">
+        SELECT
+            header.store_code storeCode,
+            count( afterHeader.id ) reverseOrderCount,
+            count( afterHeader.refund_amount ) reverseOrderAmount
+        FROM
+            sord_after_sale_header afterHeader
+                LEFT JOIN sord_header header ON afterHeader.inner_order_no = header.inner_order_no
+        WHERE
+            1 = 1
+        <if test="startTime != null">
+            AND header.order_time &gt; #{startTime}
+        </if>
+        <if test="endTime != null">
+            AND header.order_time &lt; #{endTime}
+        </if>
+        <if test="storeCodeList != null and storeCodeList.size() > 0">
+            AND header.store_code  in
+            <foreach collection="storeCodeList" item="storeCode" open="(" separator="," close=")">
+                #{storeCode}
+            </foreach>
+        </if>
+        group by header.store_code
+    </select>
+
+    <select id="queryAfterOrderSaleDateReport" resultType="org.skyer.order.api.vo.OrderSaleDateVO">
+        SELECT
+            DATE_FORMAT( header.order_time, '%Y-%m-%d' ) orderDate,
+            count(afterHeader.id) reverseCount,
+            sum(afterHeader.goods_quantity) reverseItemCount,
+            sum(afterHeader.refund_amount) reverseAmount
+        FROM
+           sord_after_sale_header afterHeader left join sord_header header on header.inner_order_no = afterHeader.inner_order_no
+        WHERE
+            1 = 1
+        <if test="dto.startDate != null">
+            AND header.order_time &gt; #{dto.startDate}
+        </if>
+        <if test="dto.endDate != null">
+            AND header.order_time &lt; #{dto.endDate}
+        </if>
+        <if test="dto.channel != null">
+            AND header.channel = #{dto.channel}
+        </if>
+        GROUP BY
+           DATE_FORMAT( header.order_time, '%Y-%m-%d' )
+    </select>
+</mapper>

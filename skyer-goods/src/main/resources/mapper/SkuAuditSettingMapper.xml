@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.skyer.goods.infra.mapper.SkuAuditSettingMapper">
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap id="BaseResultMap" type="org.skyer.goods.domain.entity.SkuAuditSetting">
+        <result column="id" property="id" jdbcType="DECIMAL"/>
+        <result column="creation_date" property="creationDate" jdbcType="DATE"/>
+        <result column="last_update_date" property="lastUpdateDate" jdbcType="DATE"/>
+        <result column="created_by" property="createdBy" jdbcType="DECIMAL"/>
+        <result column="last_updated_by" property="lastUpdatedBy" jdbcType="DECIMAL"/>
+        <result column="object_version_number" property="objectVersionNumber" jdbcType="DECIMAL"/>
+        <result column="created_audit_status" property="createdAuditStatus" jdbcType="DECIMAL"/>
+        <result column="update_audit_status" property="updateAuditStatus" jdbcType="DECIMAL"/>
+        <result column="update_price_status" property="updatePriceStatus" jdbcType="DECIMAL"/>
+        <result column="update_property_status" property="updatePropertyStatus" jdbcType="DECIMAL"/>
+    </resultMap>
+</mapper>

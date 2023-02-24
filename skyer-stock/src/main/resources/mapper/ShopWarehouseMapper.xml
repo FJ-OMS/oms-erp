@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.skyer.stock.infra.mapper.ShopWarehouseMapper">
+    <!-- 可根据自己的需求，是否要使用 -->
+    <resultMap id="BaseResultMap" type="org.skyer.stock.domain.entity.ShopWarehouse">
+        <result column="id" property="id" jdbcType="DECIMAL"/>
+        <result column="shop_id" property="shopId" jdbcType="DECIMAL"/>
+        <result column="shop_code" property="shopCode" jdbcType="VARCHAR"/>
+        <result column="channel_type_code" property="channelTypeCode" jdbcType="VARCHAR"/>
+        <result column="warehouse_id" property="warehouseId" jdbcType="DECIMAL"/>
+        <result column="warehouse_code" property="warehouseCode" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="getChannelIdByShopId" resultType="java.lang.Long">
+        SELECT
+	        warehouse_id
+        FROM sstock_shop_warehouse
+        WHERE shop_id = #{shopId}
+    </select>
+</mapper>

@@ -1,0 +1,295 @@
+spring:
+  application:
+    name: skyer-gateway
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:mysql://192.168.124.199:3306/skyer_platform?useUnicode=true&characterEncoding=utf-8&useSSL=false}
+    username: ${SPRING_DATASOURCE_USERNAME:root}
+    password: ${SPRING_DATASOURCE_PASSWORD:123456}
+    hikari:
+      # 连接池最小空闲连接数
+      minimum-idle: ${SPRING_DATASOURCE_MINIMUM_IDLE:20}
+      # 连接池允许的最大连接数
+      maximum-pool-size: ${SPRING_DATASOURCE_MAXIMUM_POOL_SIZE:200}
+      # 等待连接池分配连接的最大时长（毫秒）
+      connection-timeout: ${SPRING_DATASOURCE_CONNECTION_TIMEOUT:30000}
+  cache:
+    multi:
+      l1:
+        enabled: false # 是否开启一级缓存
+        type: caffeine # 一级缓存实现。目前支持caffeine和guava
+      l2:
+        enabled: false # 是否开启二级缓存
+        type: redis # 二级缓存的实现
+      caches:
+        permission: # 请求对应的权限缓存
+          l1-spec: initialCapacity=50,maximumSize=500,expireAfterWrite=300s
+          l2-spec: expiration=300
+  servlet:
+    multipart:
+      max-file-size: 30MB
+      max-request-size: 30MB
+  redis:
+    host: ${SPRING_REDIS_HOST:192.168.124.199}
+    port: ${SPRING_REDIS_PORT:30379}
+    database: ${SPRING_REDIS_DATABASE:4}
+    lettuce:
+      pool:
+        # 资源池中最大连接数
+        # 默认8，-1表示无限制；可根据服务并发redis情况及服务端的支持上限调整
+        max-active: ${SPRING_REDIS_POOL_MAX_ACTIVE:50}
+        # 资源池运行最大空闲的连接数
+        # 默认8，-1表示无限制；可根据服务并发redis情况及服务端的支持上限调整，一般建议和max-active保持一致，避免资源伸缩带来的开销
+        max-idle: ${SPRING_REDIS_POOL_MAX_IDLE:50}
+        # 当资源池连接用尽后，调用者的最大等待时间(单位为毫秒)
+        # 默认 -1 表示永不超时，设置5秒
+        max-wait: ${SPRING_REDIS_POOL_MAX_WAIT:5000}
+  cloud:
+    gateway:
+      filter:
+        secure-headers:
+          frame-options: ${SECURE_HEADERS_FRAME_OPTIONS:allow-from http://dev.skyer.org}
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: hiam
+          uri: lb://skyer-iam
+          predicates:
+            - Path=/iam/**
+          filters:
+            - StripPrefix=1
+        #        - name: RequestRateLimiter
+        #          args:
+        #            redis-rate-limiter.replenishRate: 100
+        #            redis-rate-limiter.burstCapacity: 100
+        #            redis-rate-limiter.replenishRateMap."user1role1": 1
+        #            redis-rate-limiter.burstCapacityMap."user1role1": 1
+        #            rate-limiter: "#{@enhancedRedisRateLimiter}"
+        #            key-resolver: "#{@userKeyResolver}"
+        #            key-resolver: "#{
+        #            new org.skyer.gateway.ratelimit.dimension.CombinedKeyResolver(
+        #              new org.skyer.gateway.ratelimit.dimension.UserKeyResolver(),
+        #              new org.skyer.gateway.ratelimit.dimension.RoleKeyResolver()
+        #            )}"
+        - id: hoth
+          uri: lb://skyer-oauth
+          predicates:
+            - Path=/oauth/**
+          filters:
+            - PreserveHostHeader
+        - id: hwgr
+          uri: lb://skyer-swagger
+          predicates:
+            - Path=/swagger/**
+          filters:
+            - StripPrefix=1
+        - id: spfm
+          uri: lb://skyer-platform
+          predicates:
+            - Path=/spfm/**
+          filters:
+            - StripPrefix=1
+        - id: hpfm
+          uri: lb://skyer-platform
+          predicates:
+            - Path=/hpfm/**
+          filters:
+            - StripPrefix=1
+        - id: hfle
+          uri: lb://skyer-file
+          predicates:
+            - Path=/hfle/**
+          filters:
+            - StripPrefix=1
+        - id: hmsg
+          uri: lb://skyer-message
+          predicates:
+            - Path=/hmsg/**
+          filters:
+            - StripPrefix=1
+        - id: hsdr
+          uri: lb://skyer-scheduler
+          predicates:
+            - Path=/hsdr/**
+          filters:
+            - StripPrefix=1
+        - id: himp
+          uri: lb://skyer-import
+          predicates:
+            - Path=/himp/**
+          filters:
+            - StripPrefix=1
+        - id: hrpt
+          uri: lb://skyer-report
+          predicates:
+            - Path=/hrpt/**
+          filters:
+            - StripPrefix=1
+        - id: hadm
+          uri: lb://skyer-admin
+          predicates:
+            - Path=/hadm/**
+        - id: schl
+          uri: lb://skyer-channel
+          predicates:
+            - Path=/schl/**
+        - id: sgoo
+          uri: lb://skyer-goods
+          predicates:
+            - Path=/sgoo/**
+        - id: swagger
+          uri: lb://skyer-swagger
+          predicates:
+            - Path=/swagger/**
+        - id: lgit
+          uri: lb://skyer-logistics
+          predicates:
+            - Path=/lgit/**
+        - id: smart-select
+          uri: lb://smart-select
+          predicates:
+            - Path=/smart-select/**
+        - id: online-process
+          uri: lb://online-process
+          predicates:
+            - Path=/online-process/**
+        - id: skyer-stock
+          uri: lb://skyer-stock
+          predicates:
+            - Path=/skyer-stock/**
+        - id: skyer-sourcing
+          uri: lb://skyer-sourcing
+          predicates:
+            - Path=/skyer-sourcing/**
+        - id: sfin
+          uri: lb://skyer-finance
+          predicates:
+            - Path=/sfin/**
+      # 开启主键加密 可选值 encrypt（主键加密）、to_string（主键变字符串类型）、do_nothing（关闭加密）
+      default-filters:
+        - SetRequestHeader=S-Request-Encrypt, ${SKYER_REQUEST_ENCRYPT_MODE:encrypt}
+
+server:
+  undertow:
+    # 设置IO线程数, 它主要执行非阻塞的任务,它们会负责多个连接
+    # 默认值为8，建议设置每个CPU核心一个线程
+    io-threads: ${SERVER_UNDERTOW_IO_THREADS:4}
+    # 阻塞任务线程池, 当执行类似servlet请求阻塞操作, undertow会从这个线程池中取得线程
+    # 默认等于 io-threads*8，它的值设置取决于系统的负载，可适当调大该值6
+    worker-threads: ${SERVER_UNDERTOW_WORKER_THREADS:128}
+    # 每块buffer的空间大小，越小空间被利用越充分
+    # 不要设置太大，以免影响其他应用，合适即可
+    buffer-size: ${SERVER_UNDERTOW_BUFFER_SIZE:1024}
+    # 是否分配的直接内存(NIO直接分配的堆外内存)
+    # 默认false
+    direct-buffers: true
+    # HTTP POST请求最大的大小
+    # 默认0，无限制，可设置10M
+    max-http-post-size: 10485760
+
+mybatis:
+  mapperLocations: classpath*:/mapper/*.xml
+  configuration:
+    mapUnderscoreToCamelCase: true
+
+feign:
+  hystrix:
+    enabled: false
+
+ribbon:
+  ReadTimeout: ${RIBBON_READ_TIMEOUT:30000}
+  ConnectTimeout: ${RIBBON_CONNECT_TIMEOUT:6000}
+  ServerListRefreshInterval: ${SERVER_LIST_REFRESH_INTERVAL:5000}
+  httpclient:
+    enabled: false
+  okhttp:
+    enabled: true
+
+hystrix:
+  stream:
+    queue:
+      enabled: true
+  command:
+    default:
+      execution:
+        timeout:
+          enabled: true
+        isolation:
+          thread:
+            timeoutInMilliseconds: ${HYSTRIX_COMMAND_TIMEOUT_IN_MILLISECONDS:90000}
+  shareSecurityContext: true
+
+
+skyer:
+  gateway:
+    # 跨域配置
+    cors:
+      allowed-origins:
+        - "*"
+      allowed-headers:
+        - "*"
+      allowed-methods:
+        - "*"
+    helper:
+      enabled: true
+      ## 启用API签名
+      signature:
+        enabled: false
+        secrets:
+          - secretId: skyer
+            secretKey: 537509248a3da7804d12905c102d14cd1bec000797a6178a7353a4c3ac23a0b3
+      jwt-key: skyer # jwt的密钥
+      # 是否打印 JWT
+      enabled-jwt-log: ${SKYER_GATEWAY_HELPER_ENABLE_JWT_LOG:false}
+      filter:
+        collect-span:
+          # 是否统计API访问情况
+          enabled: ${SKYER_GATEWAY_FILTER_COLLECT_SPAN_ENABLED:false}
+        common-request:
+          # 租户级API是否必须检查租户参数
+          check-tenant: ${SKYER_GATEWAY_FILTER_COMMON_REQUEST_CHECK_ORGANIZATION:false}
+          # 项目级API是否必须检查项目参数
+          check-project: ${SKYER_GATEWAY_FILTER_COMMON_REQUEST_CHECK_PROJECT:false}
+          # 是否启用标准的权限检查
+          enabled: ${SKYER_GATEWAY_FILTER_COMMON_REQUEST_ENABLE:false}
+        menu-permission:
+          # 是否检查菜单中包含了API权限
+          enabled: ${SKYER_GATEWAY_FILTER_MENU_PERMISSION:false}
+      permission:
+        cache-seconds: 600 # 请求地址和对应的权限缓存时间
+        cache-size: 3000  # 请求地址和对应的权限缓存大小
+        skip-paths:
+          - /oauth/**
+          - /swagger/swagger-ui.html
+          - /swagger/swagger-resources/**
+          - /swagger/webjars/**
+          - /swagger/docs/**
+          - /*/sock-js/**
+          - /*/socket/**
+          #          - /*/websocket/**
+          - /maintain
+          - /actuator/**
+          - /hims/lib/**
+          - /hfle/lib/**
+          - /*/lib/**
+          - /**/webjars/**
+          - /skyer/saga
+  ## 服务整体运维配置
+  maintain:
+    # 全局运维信息
+    global-info:
+      state: NORMAL
+    # 服务运维信息
+    service-maintain-info:
+      oauth:
+        state: NORMAL
+    # 运维接口密钥，不配置则在程序启动时生成随机key
+    secret-key: skyer
+  request:
+    counter:
+      # http请求监控
+      enable: true
+
+logging:
+  level:
+    org.skyer: ${LOG_LEVEL:debug}

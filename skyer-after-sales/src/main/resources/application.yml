@@ -1,0 +1,144 @@
+spring:
+  application:
+    name: skyer-after-sales
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:mysql://192.168.124.199:3306/skyer_after_sales?useUnicode=true&characterEncoding=utf-8&useSSL=false}
+    username: ${SPRING_DATASOURCE_USERNAME:root}
+    password: ${SPRING_DATASOURCE_PASSWORD:123456}
+    hikari:
+      # 连接池最小空闲连接数
+      minimum-idle: ${SPRING_DATASOURCE_MINIMUM_IDLE:20}
+      # 连接池允许的最大连接数
+      maximum-pool-size: ${SPRING_DATASOURCE_MAXIMUM_POOL_SIZE:200}
+      # 等待连接池分配连接的最大时长（毫秒）
+      connection-timeout: ${SPRING_DATASOURCE_CONNECTION_TIMEOUT:30000}
+  redis:
+    host: ${SPRING_REDIS_HOST:192.168.124.199}
+    port: ${SPRING_REDIS_PORT:30379}
+    database: ${SPRING_REDIS_DATABASE:1}
+    lettuce:
+      pool:
+        # 资源池中最大连接数
+        # 默认8，-1表示无限制；可根据服务并发redis情况及服务端的支持上限调整
+        max-active: ${SPRING_REDIS_POOL_MAX_ACTIVE:50}
+        # 资源池运行最大空闲的连接数
+        # 默认8，-1表示无限制；可根据服务并发redis情况及服务端的支持上限调整，一般建议和max-active保持一致，避免资源伸缩带来的开销
+        max-idle: ${SPRING_REDIS_POOL_MAX_IDLE:50}
+        # 当资源池连接用尽后，调用者的最大等待时间(单位为毫秒)
+        # 默认 -1 表示永不超时，设置5秒
+        max-wait: ${SPRING_REDIS_POOL_MAX_WAIT:5000}
+
+server:
+  undertow:
+    # 设置IO线程数, 它主要执行非阻塞的任务,它们会负责多个连接
+    # 默认值为8，建议设置每个CPU核心一个线程
+    io-threads: ${SERVER_UNDERTOW_IO_THREADS:4}
+    # 阻塞任务线程池, 当执行类似servlet请求阻塞操作, undertow会从这个线程池中取得线程
+    # 默认等于 io-threads*8，它的值设置取决于系统的负载，可适当调大该值
+    worker-threads: ${SERVER_UNDERTOW_WORKER_THREADS:128}
+    # 每块buffer的空间大小，越小空间被利用越充分
+    # 不要设置太大，以免影响其他应用，合适即可
+    buffer-size: ${SERVER_UNDERTOW_BUFFER_SIZE:1024}
+    # 是否分配的直接内存(NIO直接分配的堆外内存)
+    # 默认false
+    direct-buffers: true
+    # HTTP POST请求最大的大小
+    # 默认0，无限制，可设置10M
+    max-http-post-size: 10485760
+    allow-unescaped-characters-in-url: true
+
+feign:
+  hystrix:
+    enabled: true
+
+hystrix:
+  threadpool:
+    default:
+      # 执行命令线程池的核心线程数，也是命令执行的最大并发量
+      # 默认10
+      coreSize: 1000
+      # 最大执行线程数
+      maximumSize: 1000
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            # HystrixCommand 执行的超时时间，超时后进入降级处理逻辑。一个接口，理论的最佳响应速度应该在200ms以内，或者慢点的接口就几百毫秒。
+            # 默认 1000 毫秒，最高设置 2000足矣。如果超时，首先看能不能优化接口相关业务、SQL查询等，不要盲目加大超时时间，否则会导致线程堆积过多，hystrix 线程池卡死，最终服务不可用。
+            timeoutInMilliseconds: ${HYSTRIX_COMMAND_TIMEOUT_IN_MILLISECONDS:40000}
+
+ribbon:
+  # 客户端读取超时时间，超时时间要小于Hystrix的超时时间，否则重试机制就无意义了
+  ReadTimeout: ${RIBBON_READ_TIMEOUT:30000}
+  # 客户端连接超时时间
+  ConnectTimeout: ${RIBBON_CONNECT_TIMEOUT:3000}
+  # 访问实例失败(超时)，允许自动重试，设置重试次数，失败后会更换实例访问，请一定确保接口的幂等性，否则重试可能导致数据异常。
+  OkToRetryOnAllOperations: true
+  MaxAutoRetries: 1
+  MaxAutoRetriesNextServer: 1
+
+mybatis:
+  mapperLocations: classpath*:/mapper/*.xml
+  configuration:
+    mapUnderscoreToCamelCase: true
+    key-generator: snowflake
+
+skyer:
+  lov:
+    # 是否开启SQL类型LOV
+    sql:
+      enabled: ${SKYER_LOV_SQL_ENABLED:true}
+    # 是否开启LOV值翻译
+    value:
+      enabled: ${SKYER_LOV_VALUE_ENABLED:true}
+  platform:
+    # 是否启动初始化缓存
+    init-cache: ${SKYER_PLATFORM_INIT_CACHE:true}
+    # 平台HTTP协议
+    http-protocol: ${SKYER_PLATFORM_HTTP_PROTOCOL:http}
+    # 角色模板编码
+    role-template-codes:
+      - ${SKYER_SALES_TEMPLATE_CODE:role/organization/default/template/sales}
+      - ${SKYER_EXPERTS_TEMPLATE_CODE:role/organization/default/template/experts}
+    regist-entity:
+      # 是否开启实体类的注册
+      enable: ${SKYER_REGIST_ENTITY_ENABLE:false}
+    # 公钥和私钥
+    encrypt:
+      public-key: ${SKYER_OAUTH_PASSWORD_PUBLIC_KEY:MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAIPdTZ1b9Q13Y2YmZ4mjQnFpypCqhV6rjGgsTQMYqC0eVu/je3/L98/4/j3lNePWqwHgCDD0mxISFm44nDKfPbcCAwEAAQ==}
+      private-key: ${SKYER_OAUTH_PASSWORD_PRIVATE_KEY:MIIBVAIBADANBgkqhkiG9w0BAQEFAASCAT4wggE6AgEAAkEAg91NnVv1DXdjZiZniaNCcWnKkKqFXquMaCxNAxioLR5W7+N7f8v3z/j+PeU149arAeAIMPSbEhIWbjicMp89twIDAQABAkAYAgbLi56GISJ7yqo3KP5D39r9k85MejdKECbFVYvpCsLG51IrwtVcdGJTExmkzIuOWnwqRAYUjpQnVvPvLzZhAiEA/Dyk4j+XZtC7NVxrXjn+PHG0vWZ8x14G5sBL6RfgzEsCIQCF1O0383YF0BbDUGkBoaVGmEc3H0D7FQF5L4gMe5EYxQIgLljOSyw4G5I68+EZcWTijCSweyS7xL5IMlofGKNkkOUCIC+hqdAZEW9eMUvQaZ8QBf/LIMWIlRsHzd9wwE4ZCHo1AiEAqsUlDIIfPOrjQfbeYVWSD+Ac9PzMiFfH9H/WMuaWRtw=}
+  data:
+    permission:
+      db-owner: ${SKYER_DB_OWNER:}
+    change:
+      enable: true
+  audit:
+    operation:
+      # 全局开关，默认 false
+      enable: true
+    data:
+      # 是否启用数据变更监控功能
+      enable: true
+  scheduler:
+    executor-code: LGIT_EXECUTOR
+  export:
+    enable-async: true
+  api-customize:
+    enable-agent: false
+  resource:
+    # 匹配的资源才会解析JwtToken便于得到UserDetails
+    pattern: ${SKYER_RESOURCE_PATTERN:/v1/*,/skyer/*,/safs/v1/*,/safs/skyer/*}
+  field-permission:
+    enable: true
+  import:
+    transaction-control: true
+    batch-size: 3000
+
+logging:
+  level:
+    org.skyer: ${LOG_LEVEL:info}
+    org.skyer.mybatis: ${LOG_LEVEL:info}
+    org.skyer.platform: ${LOG_LEVEL:info}
+    org.skyer.starter: ${LOG_LEVEL:info}
+    org.skyer.plugin.platform: ${LOG_LEVEL:info}

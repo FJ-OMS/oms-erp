@@ -1,0 +1,95 @@
+[
+  {
+    "thirdRefundNo": "959593215112803",
+    "internalRefundNo": "TK8954563024",
+    "orderSn": "2102569670297465620",
+    "orderType": "0",
+    "fsSon": "父订单",
+    "innerOrderSn": "XS202109141819323",
+    "storeName": "淘宝_居家旗舰店",
+    "channelTypeCode": "淘宝",
+    "tradeStatus": "11",
+    "tradeErr": true,
+    "errReason": "买家申请仅退款",
+    "resStatus": "0",
+    "thirdReceiveStatus": "0",
+    "shippingName": "中通快递",
+    "shippingSn": "",
+    "guaQi": "否",
+    "buyMsg": "发中通物流",
+    "csMark": "",
+    "goodsNum": "1",
+    "orderAmount": "89.90",
+    "discountFee": "0.00",
+    "shippingFee": "0.00",
+    "totalAmount": "49.90",
+    "payment": "49.90",
+    "sorFavourable": "40.00",
+    "sorThirdPromotion": "0.00",
+    "sorBuyerNikeName": "yuyuyuyou",
+    "receiverName": "陈诗宇",
+    "receiverMobile": "156****6366",
+    "isInvoice": "有",
+    "receiverAddress": "福建省 厦门市 集美区***",
+    "auditReason": "",
+    "fiveFlag": "1",
+    "payType": "支付宝",
+    "payStatus": "已支付",
+    "invoiceType": "普通发票",
+    "invoiceHeader": "陈诗宇",
+    "invoiceContent": "明细",
+    "thirdCreateTime": "2021-07-06 18:33:53",
+    "payTime": "2021-07-06 18:35:53",
+    "createTime": "2021-07-06 19:33:53",
+    "faHuoTime": "",
+    "confirmTime": "2021-07-06 19:33:53",
+    "relateSaleOrderList": [],
+    "relateAfterOrderList": [
+      {
+        "no": "TK8954563024",
+        "type": "仅退款",
+        "status": "待审核"
+      }
+    ],
+    "distributionInfo": {
+      "type": "物流",
+      "name": "中通物流",
+      "list": []
+    },
+    "goodsList": [
+      {
+        "spuName": "折叠床单人床午睡家用简易午休床陪护便携",
+        "spuCode": "S15698752",
+        "skuCode": "789654233",
+        "isGift": "否",
+        "num": 1,
+        "thirdPrice": "89.90",
+        "internalPrice": "89.90",
+        "avgPlatformPrice": "89.90",
+        "avgInternalPrice": "89.90",
+        "avgFeight": "0.00",
+        "avgMarketPrice": "40.00",
+        "avgThirdPrice": "0.00"
+      }
+    ],
+    "skuDetail": [
+      {
+        "spuName": "折叠床单人床午睡家用简易午休床陪护便携",
+        "spuCode": "S15698752",
+        "skuCode": "789654233",
+        "isGift": "否",
+        "num": 1,
+        "avgPlatformPrice": "89.90",
+        "avgInternalPrice": "89.90",
+        "avgMarketPrice": "40.00",
+        "avgThirdPrice": "0.00"
+      }
+    ],
+    "afterRefundType": "0",
+    "afterRefundSource": "平台下载",
+    "afterRefundStatus": "待审核",
+    "afterRefundAmount": "49.90",
+    "afterRefundReason": "7天无理由退货",
+    "afterRefundRemark": ""
+  }
+]

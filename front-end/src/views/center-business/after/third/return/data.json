@@ -1,0 +1,24 @@
+[
+  {
+    "thirdRefundNo": "2102561665620468920", 
+    "internalRefundNo": "TH4653300101120", 
+    "thirdSellRefundNo": "2102561003394443575",
+    "internalSellRefundNo": "XS202109151845002",
+    "status": "待仓库验收",
+    "nickName": "bilaoye",
+    "returnGoodsNum": 1,
+    "money": 260.00,
+    "reason": "c",
+    "remark": "",
+    "returnNo": "84122475274",
+    "returnCompany": "百世汇通",
+    "returnName": "饶必",
+    "returnPhone": "180****4462",
+    "returnAddress": "福建厦门市集美区...",
+    "thirdStatus": "已签收",
+    "storeName": "京东_柒牌官方旗舰店",
+    "channelType": "京东",
+    "time1": "2021-08-27 18:33:53",
+    "time2": "2021-08-28 18:33:53"
+  }
+]

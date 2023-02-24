@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.skyer.stock.infra.mapper.OutboundDeliveryOrderMapper">
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap id="BaseResultMap" type="org.skyer.stock.domain.entity.OutboundDeliveryOrder">
+        <result column="id" property="id" jdbcType="DECIMAL"/>
+        <result column="creation_date" property="creationDate" jdbcType="DATE"/>
+        <result column="last_update_date" property="lastUpdateDate" jdbcType="DATE"/>
+        <result column="created_by" property="createdBy" jdbcType="DECIMAL"/>
+        <result column="last_updated_by" property="lastUpdatedBy" jdbcType="DECIMAL"/>
+        <result column="object_version_number" property="objectVersionNumber" jdbcType="DECIMAL"/>
+        <result column="code" property="code" jdbcType="VARCHAR"/>
+        <result column="tenant_id" property="tenantId" jdbcType="DECIMAL"/>
+        <result column="order_code" property="orderCode" jdbcType="VARCHAR"/>
+        <result column="order_id" property="orderId" jdbcType="DECIMAL"/>
+        <result column="out_type" property="outType" jdbcType="VARCHAR"/>
+        <result column="receiver_name" property="receiverName" jdbcType="VARCHAR"/>
+        <result column="receiver_address" property="receiverAddress" jdbcType="VARCHAR"/>
+        <result column="receiver_tel" property="receiverTel" jdbcType="VARCHAR"/>
+        <result column="receiver_mobile" property="receiverMobile" jdbcType="VARCHAR"/>
+        <result column="receiver_country" property="receiverCountry" jdbcType="VARCHAR"/>
+        <result column="receiver_province" property="receiverProvince" jdbcType="VARCHAR"/>
+        <result column="receiver_city" property="receiverCity" jdbcType="VARCHAR"/>
+        <result column="receiver_district" property="receiverDistrict" jdbcType="VARCHAR"/>
+        <result column="sor_buyer_nike_name" property="sorBuyerNikeName" jdbcType="VARCHAR"/>
+        <result column="scheduled_delivery_time" property="scheduledDeliveryTime" jdbcType="DATE"/>
+        <result column="order_msg" property="orderMsg" jdbcType="VARCHAR"/>
+        <result column="buy_msg" property="buyMsg" jdbcType="VARCHAR"/>
+        <result column="receiving_logic_warehouse_id" property="receivingLogicWarehouseId" jdbcType="DECIMAL"/>
+        <result column="receiving_logic_warehouse_name" property="receivingLogicWarehouseName" jdbcType="VARCHAR"/>
+        <result column="receiving_logic_warehouse_code" property="receivingLogicWarehouseCode" jdbcType="VARCHAR"/>
+        <result column="shop_id" property="shopId" jdbcType="DECIMAL"/>
+        <result column="shop_code" property="shopCode" jdbcType="VARCHAR"/>
+        <result column="shop_name" property="shopName" jdbcType="VARCHAR"/>
+        <result column="channel_type_code" property="channelTypeCode" jdbcType="VARCHAR"/>
+        <result column="front_record_id" property="frontRecordId" jdbcType="DECIMAL"/>
+        <result column="front_record_code" property="frontRecordCode" jdbcType="VARCHAR"/>
+        <result column="front_record_type" property="frontRecordType" jdbcType="VARCHAR"/>
+        <result column="package_code" property="packageCode" jdbcType="VARCHAR"/>
+        <result column="platform_order_code" property="platformOrderCode" jdbcType="VARCHAR"/>
+        <result column="result_code" property="resultCode" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="DECIMAL"/>
+        <result column="out_logic_warehouse_id" property="outLogicWarehouseId" jdbcType="DECIMAL"/>
+        <result column="out_logic_warehouse_name" property="outLogicWarehouseName" jdbcType="VARCHAR"/>
+        <result column="out_logic_warehouse_code" property="outLogicWarehouseCode" jdbcType="VARCHAR"/>
+        <result column="logistic_company" property="logisticCompany" jdbcType="VARCHAR"/>
+        <result column="logistic_company_code" property="logisticCompanyCode" jdbcType="VARCHAR"/>
+        <result column="logistic_company_id" property="logisticCompanyId" jdbcType="DECIMAL"/>
+        <result column="logistic_business" property="logisticBusiness" jdbcType="VARCHAR"/>
+        <result column="logistic_business_code" property="logisticBusinessCode" jdbcType="VARCHAR"/>
+        <result column="logistic_business_id" property="logisticBusinessId" jdbcType="DECIMAL"/>
+    </resultMap>
+
+    <select id="getByOrderId" resultType="org.skyer.stock.domain.entity.OutboundDeliveryOrder">
+        SELECT * FROM sstock_outbound_delivery_order
+        WHERE order_id = #{orderId}
+        LIMIT 1
+    </select>
+
+    <select id="selectList" resultType="org.skyer.stock.domain.vo.OutboundDeliveryOrderListVO">
+        SELECT t1.*,
+               t2.qty,
+               t2.already_qty
+        FROM sstock_outbound_delivery_order t1
+        LEFT JOIN (SELECT odo_id, sum( planned_qty ) qty, sum(already_out_qty) already_qty
+            FROM sstock_outbound_delivery_order_detail
+            GROUP BY odo_id) t2
+        ON t1.id = t2.odo_id
+        <where>
+            <if test="orderId != null">
+                AND t1.order_id = #{orderId}
+            </if>
+            <if test="orderCode != null and orderCode != ''">
+                AND t1.order_code = #{orderCode}
+            </if>
+            <if test="queryCode !=null and queryCode !=''">
+                AND (code = #{queryCode} OR platform_order_code = #{queryCode} OR order_code=#{queryCode}
+                         OR front_record_code=#{queryCode})
+            </if>
+            <if test="channelTypeCode != null and channelTypeCode!=''">
+                AND channel_type_code = #{channelTypeCode}
+            </if>
+            <if test="shopIdList!=null and shopIdList.size()>0">
+                AND shop_id IN
+                    <foreach collection="shopIdList" item="item" open="(" close=")" separator=",">#{item}</foreach>
+            </if>
+            <if test="status != null">
+                AND status = #{status}
+            </if>
+            <if test="outLogicWarehouseCode != null and outLogicWarehouseCode != ''">
+                AND out_logic_warehouse_code = #{outLogicWarehouseCode}
+            </if>
+            <if test="beginCreationDate != null">
+                AND creation_date >= #{beginCreationDate}
+            </if>
+            <if test="endCreationDate != null">
+                AND creation_date &lt;= #{endCreationDate}
+            </if>
+        </where>
+    </select>
+
+</mapper>

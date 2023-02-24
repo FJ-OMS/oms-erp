@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.skyer.stock.infra.mapper.ChangeLogMapper">
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap id="BaseResultMap" type="org.skyer.stock.domain.entity.ChangeLog">
+        <result column="id" property="id" jdbcType="DECIMAL"/>
+        <result column="delete_flag" property="deleteFlag" jdbcType="DECIMAL"/>
+        <result column="creation_date" property="creationDate" jdbcType="DATE"/>
+        <result column="last_update_date" property="lastUpdateDate" jdbcType="DATE"/>
+        <result column="created_by" property="createdBy" jdbcType="DECIMAL"/>
+        <result column="last_updated_by" property="lastUpdatedBy" jdbcType="DECIMAL"/>
+        <result column="tenant_id" property="tenantId" jdbcType="DECIMAL"/>
+        <result column="object_version_number" property="objectVersionNumber" jdbcType="DECIMAL"/>
+        <result column="turnover_code" property="turnoverCode" jdbcType="VARCHAR"/>
+        <result column="record_code" property="recordCode" jdbcType="VARCHAR"/>
+        <result column="in_out_type" property="inOutType" jdbcType="DECIMAL"/>
+        <result column="record_type_code" property="recordTypeCode" jdbcType="VARCHAR"/>
+        <result column="sku_code" property="skuCode" jdbcType="VARCHAR"/>
+        <result column="pre_real_num" property="preRealNum" jdbcType="DECIMAL"/>
+        <result column="change_num" property="changeNum" jdbcType="DECIMAL"/>
+        <result column="aft_real_num" property="aftRealNum" jdbcType="DECIMAL"/>
+        <result column="qty_type_code" property="qtyTypeCode" jdbcType="DECIMAL"/>
+        <result column="warehouse_id" property="warehouseId" jdbcType="DECIMAL"/>
+        <result column="remark" property="warehouseId" jdbcType="VARCHAR"/>
+    </resultMap>
+    <select id="getStockChangeList" resultType="org.skyer.stock.domain.vo.StockChangeListVO">
+        SELECT
+	        t3.spu_code,t3.`name` spu_name,t1.sku_code,t4.`name` category_name,
+	        t5.`code` warehouse_code,t5.`name` warehouse_name,t1.record_type_code,t5.type_code warehouse_type_code,
+	        t1.qty_type_code,t1.pre_real_num,t1.change_num,t1.aft_real_num,t1.created_by,t1.creation_date,t1.record_code
+        FROM skyer_stock.sstock_change_log t1
+        LEFT JOIN skyer_goods.sgoo_sku t2 ON t1.sku_code = t2.sku_code
+        LEFT JOIN skyer_goods.sgoo_spu t3 ON t2.spu_id = t3.id
+        LEFT JOIN skyer_goods.sgoo_category t4 ON t3.category_id = t4.id
+        LEFT JOIN skyer_stock.sstock_warehouse t5 ON t1.warehouse_id = t5.id
+        <where>
+            <if test="tenantId != null">
+                AND t1.tenant_id = #{tenantId}
+            </if>
+            <if test="dto.spuCode != null and dto.spuCode != ''">
+                AND t3.spu_code LIKE CONCAT('%',#{dto.spuCode},'%')
+            </if>
+            <if test="dto.spuName != null and dto.spuName != ''">
+                AND t3.`name` LIKE CONCAT('%',#{dto.spuName},'%')
+            </if>
+            <if test="dto.skuCode != null and dto.skuCode != ''">
+                AND t1.sku_code LIKE CONCAT('%',#{dto.skuCode},'%')
+            </if>
+            <if test="dto.categoryId != null">
+                AND t3.category_id = #{dto.categoryId}
+            </if>
+            <if test="dto.warehouseCode != null and dto.warehouseCode != ''">
+                AND t5.`code` LIKE CONCAT('%',#{dto.warehouseCode},'%')
+            </if>
+            <if test="dto.warehouseName != null and dto.warehouseName != ''">
+                AND t5.`name` LIKE CONCAT('%',#{dto.warehouseName},'%')
+            </if>
+            <if test="dto.recordCode != null and dto.recordCode != ''">
+                AND t1.record_code = #{dto.recordCode}
+            </if>
+            <if test="dto.recordTypeCodeList != null">
+                <foreach collection="dto.recordTypeCodeList" item="type" open="AND(" separator=" OR " close=")">
+                    t1.record_type_code = #{type}
+                </foreach>
+            </if>
+            <if test="dto.warehouseTypeCodeList != null">
+                <foreach collection="dto.warehouseTypeCodeList" item="type" open="AND(" separator=" OR " close=")">
+                    t5.type_code = #{type}
+                </foreach>
+            </if>
+            <if test="dto.beginDate != null and dto.endDate == null">
+                AND t1.creation_date &gt;= #{dto.beginDate}
+            </if>
+            <if test="dto.endDate != null and dto.beginDate == null">
+                AND t1.creation_date &lt;= #{dto.endDate}
+            </if>
+            <if test="dto.beginDate != null and dto.endDate != null">
+                AND t1.creation_date BETWEEN #{dto.beginDate} AND #{dto.endDate}
+            </if>
+        </where>
+        ORDER BY t1.creation_date DESC
+    </select>
+
+    <select id="getNum" resultType="java.math.BigDecimal">
+        SELECT
+            SUM(t1.change_num)
+        FROM skyer_stock.sstock_change_log t1
+        LEFT JOIN skyer_goods.sgoo_sku t2 ON t1.sku_code = t2.sku_code
+        LEFT JOIN skyer_goods.sgoo_spu t3 ON t2.spu_id = t3.id
+        LEFT JOIN skyer_goods.sgoo_category t4 ON t3.category_id = t4.id
+        LEFT JOIN skyer_stock.sstock_warehouse t5 ON t1.warehouse_id = t5.id
+        <where>
+            <if test="flag == true">
+                AND t1.change_num &gt; 0
+            </if>
+            <if test="flag == false">
+                AND t1.change_num &lt; 0
+            </if>
+            <if test="tenantId != null">
+                AND t1.tenant_id = #{tenantId}
+            </if>
+            <if test="dto.spuCode != null and dto.spuCode != ''">
+                AND t3.spu_code LIKE CONCAT('%',#{dto.spuCode},'%')
+            </if>
+            <if test="dto.spuName != null and dto.spuName != ''">
+                AND t3.`name` LIKE CONCAT('%',#{dto.spuName},'%')
+            </if>
+            <if test="dto.skuCode != null and dto.skuCode != ''">
+                AND t1.sku_code LIKE CONCAT('%',#{dto.skuCode},'%')
+            </if>
+            <if test="dto.categoryId != null">
+                AND t3.category_id = #{dto.categoryId}
+            </if>
+            <if test="dto.warehouseCode != null and dto.warehouseCode != ''">
+                AND t5.`code` LIKE CONCAT('%',#{dto.warehouseCode},'%')
+            </if>
+            <if test="dto.warehouseName != null and dto.warehouseName != ''">
+                AND t5.`name` LIKE CONCAT('%',#{dto.warehouseName},'%')
+            </if>
+            <if test="dto.recordTypeCodeList != null">
+                <foreach collection="dto.recordTypeCodeList" item="type" open="AND(" separator=" OR " close=")">
+                    t1.record_type_code = #{type}
+                </foreach>
+            </if>
+            <if test="dto.warehouseTypeCodeList != null">
+                <foreach collection="dto.warehouseTypeCodeList" item="type" open="AND(" separator=" OR " close=")">
+                    t5.type_code = #{type}
+                </foreach>
+            </if>
+            <if test="dto.beginDate != null and dto.endDate == null">
+                AND t1.creation_date &gt;= #{dto.beginDate}
+            </if>
+            <if test="dto.endDate != null and dto.beginDate == null">
+                AND t1.creation_date &lt;= #{dto.endDate}
+            </if>
+            <if test="dto.beginDate != null and dto.endDate != null">
+                AND t1.creation_date BETWEEN #{dto.beginDate} AND #{dto.endDate}
+            </if>
+        </where>
+    </select>
+</mapper>

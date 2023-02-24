@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.skyer.tags.infra.mapper.LabelMapper">
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap id="BaseResultMap" type="org.skyer.tags.domain.entity.Label">
+        <result column="id" property="id" jdbcType="DECIMAL"/>
+        <result column="label_name" property="labelName" jdbcType="VARCHAR"/>
+        <result column="label_type" property="labelType" jdbcType="VARCHAR"/>
+        <result column="module_code" property="moduleCode" jdbcType="VARCHAR"/>
+        <result column="label_code" property="labelCode" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="DECIMAL"/>
+        <result column="text_content" property="textContent" jdbcType="VARCHAR"/>
+        <result column="text_color" property="textColor" jdbcType="VARCHAR"/>
+        <result column="system_label_flag" property="systemLabelFlag" jdbcType="DECIMAL"/>
+        <result column="change_flag" property="changeFlag" jdbcType="DECIMAL"/>
+        <result column="creation_date" property="creationDate" jdbcType="DATE"/>
+        <result column="last_update_date" property="lastUpdateDate" jdbcType="DATE"/>
+        <result column="created_by" property="createdBy" jdbcType="DECIMAL"/>
+        <result column="last_updated_by" property="lastUpdatedBy" jdbcType="DECIMAL"/>
+        <result column="object_version_number" property="objectVersionNumber" jdbcType="DECIMAL"/>
+    </resultMap>
+    <select id="selectList" resultType="org.skyer.tags.domain.vo.LabelVO">
+        SELECT id, label_name, label_type, module_code, label_code, status, text_content, text_color,
+               system_label_flag, change_flag,  created_by, creation_date
+        FROM tags_label
+        <where>
+            <if test="systemLabelFlag != null">
+                AND system_label_flag = #{systemLabelFlag}
+            </if>
+            <if test="labelName != null and labelName != ''">
+                <bind name="likeLabelName" value="'%' + labelName + '%'"/>
+                AND label_name LIKE #{likeLabelName}
+            </if>
+            <if test="labelType != null and labelType != ''">
+                AND label_type = #{labelType}
+            </if>
+            <if test="status != null">
+                AND status = #{status}
+            </if>
+            <if test="beginCreationDate != null and endCreationDate == null">
+                AND creation_date >= #{beginCreationDate}
+            </if>
+            <if test="endCreationDate != null and beginCreationDate == null">
+                AND creation_date &lt;= #{endCreationDate}
+            </if>
+            <if test="beginCreationDate != null and endCreationDate != null">
+                AND creation_date BETWEEN #{beginCreationDate} AND #{endCreationDate}
+            </if>
+        </where>
+
+    </select>
+</mapper>

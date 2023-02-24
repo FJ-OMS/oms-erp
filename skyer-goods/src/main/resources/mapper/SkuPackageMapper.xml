@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.skyer.goods.infra.mapper.SkuPackageMapper">
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap id="BaseResultMap" type="org.skyer.goods.domain.entity.SkuPackage">
+        <result column="id" property="id" jdbcType="DECIMAL"/>
+        <result column="sku_id" property="skuId" jdbcType="DECIMAL"/>
+        <result column="package_sku_id" property="packageSkuId" jdbcType="DECIMAL"/>
+        <result column="num" property="num" jdbcType="DECIMAL"/>
+    </resultMap>
+</mapper>

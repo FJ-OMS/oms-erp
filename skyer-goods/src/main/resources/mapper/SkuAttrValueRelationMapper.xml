@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.skyer.goods.infra.mapper.SkuAttrValueRelationMapper">
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap id="BaseResultMap" type="org.skyer.goods.domain.entity.SkuAttrValueRelation">
+        <result column="id" property="id" jdbcType="DECIMAL"/>
+        <result column="goods_sku_id" property="goodsSkuId" jdbcType="DECIMAL"/>
+        <result column="sku" property="sku" jdbcType="VARCHAR"/>
+        <result column="attribute_value_id" property="attributeValueId" jdbcType="DECIMAL"/>
+        <result column="delete_flag" property="deleteFlag" jdbcType="DECIMAL"/>
+        <result column="creation_date" property="creationDate" jdbcType="DATE"/>
+        <result column="last_update_date" property="lastUpdateDate" jdbcType="DATE"/>
+        <result column="created_by" property="createdBy" jdbcType="DECIMAL"/>
+        <result column="last_updated_by" property="lastUpdatedBy" jdbcType="DECIMAL"/>
+        <result column="tenant_id" property="tenantId" jdbcType="DECIMAL"/>
+        <result column="object_version_number" property="objectVersionNumber" jdbcType="DECIMAL"/>
+    </resultMap>
+</mapper>

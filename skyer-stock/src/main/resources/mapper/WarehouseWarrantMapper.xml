@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.skyer.stock.infra.mapper.WarehouseWarrantMapper">
+
+    <select id="selectList" resultType="org.skyer.stock.domain.vo.WarehouseWarrantVO">
+        SELECT
+            t1.id,
+            t1.`code`,
+            t1.platform_order_code,
+            t1.order_code,
+            t1.front_record_type,
+            t1.front_record_id,
+            t1.front_record_code,
+            t1.input_type,
+            t1.`status`,
+            ifnull(t2.qty,0) qty,
+            t1.receiving_logic_warehouse_name,
+            t1.receiving_logic_warehouse_code,
+            t1.store_name,
+            t1.channel_type_code,
+            t1.creation_date
+        FROM sstock_warehouse_warrant t1
+        LEFT JOIN (SELECT warehouse_warrant_id, SUM(planned_qty) qty FROM sstock_warehouse_warrant_detail GROUP BY warehouse_warrant_id ) t2
+            ON t1.id = t2.warehouse_warrant_id
+        <where>
+            <if test="queryCode != null and queryCode != ''">
+                AND (t1.`code` = #{queryCode}
+                    OR t1.platform_order_code = #{queryCode}
+                    OR t1.order_code = #{queryCode}
+                    OR t1.front_record_code = #{queryCode}
+                )
+            </if>
+            <if test="channelTypeCode != null and channelTypeCode != ''">
+                AND t1.channel_type_code = #{channelTypeCode}
+            </if>
+            <if test="storeIdList != null and storeIdList.size()>0">
+                AND t1.store_id IN
+                <foreach collection="storeIdList" item="item" open="(" close=")" separator=",">#{item}</foreach>
+            </if>
+            <if test="status != null">
+                AND t1.`status` = #{status}
+            </if>
+            <if test="receivingLogicWarehouseCode != null and receivingLogicWarehouseCode != ''">
+                AND t1.receiving_logic_warehouse_code = #{receivingLogicWarehouseCode}
+            </if>
+            <if test="beginCreationDate != null">
+                AND t1.creation_date &gt;= #{beginCreationDate}
+            </if>
+            <if test="endCreationDate != null">
+                AND t1.creation_date &lt;= #{endCreationDate}
+            </if>
+        </where>
+    </select>
+    <select id="getOneByFrontRecordTypeAndFrontRecordCode"
+            resultType="org.skyer.stock.domain.entity.WarehouseWarrant">
+        SELECT
+            *
+        FROM sstock_warehouse_warrant
+        WHERE front_record_code = #{frontRecordCode} AND front_record_type = #{frontRecordType}
+        ORDER BY creation_date DESC
+        LIMIT 1
+    </select>
+</mapper>

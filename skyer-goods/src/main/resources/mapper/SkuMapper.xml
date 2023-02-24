@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.skyer.goods.infra.mapper.SkuMapper">
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap id="BaseResultMap" type="org.skyer.goods.domain.entity.Sku">
+        <result column="id" property="id" jdbcType="DECIMAL"/>
+        <result column="spu_id" property="spuId" jdbcType="DECIMAL"/>
+        <result column="sku_code" property="skuCode" jdbcType="VARCHAR"/>
+        <result column="creation_date" property="creationDate" jdbcType="DATE"/>
+        <result column="last_update_date" property="lastUpdateDate" jdbcType="DATE"/>
+        <result column="created_by" property="createdBy" jdbcType="DECIMAL"/>
+        <result column="last_updated_by" property="lastUpdatedBy" jdbcType="DECIMAL"/>
+        <result column="object_version_number" property="objectVersionNumber" jdbcType="DECIMAL"/>
+        <result column="show_flag" property="showFlag" jdbcType="DECIMAL"/>
+        <result column="md5_check_value" property="md5CheckValue" jdbcType="VARCHAR"/>
+        <result column="sku_name" property="skuName" jdbcType="VARCHAR"/>
+        <result column="cost_price" property="costPrice" jdbcType="DECIMAL"/>
+        <result column="sales_price" property="salesPrice" jdbcType="DECIMAL"/>
+        <result column="activity_price" property="activityPrice" jdbcType="DECIMAL"/>
+        <result column="market_price" property="marketPrice" jdbcType="DECIMAL"/>
+        <result column="distribution_price" property="distributionPrice" jdbcType="DECIMAL"/>
+        <result column="wholesale_price" property="wholesalePrice" jdbcType="DECIMAL"/>
+        <result column="clearing_price" property="clearingPrice" jdbcType="DECIMAL"/>
+        <result column="weight" property="weight" jdbcType="DECIMAL"/>
+        <result column="length" property="length" jdbcType="DECIMAL"/>
+        <result column="width" property="width" jdbcType="DECIMAL"/>
+        <result column="height" property="height" jdbcType="DECIMAL"/>
+        <result column="status" property="status" jdbcType="DECIMAL"/>
+    </resultMap>
+
+    <select id="getSkuList" resultType="org.skyer.goods.domain.entity.Sku">
+        select sku.*,spu.material_id,spu.type as spuType from sgoo_sku sku left join sgoo_spu spu on sku.spu_id = spu.id where 1=1
+
+        <if test="param.spuCode != null and param.spuCode.trim().length() > 0">
+            and spu.spu_code = #{param.spuCode}
+        </if>
+
+        <if test="param.spuName != null and param.spuName.trim().length() > 0">
+            and spu.name like CONCAT( #{param.spuName}, '%')
+        </if>
+
+        <if test="param.skuCode != null and param.skuCode.trim().length() > 0">
+            and sku.sku_code = #{param.skuCode}
+        </if>
+
+        <if test="param.spuType != null and param.spuType.trim().length() > 0">
+            and spu.type = #{param.spuType}
+        </if>
+
+        <if test="param.skuName != null and param.skuName.trim().length() > 0">
+            and sku.sku_name like CONCAT( #{param.skuName}, '%')
+        </if>
+
+        <if test="param.categoryIdList != null and  param.categoryIdList.size() >0" >
+            and spu.category_id in
+            <foreach collection="param.categoryIdList" item="categoryId" open="(" separator="," close=")">
+                #{categoryId}
+            </foreach>
+        </if>
+    </select>
+
+    <select id="queryRPCGoodsList" resultType="org.skyer.goods.domain.vo.RpcGoodsResVO">
+        SELECT
+        sku.id, spu.spu_code spuCode, sku.sku_code skuCode,sku.sku_name skuName,spu.name spuName,spu.type spuType,
+        spu.category_id lastCategoryId,category.name categoryStr,brand.id brandId,brand.name brandName
+        FROM sgoo_sku sku
+        LEFT JOIN sgoo_spu spu ON sku.spu_id = spu.id
+        LEFT JOIN sgoo_brand brand ON brand.id = spu.brand_id
+        LEFT JOIN sgoo_category category ON spu.category_id = category.id
+        <where>
+            <if test="skuCodeList != null" >
+                AND sku.sku_code IN
+                <foreach collection="skuCodeList" item="skuCode" open="(" separator="," close=")">
+                    #{skuCode}
+                </foreach>
+            </if>
+        </where>
+    </select>
+
+    <select id="queryOrderRpcList" resultType="org.skyer.goods.domain.vo.RpcOrderResVO">
+        select spu.id as spuId ,spu.spu_code as spuCode ,spu.name as spuName ,spu.type as spuType,
+        sku.id as skuId , sku.sku_code as skuCode ,sku.sku_name  as skuName,
+        spu.brand_id as brandInfo,spu.material_id as materialInfo, spu.category_id as categoryInfo ,
+        sku.cost_price as costPrice ,sku.sales_price as salesPrice, sku.activity_price as activityPrice,
+        sku.market_price as marketPrice, sku.distribution_price as distributionPrice ,
+        sku.wholesale_price as wholesalePrice , sku.clearing_price as clearingPrice ,
+        sku.weight as weight, sku.length as length,sku.width as width,sku.height as height,
+        sku.set_flag as setFlag, sku.gift_flag as giftFlag, sku.multi_flag as multiFlag
+        from sgoo_sku sku inner join sgoo_spu spu on
+        sku.spu_id = spu.id
+        where 1=1
+        <if test="skuCodeList != null" >
+            and sku.sku_code in
+            <foreach collection="skuCodeList" item="skuCode" open="(" separator="," close=")">
+                #{skuCode}
+            </foreach>
+        </if>
+    </select>
+</mapper>

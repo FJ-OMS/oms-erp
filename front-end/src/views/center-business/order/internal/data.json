@@ -1,0 +1,442 @@
+[
+  {
+    "orderSn": "2102569670297464100",
+    "orderType": "0",
+    "fsSon": "父订单",
+    "innerOrderSn": "XS202109141819001",
+    "storeName": "天猫_居家日用旗舰",
+    "channelTypeCode": "天猫",
+    "tradeStatus": "10",
+    "shippingName": "中通快递",
+    "shippingSn": "",
+    "guaQi": "否",
+    "buyMsg": "发中通物流",
+    "csMark": "",
+    "goodsNum": "1",
+    "orderAmount": "89.90",
+    "discountFee": "40.00",
+    "shippingFee": "0.00",
+    "totalAmount": "49.90",
+    "payment": "49.90",
+    "sorFavourable": "40.00",
+    "sorThirdPromotion": "0.00",
+    "sorBuyerNikeName": "yuyuyuyou",
+    "buyerRemark": "发中通快递",
+    "receiverName": "陈诗宇",
+    "receiverMobile": "156****6366",
+    "isInvoice": "有",
+    "receiverAddress": "福建省 厦门市 集美区***",
+    "auditReason": "有买家备注",
+    "fiveFlag": "1",
+    "payType": "支付宝",
+    "payStatus": "已支付",
+    "invoiceType": "普通发票",
+    "invoiceHeader": "陈诗宇",
+    "invoiceContent": "明细",
+    "thirdCreateTime": "2021-07-05 18:33:53",
+    "payTime": "2021-07-05 18:35:53",
+    "createTime": "2021-07-05 18:40:53",
+    "faHuoTime": "",
+    "confirmTime": "",
+    "relateSaleOrderList": [],
+    "relateAfterOrderList": [],
+    "distributionInfo": {
+      "type": "物流",
+      "name": "中通物流",
+      "list": [
+        {
+          "value1": "逻辑仓2仓",
+          "value2": "CKTZ9698547773",
+          "value3": "CKJG9698954673",
+          "value4": "申通快递",
+          "value5": "全部出库",
+          "value6": "2",
+          "value7": "2"
+        },
+        {
+          "value1": "逻辑仓3仓",
+          "value2": "CKTZ9698545821",
+          "value3": "CKJG9698954673",
+          "value4": "申通快递",
+          "value5": "全部出库",
+          "value6": "2",
+          "value7": "2"
+        }
+      ],
+      "list1": [
+        {
+          "value1": "45121216222311",
+          "value2": "申通快递",
+          "value3": "CKTZ9698547773",
+          "value4": "1",
+          "value5": "2021-09-12 18:20:11"
+        }
+      ]
+    },
+    "goodsList": [
+      {
+        "sign": 0,
+        "spuName": "手持挂烫机蒸汽熨斗家用小型宿舍学生便携式熨衣服神器熨烫机",
+        "spuCode": "S256978541",
+        "skuCode": "458963152",
+        "isGift": "否",
+        "num": 2,
+        "thirdPrice": "59.00",
+        "internalPrice": "59.00",
+        "avgPlatformPrice": "49.00",
+        "avgInternalPrice": "89.90",
+        "avgFeight": "0.00",
+        "avginternalPrice": "49.00",
+        "avgMarketPrice": "5.00",
+        "avgThirdPrice": "5.00",
+        "fhzt": "部分发货",
+        "tkzt": "部分退款",
+        "detailsList": [
+          {
+            "sign": 1,
+            "status": "待收货",
+            "spuName": "手持挂烫机蒸汽熨斗家用小型宿舍学生便携式熨衣服神器熨烫机",
+            "spuCode": "S256978541",
+            "skuCode": "SKU5655565",
+            "isGift": "否",
+            "isPutup": "否",
+            "num": 1,
+            "thirdPrice": "59.00",
+            "internalPrice": "59.00",
+            "avgPlatformPrice": "49.00",
+            "avgInternalPrice": "89.90",
+            "avgFeight": "0.00",
+            "avginternalPrice": "49.00",
+            "avgMarketPrice": "5.00",
+            "avgThirdPrice": "5.00",
+            "fhzt": "已发货",
+            "tkzt": "否",
+            "istk": "否",
+            "shStatus": "已审核",
+            "xyStatus": "成功",
+            "yzStatus": "预占成功"
+          },
+          {
+            "sign": 0,
+            "status": "已取消",
+            "spuName": "手持挂烫机蒸汽熨斗家用小型宿舍学生便携式熨衣服神器熨烫机",
+            "spuCode": "S256978541",
+            "skuCode": "SKU5655565",
+            "isGift": "否",
+            "isPutup": "是",
+            "num": 1,
+            "thirdPrice": "59.00",
+            "internalPrice": "59.00",
+            "avgPlatformPrice": "49.00",
+            "avgInternalPrice": "89.90",
+            "avgFeight": "0.00",
+            "avginternalPrice": "49.00",
+            "avgMarketPrice": "5.00",
+            "avgThirdPrice": "5.00",
+            "fhzt": "未发货",
+            "tkzt": "是",
+            "istk": "是",
+            "shStatus": "未审核",
+            "xyStatus": "待寻源",
+            "yzStatus": "待预占"
+          }
+        ]
+      }
+    ],
+    "skuDetail": [
+      {
+        "spuName": "折叠床单人床午睡家用简易午休床陪护便携",
+        "spuCode": "S15698752",
+        "skuCode": "789654233",
+        "isGift": "否",
+        "num": 1,
+        "avgPlatformPrice": "89.90",
+        "avgInternalPrice": "89.90",
+        "avgMarketPrice": "40.00",
+        "avgThirdPrice": "0.00"
+      }
+    ]
+  },
+  {
+    "orderSn": "2102082985597464100",
+    "orderType": "0",
+    "fsSon": "父订单",
+    "innerOrderSn": "XS202109151819003",
+    "storeName": "淘宝_居家旗舰店",
+    "channelTypeCode": "天猫",
+    "tradeStatus": "13",
+    "shippingName": "申通快递",
+    "shippingSn": "895417896313",
+    "guaQi": "是",
+    "buyMsg": "",
+    "csMark": "",
+    "goodsNum": "2",
+    "orderAmount": "118.00",
+    "discountFee": "20.00",
+    "shippingFee": "0.00",
+    "totalAmount": "108.90",
+    "payment": "98.00",
+    "sorFavourable": "10.00",
+    "sorThirdPromotion": "10.00",
+    "sorBuyerNikeName": "tb1568246983",
+    "receiverName": "钱欧明",
+    "receiverMobile": "139****9858",
+    "isInvoice": "无",
+    "receiverAddress": "福建省 福州市 闽侯县*****",
+    "auditReason": "",
+    "fiveFlag": "1",
+    "payType": "支付宝",
+    "payStatus": "已支付",
+    "invoiceType": "",
+    "invoiceHeader": "",
+    "invoiceContent": "",
+    "thirdCreateTime": "2021-09-12 11:31:51",
+    "payTime": "2021-09-12 11:31:58",
+    "createTime": "2021-09-12 12:32:11",
+    "faHuoTime": "2021-09-12 18:20:11",
+    "confirmTime": "",
+    "relateSaleOrderList": [],
+    "relateAfterOrderList": [
+      {
+        "no": "HH202109161314",
+        "type": "换货",
+        "status": "待发货"
+      }
+    ],
+    "distributionInfo": {
+      "type": "物流",
+      "name": "申通快递",
+      "list": [
+        {
+          "deliveryWarehouse": "逻辑仓2仓",
+          "deliveryNoticeNo": "CKTZ9698547773",
+          "deliverResultNo": "CKJG9698954673",
+          "logisticsCompany": "申通快递",
+          "shippingSn": "895417896313",
+          "status": "全部出库",
+          "num": "2",
+          "time": "2021-09-12 18:20:11"
+        }
+      ]
+    },
+    "goodsList": [
+      {
+        "spuName": "手持挂烫机蒸汽熨斗家用小型宿舍学生便携式熨衣服神器熨烫机",
+        "spuCode": "S256978541",
+        "skuCode": "458963152",
+        "isGift": "否",
+        "num": 2,
+        "thirdPrice": "59.9",
+        "internalPrice": "59..9",
+        "avgPlatformPrice": "98.9",
+        "avgInternalPrice": "98.9",
+        "avgFeight": "0.00",
+        "avgMarketPrice": "10.00",
+        "avgThirdPrice": "10.00"
+      }
+    ],
+    "skuDetail": [
+      {
+        "spuName": "手持挂烫机蒸汽熨斗家用小型宿舍学生便携式熨衣服神器熨烫机",
+        "spuCode": "S256978541",
+        "skuCode": "458963152",
+        "isGift": "否",
+        "num": 1,
+        "avgPlatformPrice": "49.9",
+        "avgInternalPrice": "49.9",
+        "avgMarketPrice": "5.00",
+        "avgThirdPrice": "5.00"
+      },
+      {
+        "spuName": "手持挂烫机蒸汽熨斗家用小型宿舍学生便携式熨衣服神器熨烫机",
+        "spuCode": "S256978541",
+        "skuCode": "458963152",
+        "isGift": "否",
+        "num": 1,
+        "avgPlatformPrice": "49.9",
+        "avgInternalPrice": "49.9",
+        "avgMarketPrice": "5.00",
+        "avgThirdPrice": "5.00"
+      }
+    ]
+  },
+  {
+    "orderSn": "2102561003394443575",
+    "orderType": "0",
+    "fsSon": "父订单",
+    "innerOrderSn": "XS202109151845002",
+    "storeName": "京东-柒牌官方旗舰店",
+    "channelTypeCode": "京东",
+    "tradeStatus": "13",
+    "shippingName": "顺丰速运",
+    "shippingSn": "SF5620061322963",
+    "guaQi": "否",
+    "buyMsg": "",
+    "csMark": "",
+    "goodsNum": "1",
+    "orderAmount": "299.00",
+    "discountFee": "39.00",
+    "shippingFee": "0.00",
+    "totalAmount": "260.00",
+    "payment": "260.00",
+    "sorFavourable": "39.00",
+    "sorThirdPromotion": "0.00",
+    "sorBuyerNikeName": "饶必",
+    "receiverName": "陈诗宇",
+    "receiverMobile": "180****4462",
+    "isInvoice": "有",
+    "receiverAddress": "福建省 厦门市 集美区***",
+    "auditReason": "",
+    "fiveFlag": "1",
+    "payType": "支付宝",
+    "payStatus": "已支付",
+    "invoiceType": "普通发票",
+    "invoiceHeader": "饶必",
+    "invoiceContent": "明细",
+    "thirdCreateTime": "2021-08-25 16:56:12",
+    "payTime": "2021-08-25 16:56:15",
+    "createTime": "2021-08-26 17:51:12",
+    "faHuoTime": "2021-08-26 17:51:12",
+    "confirmTime": "",
+    "relateSaleOrderList": [
+      {
+        "no": "XS202109151845002",
+        "type": "父订单",
+        "status": "取消"
+      }
+    ],
+    "relateAfterOrderList": [
+      {
+        "no": "TH303100",
+        "type": "退货退款",
+        "status": "待收货"
+      }
+    ],
+    "distributionInfo": {
+      "type": "物流",
+      "name": "顺丰速运",
+      "list": [
+        {
+          "deliveryWarehouse": "逻辑仓2仓",
+          "deliveryNoticeNo": "88888888888",
+          "deliverResultNo": "66666666666",
+          "logisticsCompany": "顺丰速运",
+          "shippingSn": "SF9399016707663780",
+          "status": "已出库",
+          "num": "1",
+          "time": "2021-08-26 17:51:12"
+        }
+      ]
+    },
+    "goodsList": [
+      {
+        "spuName": "柒牌条纹长袖衬衫男韩版商务休闲中青年绣花男士衬衣121JA70230 灰蓝色 L",
+        "spuCode": "CS0314622",
+        "skuCode": "654C4D44",
+        "isGift": "否",
+        "num": 1,
+        "thirdPrice": "299.00",
+        "internalPrice": "299.00",
+        "avgPlatformPrice": "260.00",
+        "avgInternalPrice": "260.00",
+        "avgFeight": "0.00",
+        "avgMarketPrice": "39.00",
+        "avgThirdPrice": "0.00"
+      }
+    ],
+    "skuDetail": [
+      {
+        "spuName": "柒牌条纹长袖衬衫男韩版商务休闲中青年绣花男士衬衣121JA70230 灰蓝色 L",
+        "spuCode": "CS0314622",
+        "skuCode": "654C4D44",
+        "isGift": "否",
+        "num": 1,
+        "avgPlatformPrice": "260.00",
+        "avgInternalPrice": "260.00",
+        "avgMarketPrice": "39.00",
+        "avgThirdPrice": "0.00"
+      }
+    ]
+  },
+  {
+    "orderSn": "2102569670297465620",
+    "orderType": "0",
+    "fsSon": "父订单",
+    "innerOrderSn": "XS202109141819323",
+    "storeName": "淘宝_居家旗舰店",
+    "channelTypeCode": "淘宝",
+    "tradeStatus": "11",
+    "shippingName": "中通快递",
+    "shippingSn": "",
+    "guaQi": "否",
+    "buyMsg": "发中通物流",
+    "csMark": "",
+    "goodsNum": "1",
+    "orderAmount": "89.90",
+    "discountFee": "0.00",
+    "shippingFee": "0.00",
+    "totalAmount": "49.90",
+    "payment": "49.90",
+    "sorFavourable": "40.00",
+    "sorThirdPromotion": "0.00",
+    "sorBuyerNikeName": "yuyuyuyou",
+    "receiverName": "陈诗宇",
+    "receiverMobile": "156****6366",
+    "isInvoice": "有",
+    "receiverAddress": "福建省 厦门市 集美区***",
+    "auditReason": "",
+    "fiveFlag": "1",
+    "payType": "支付宝",
+    "payStatus": "已支付",
+    "invoiceType": "普通发票",
+    "invoiceHeader": "陈诗宇",
+    "invoiceContent": "明细",
+    "thirdCreateTime": "2021-07-06 18:33:53",
+    "payTime": "2021-07-06 18:35:53",
+    "createTime": "2021-07-06 19:33:53",
+    "faHuoTime": "",
+    "confirmTime": "2021-07-06 19:33:53",
+    "relateSaleOrderList": [],
+    "relateAfterOrderList": [
+      {
+        "no": "TK8954563024",
+        "type": "仅退款",
+        "status": "待审核"
+      }
+    ],
+    "distributionInfo": {
+      "type": "物流",
+      "name": "中通物流",
+      "list": []
+    },
+    "goodsList": [
+      {
+        "spuName": "折叠床单人床午睡家用简易午休床陪护便携",
+        "spuCode": "S15698752",
+        "skuCode": "789654233",
+        "isGift": "否",
+        "num": 1,
+        "thirdPrice": "89.90",
+        "internalPrice": "89.90",
+        "avgPlatformPrice": "89.90",
+        "avgInternalPrice": "89.90",
+        "avgFeight": "0.00",
+        "avgMarketPrice": "40.00",
+        "avgThirdPrice": "0.00"
+      }
+    ],
+    "skuDetail": [
+      {
+        "spuName": "折叠床单人床午睡家用简易午休床陪护便携",
+        "spuCode": "S15698752",
+        "skuCode": "789654233",
+        "isGift": "否",
+        "num": 1,
+        "avgPlatformPrice": "89.90",
+        "avgInternalPrice": "89.90",
+        "avgMarketPrice": "40.00",
+        "avgThirdPrice": "0.00"
+      }
+    ]
+  }
+]

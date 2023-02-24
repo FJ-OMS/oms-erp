@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.skyer.stock.infra.mapper.AdjustRecordMapper">
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap id="BaseResultMap" type="org.skyer.stock.domain.entity.AdjustRecord">
+        <result column="id" property="id" jdbcType="DECIMAL"/>
+        <result column="delete_flag" property="deleteFlag" jdbcType="DECIMAL"/>
+        <result column="creation_date" property="creationDate" jdbcType="DATE"/>
+        <result column="last_update_date" property="lastUpdateDate" jdbcType="DATE"/>
+        <result column="created_by" property="createdBy" jdbcType="DECIMAL"/>
+        <result column="last_updated_by" property="lastUpdatedBy" jdbcType="DECIMAL"/>
+        <result column="tenant_id" property="tenantId" jdbcType="DECIMAL"/>
+        <result column="object_version_number" property="objectVersionNumber" jdbcType="DECIMAL"/>
+        <result column="adjust_code" property="adjustCode" jdbcType="VARCHAR"/>
+        <result column="warehouse_id" property="warehouseId" jdbcType="DECIMAL"/>
+        <result column="audit_status" property="auditStatus" jdbcType="VARCHAR"/>
+        <result column="logic_status" property="logicStatus" jdbcType="DECIMAL"/>
+        <result column="real_status" property="realStatus" jdbcType="DECIMAL"/>
+        <result column="remarks" property="remarks" jdbcType="VARCHAR"/>
+    </resultMap>
+
+
+    <select id="listAdjustRecordVO" resultType="org.skyer.stock.domain.vo.AdjustRecordPageResVO">
+        SELECT
+            ad.id adjustId,
+	        ad.adjust_code adjustCode,
+	        ad.`audit_status` STATUS,
+	        ad.created_by createdBy,
+	        ad.creation_date createDate,
+	        ad.last_updated_by lastUpdatedBy,
+	        ad.last_update_date lastUpdateDate,
+	        wh.code warehouseCode,
+	        wh.name warehouseName
+        FROM
+	     sstock_adjust_record ad LEFT JOIN sstock_warehouse wh on ad.warehouse_id = wh.id where ad.delete_flag =0
+        <if test="param.startTime != null">
+            <![CDATA[
+                and ad.creation_date >= #{param.startTime}
+            ]]>
+        </if>
+        <if test="param.endTime != null">
+            <![CDATA[
+                and ad.creation_date <= #{param.endTime}
+            ]]>
+        </if>
+        <if test="param.warehouseCode !=null">
+               and wh.code = #{param.warehouseCode}
+        </if>
+        <if test="param.adjustCode != null">
+               and ad.adjust_code = #{param.adjustCode}
+        </if>
+        <if test="param.warehouseName != null">
+              and wh.name like CONCAT( #{param.warehouseName}, '%')
+        </if>
+        <if test="param.status != null">
+            AND ad.audit_status IN
+            <foreach collection="param.status" item="status" open="(" separator="," close=")">
+                #{status}
+            </foreach>
+        </if>
+        <if test="tenantId != null">
+              and ad.tenant_id = #{tenantId}
+        </if>
+        order by ad.creation_date desc
+    </select>
+    <select id="getAllByLogicWarehouseIds" resultType="org.skyer.stock.domain.entity.AdjustRecord">
+        SELECT
+            id,delete_flag,creation_date,last_update_date,created_by,last_updated_by,tenant_id,object_version_number,
+            adjust_code,warehouse_id,audit_status,logic_status,real_status,remarks
+        FROM sstock_adjust_record
+        <where>
+            <if test="logicWarehouseIds != null and logicWarehouseIds.size > 0 ">
+                AND warehouse_id IN
+                <foreach collection="logicWarehouseIds" item="logicWarehouseId" open="(" separator="," close=")">
+                    #{logicWarehouseId}
+                </foreach>
+            </if>
+        </where>
+    </select>
+</mapper>

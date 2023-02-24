@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.skyer.stock.infra.mapper.ResultDetailMapper">
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap id="BaseResultMap" type="org.skyer.stock.domain.entity.ResultDetail">
+        <result column="id" property="id" jdbcType="DECIMAL"/>
+        <result column="result_id" property="resultId" jdbcType="DECIMAL"/>
+        <result column="real_num" property="realNum" jdbcType="DECIMAL"/>
+        <result column="sku_code" property="skuCode" jdbcType="VARCHAR"/>
+        <result column="sku_name" property="skuName" jdbcType="VARCHAR"/>
+        <result column="spu_code" property="spuCode" jdbcType="VARCHAR"/>
+        <result column="spu_name" property="spuName" jdbcType="VARCHAR"/>
+    </resultMap>
+    <select id="statsByResultId" resultType="org.skyer.stock.domain.vo.ResultRecordQtyVO">
+        SELECT SUM(real_num) already_out_qty
+        FROM sstock_result_detail
+        WHERE result_id = #{resultId}
+    </select>
+
+</mapper>

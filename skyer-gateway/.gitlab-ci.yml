@@ -1,0 +1,5 @@
+include: http://api.k8s9.com/devops/v1/projects/285085540595404800/ci_contents/pipelines/df4bc0b2-ac5d-4bd6-810c-4797c25011ee/content.yaml
+
+#include: http://api.baogicloud.com/devops/v1/projects/204888765897510912/ci_contents/pipelines/89e83a7a-39f1-4b5e-837e-aeabb202b050/content.yaml
+#
+##include: http://api.baogicloud.com/devops/v1/projects/187577360164982784/ci_contents/pipelines/f17abcef-062b-4869-b4e0-71c9942da621/content.yaml

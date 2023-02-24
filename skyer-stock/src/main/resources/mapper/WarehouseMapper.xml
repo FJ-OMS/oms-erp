@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.skyer.stock.infra.mapper.WarehouseMapper">
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap id="BaseResultMap" type="org.skyer.stock.domain.entity.Warehouse">
+        <result column="id" property="id" jdbcType="DECIMAL"/>
+        <result column="delete_flag" property="deleteFlag" jdbcType="DECIMAL"/>
+        <result column="creation_date" property="creationDate" jdbcType="DATE"/>
+        <result column="last_update_date" property="lastUpdateDate" jdbcType="DATE"/>
+        <result column="created_by" property="createdBy" jdbcType="DECIMAL"/>
+        <result column="last_updated_by" property="lastUpdatedBy" jdbcType="DECIMAL"/>
+        <result column="tenant_id" property="tenantId" jdbcType="DECIMAL"/>
+        <result column="object_version_number" property="objectVersionNumber" jdbcType="DECIMAL"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="code" property="code" jdbcType="VARCHAR"/>
+        <result column="type_code" property="typeCode" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="DECIMAL"/>
+    </resultMap>
+
+    <select id="getShopWarehouse" resultType="org.skyer.stock.domain.entity.Warehouse">
+        SELECT
+          t1.id,t1.object_version_number,t1.code
+        FROM sstock_warehouse t1
+        INNER JOIN sstock_shop_warehouse t2
+        ON t1.id = t2.warehouse_id
+        WHERE t2.shop_id = #{shopId}
+    </select>
+
+    <select id="getSystemLogicWarehouse" resultType="org.skyer.stock.domain.entity.Warehouse">
+        SELECT
+          t1.id,t1.code
+        FROM sstock_warehouse t1
+        WHERE t1.system_flag = true AND t1.type_code = 'logic'
+    </select>
+    <select id="queryWarehouseList" resultType="org.skyer.stock.domain.vo.WarehouseQueryResVO">
+        select
+            id,name,type_code typeCode,code,status
+        from sstock_warehouse
+        <where>
+            delete_flag = 0
+            <if test="tenantId != null">
+                and tenant_id = #{tenantId}
+            </if>
+            <if test="sructureId != null">
+                AND (structure_id = #{sructureId} OR structure_id IS NULL)
+            </if>
+            <if test="param.code != null">
+                and code = #{param.code}
+            </if>
+            <if test="param.id != null">
+                and id = #{param.id}
+            </if>
+            <if test="param.status != null">
+                and status = #{param.status}
+            </if>
+            <if test="param.name != null and param.name.trim().length() > 0">
+                AND name LIKE CONCAT( #{param.name}, '%')
+            </if>
+            <if test="param.typeCode != null" >
+                and type_code in
+                <foreach collection="param.typeCode" item="type" open="(" separator="," close=")">
+                    #{type}
+                </foreach>
+            </if>
+        </where>
+        order by creation_date desc
+    </select>
+
+    <select id="getOneByNameOrType" resultType="org.skyer.stock.domain.entity.Warehouse">
+        SELECT
+        t1.id
+        FROM sstock_warehouse t1
+        <where>
+            <if test="name != null and name !=''">
+                AND t1.`name` = #{name}
+            </if>
+            <if test="typeCode != null and typeCode !=''">
+                AND t1.`type_code` = #{typeCode}
+            </if>
+        </where>
+    </select>
+
+    <select id="getWarehouseListByIds" resultType="org.skyer.stock.domain.entity.Warehouse">
+        SELECT *
+        FROM sstock_warehouse sw
+        <where>
+            sw.id IN
+            <foreach item="item" index="idx" collection="ids" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </where>
+    </select>
+
+    <select id="queryAllByTenantId" resultType="org.skyer.stock.domain.entity.Warehouse">
+        SELECT
+            id,creation_date,`name`,type_code,`code`
+        FROM sstock_warehouse
+        WHERE tenant_id = #{tenantId} AND delete_flag = false AND `status` = true
+        ORDER BY type_code ASC,creation_date ASC
+    </select>
+</mapper>

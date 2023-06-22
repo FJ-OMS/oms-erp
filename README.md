@@ -10,7 +10,6 @@
 [![GitHub stars](https://img.shields.io/github/stars/eeveek/oms)](https://github.com/eeveek/oms/stargazers)
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/eeveek/oms)
 [![GitHub license](https://img.shields.io/github/license/eeveek/oms)](https://github.com/eeveek/oms/blob/master/LICENSE)
-
 </p>
 
 # 🔺[开源的新零售业务中台OMS](https://www.k8s9.com)
@@ -62,8 +61,6 @@ __技术架构__
 
 ![img](https://github.com/FJ-OMS/oms-erp/blob/main/%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84.png)
 
-
-
 ## 🔺特技
 
 __云原生__
@@ -90,9 +87,6 @@ __测试__
 演示地址：https://www.k8s9.com/ 点击导航栏上的免费试用 用户名：demo 密码:abcd1234  
 微信:blowbing
 ```
-
-
-
 ![img](https://github.com/eeveek/oms/blob/main/front-end/we.png)  ![img](https://github.com/eeveek/oms/blob/main/front-end/gzh.png)
 
 ## 🔺安装教程

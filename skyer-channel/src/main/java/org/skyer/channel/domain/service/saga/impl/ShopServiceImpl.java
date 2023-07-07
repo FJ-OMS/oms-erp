@@ -135,6 +135,9 @@ public class ShopServiceImpl implements ShopService {
     @Override
     @ProcessLovValue
     public List<ChannelSaleOrderVO> queryChannelOrderSaleReport(ChannelSaleOrderDTO dto) {
+        if (dto == null) {
+            log.info("ChannelSaleOrderDTO 为空");
+        }
         List<ChannelSaleOrderVO> channelSaleOrderVOS = shopRepository.queryChannelOrderSaleReport(dto);
         //调用订单中心获取订单金额等数据
         if (CollectionUtils.isEmpty(channelSaleOrderVOS)) {

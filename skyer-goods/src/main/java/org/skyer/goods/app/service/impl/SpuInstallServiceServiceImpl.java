@@ -277,6 +277,9 @@ public class SpuInstallServiceServiceImpl implements SpuInstallServiceService {
 
     @Override
     public Boolean update(SpuInstallServiceDTO spuInstallServiceDTO) {
+        if (spuInstallServiceDTO == null) {
+            throw new CommonException("spu为null请重新设置!");
+        }
         if (!spuInstallServiceDTO.getIsAllStore() && CollUtil.isEmpty(spuInstallServiceDTO.getSpuStoreIds())) {
             // 如果不是适用于所有店铺且店铺没有设置值，返回错误
             throw new CommonException("没有设置店铺!");

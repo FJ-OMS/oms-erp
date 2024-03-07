@@ -81,6 +81,27 @@ __测试__
 包括测试用例管理、测试计划管理、测试执行管理、缺陷管理、 测试报告管理，支持手工测试并提供API测试、性能测试、流量 回归测试、UI测试等自动化测试能力，测试任务还可嵌入开发流 水线，持续测试有效保障产品质量
 ```
 
+##使用说明
+1.前端配置：
+项目使用了 element-ui、vue。确保这些前端库已正确引入和配置。
+命令行输入npm run dev
+2.后端配置：
+项目使用了 MySQL 和 Redis 数据库。您需要在 application.yml 文件中配置数据库连接信息。
+MySQL 配置：
+数据库连接URL：jdbc:mysql://<local_ip>:3306/skyer_after_sales?useUnicode=true&characterEncoding=utf-8&useSSL=false
+用户名：<local_username>
+密码：<local_password>
+Redis配置：
+redis.host: <local_redis_ip>
+3.登录网站
+服务器端口号：8080，启动成功后访问http://127.0.0.1:8080，用户名和密码在数据库的用户信息表中。
+4.后端框架：
+后端框架是 Spring Boot 框架。
+5.导入 SQL 文件：
+项目需要导入 oms-erp-main\skyer-order\sql，oms-erp-main\skyer-tags\sql中的sql文件，以及oms-erp-main\skyer-channel\src\main\resources\skyer_channel.sql 文件到数据库中。您可以使用数据库管理工具或命令行工具执行该 SQL 文件。
+6.启动项目：
+项目的启动方式是直接运行 Application.java 文件。确保您的开发环境配置正确，项目的依赖项已经安装。
+
 ## 🔺联系方式和试用
 
 ```

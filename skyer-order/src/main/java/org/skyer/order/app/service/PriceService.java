@@ -5,7 +5,6 @@ import org.skyer.order.domain.entity.Header;
 
 /**
  * 内部订单价格（聚合）应用服务
- *
  * @author wushaochuan 2022-01-18 14:34:54
  */
 public interface PriceService {

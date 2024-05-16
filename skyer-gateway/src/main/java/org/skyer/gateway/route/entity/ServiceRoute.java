@@ -8,7 +8,6 @@ import javax.validation.constraints.NotNull;
 
 /**
  * 服务路由配置
- *
  * @author zhiying.dong@hand-china.com 2018-12-07 14:45:53
  */
 public class ServiceRoute extends AuditDomain {

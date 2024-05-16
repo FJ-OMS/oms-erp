@@ -27,7 +27,6 @@ import java.util.stream.Collectors;
 
 /**
  * 应用服务默认实现
- *
  * @author xurongfa 2022-01-22 11:33:07
  */
 @Service

@@ -10,6 +10,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
+ *
  * 仅允许动态构造（必须由多个KeyResolver构成），无需注入spring容器
  */
 public class CombinedKeyResolver implements KeyResolver {

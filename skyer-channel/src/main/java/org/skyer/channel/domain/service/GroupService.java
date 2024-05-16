@@ -4,7 +4,6 @@ import org.skyer.channel.domain.entity.Group;
 
 /**
  * 应用服务
- *
  * @author linzhuanghuang@ebc.com 2021-09-03 16:54:36
  */
 public interface GroupService {

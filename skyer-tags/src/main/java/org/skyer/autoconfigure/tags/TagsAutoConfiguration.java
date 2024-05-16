@@ -21,6 +21,7 @@ import org.skyer.core.jackson.annotation.EnableObjectMapper;
 import org.skyer.core.util.CommonExecutor;
 
 /**
+ *
  * @author bojiangzhou 2018/10/25
  */
 @ComponentScan(value = {"org.hippius.wd", "org.skyer.tags.api", "org.skyer.tags.app",

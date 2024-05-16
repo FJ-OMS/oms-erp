@@ -8,7 +8,6 @@ import java.util.Map;
 
 /**
  * 内部订单明细价格（聚合）应用服务
- *
  * @author wushaochuan 2022-01-18 14:34:54
  */
 public interface ItemPriceService {

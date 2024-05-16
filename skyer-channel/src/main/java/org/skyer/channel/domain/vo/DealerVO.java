@@ -12,6 +12,7 @@ import org.skyer.core.cache.Cacheable;
 import org.skyer.starter.keyencrypt.core.Encrypt;
 
 /**
+ *
  * @author: lzh
  * @date: 2021-06-18
  * @description:

@@ -19,6 +19,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 /**
+ * @description 售后服务自动配置
  * @author bojiangzhou 2018/10/25
  */
 @ComponentScan(value = {"org.hippius.wd", "org.skyer.afterSales.api", "org.skyer.afterSales.app",

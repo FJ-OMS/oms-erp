@@ -6,10 +6,7 @@ import springfox.documentation.service.Tag;
 import springfox.documentation.spring.web.plugins.Docket;
 
 /**
- * <p>
  * Swagger Api 描述配置
- * </p>
- *
  * @author qingsheng.chen 2018/7/30 星期一 14:26
  */
 @Configuration

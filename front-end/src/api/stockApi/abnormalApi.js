@@ -8,9 +8,7 @@
  */
 /* jshint esversion: 9 */
 /**
- *
  *  adjust record : 库存管理->异常库存管理
- *
  *
  */
 

@@ -11,6 +11,7 @@ module.exports = {
       plugins: ['dynamic-import-node'],
     },
   },
+
   plugins: [
     [
       'import',

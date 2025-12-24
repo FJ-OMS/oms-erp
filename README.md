@@ -81,7 +81,8 @@ __测试__
 包括测试用例管理、测试计划管理、测试执行管理、缺陷管理、 测试报告管理，支持手工测试并提供API测试、性能测试、流量 回归测试、UI测试等自动化测试能力，测试任务还可嵌入开发流 水线，持续测试有效保障产品质量
 ```
 
-## 使用说明
+__使用说明__
+```
 1.前端配置：
 项目使用了 element-ui、vue。确保这些前端库已正确引入和配置。
 命令行输入npm run dev
@@ -101,7 +102,7 @@ redis.host: <local_redis_ip>
 项目需要导入 oms-erp-main\skyer-order\sql，oms-erp-main\skyer-tags\sql中的sql文件，以及oms-erp-main\skyer-channel\src\main\resources\skyer_channel.sql 文件到数据库中。您可以使用数据库管理工具或命令行工具执行该 SQL 文件。
 6.启动项目：
 项目的启动方式是直接运行 Application.java 文件。确保您的开发环境配置正确，项目的依赖项已经安装。
-
+```
 ## 🔺联系方式和试用
 
 ```

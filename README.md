@@ -111,7 +111,8 @@ redis.host: <local_redis_ip>
 ![img](https://github.com/eeveek/oms/blob/main/front-end/we.png)  ![img](https://github.com/eeveek/oms/blob/main/front-end/gzh.png)
 
 ## 🔺安装教程
-
+暂无
 ## 🔺使用说明
-
+暂无
 ## 🔺参与贡献
+暂无

@@ -104,7 +104,7 @@ public class SpuController {
 
     @ApiOperation(value = "商品批量上传ES测试")
     @GetMapping("/es-test")
-    @Permission(level = ResourceLevel.ORGANIZATION, permissionPublic = true)
+    @Permission(level = ResourceLevel.ORGANIZATION)
     public ResponseEntity<Void> esTest() throws IOException {
         spuEsService.productStatusUp();
         return Results.success();

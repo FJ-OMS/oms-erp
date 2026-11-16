@@ -123,7 +123,7 @@ public class GoodsSkuController extends BaseController {
 
     @ApiOperation(value = "刷新es数据")
     @GetMapping("/es-test")
-    @Permission(level = ResourceLevel.ORGANIZATION,permissionPublic = true)
+    @Permission(level = ResourceLevel.ORGANIZATION)
     public ResponseEntity<Void> esTest() throws Exception {
         skuEsService.delSkuEsAll();
         skuEsService.skuStatusUp();
